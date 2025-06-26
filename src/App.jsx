@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
+  fetch('/api/hello').then(resp => console.log(resp))
   const [count, setCount] = useState(0)
 
   return (
