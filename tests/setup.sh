@@ -1,11 +1,10 @@
 #!/bin/bash
 
 export ENVIROMENT="TEST" && \
-vercel dev & 
+npm run dev & 
 
-SERVER_PID=$!
 npx wait-on http://localhost:3000
 vitest
-kill $SERVER_PID
+kill -9 $(pgrep -f '^next-server')
 
 unset ENVIROMENT

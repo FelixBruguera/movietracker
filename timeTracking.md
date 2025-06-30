@@ -4,3 +4,4 @@
 | :----:|:-----| :-----|
 | 26.06.2025 | 2    | Implement the /movies endpoint to the API and add tests |
 | 26.06.2025 | 0.5    | Add pagination to the movies endpoint, update the output of the movies pipeline, refactor the query params parsing and update the tests  |
+| 30.06.2025 | 2    | Install next, tailwind and shadcn, remove vite, add the total pages to the output of the movies endpoint.  Update the tests to work with pagination, Add the index component with pagination  |
