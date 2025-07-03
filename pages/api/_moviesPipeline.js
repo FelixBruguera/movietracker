@@ -4,29 +4,38 @@ export default function moviesPipeline(options) {
   const ranges = [
     "year_min",
     "imdb.rating_min",
-    "metacritic_min",
-    "tomatoes.critic.rating_min",
-    "awards.wins_min",
     "runtime_min",
+    "year_max",
+    "imdb.rating_max",
+    "runtime_max",
   ]
   const pipeline = []
   const matchPipeline = { $match: {} }
   for (const [key, value] of Object.entries(options)) {
-    if (value === "All") {
+    if (value === "All" || value === "''") {
       continue
     }
-    if (checkboxes.includes(key)) {
+    else if (key === "search" && value.length > 0) {
+      matchPipeline["$match"]["$text"] = { $search: value }
+    } 
+    else if (checkboxes.includes(key)) {
       matchPipeline["$match"][key] = { $in: [value] }
-    } else if (ranges.includes(key)) {
+    } 
+    else if (ranges.includes(key)) {
       const [fieldName, aggregator] = key.split("_")
       const formattedValue = parseFloat(value)
-      const max = parseFloat(options[`${fieldName}_max`])
-      matchPipeline["$match"][fieldName] = {
-        $gte: formattedValue,
-        $lte: max,
+      const formattedAggregator = aggregator === "min" ? "$gte" : "$lte"
+      if (matchPipeline["$match"][fieldName]) {
+        matchPipeline["$match"][fieldName][formattedAggregator] = formattedValue
+      } 
+      else {
+        matchPipeline["$match"][fieldName] = {
+          [formattedAggregator]: formattedValue,
+        }
       }
-    } else if (key === "type") {
-      matchPipeline["$match"][key] = { $eq: value }
+    } 
+    else if (key === "type") {
+      matchPipeline["$match"][key] = { $eq: value.toLowerCase() }
     }
   }
   let sortKey = "imdb.rating"

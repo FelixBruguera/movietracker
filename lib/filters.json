@@ -79,5 +79,11 @@
     "Thriller",
     "War",
     "Western"
-  ]
+  ],
+  "ranges": {
+    "year": "Release  year",
+    "imdb.rating": "IMDB Rating",
+    "awards.wins": "Awards won",
+    "runtime": "Runtime"
+  }
 }

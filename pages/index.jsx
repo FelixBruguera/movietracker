@@ -26,17 +26,19 @@ export default function Index() {
   const totalPages = data[0].info.totalPages
 
   return (
-    <div>
+    <div className="flex flex-col justify-between">
       <MoviesMenu />
       <ul className="p-5 flex flex-wrap justify-center items-center gap-2 gap-y-0">
-        {movies.map((movie) => (
+        {movies.length === 0 
+        ? <li className="h-100" ><h1 className="font-bold text-lg">No results found</h1></li>
+        : movies.map((movie) => (
           <li key={movie._id} className="h-95 w-60">
             <Link href={`/movies/${movie._id}`} className="text-center">
               <img
                 src={movie.poster}
                 alt={movie.title}
                 title={movie.title}
-                className="max-h-full max-w-full"
+                className="max-h-full max-w-full shadow-md rounded-sm"
               />
             </Link>
           </li>

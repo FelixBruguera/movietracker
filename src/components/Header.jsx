@@ -7,7 +7,7 @@ import { useRouter } from "next/router"
 const Header = () => {
   const router = useRouter()
   return (
-    <nav className="flex items-center justify-around h-15 p-2 mb-2">
+    <nav className="flex items-center justify-around h-20 p-2 mb-2">
       <Link href={"/"} className="flex items-center gap-1 text-xl font-bold">
         <Clapperboard />
         Movie Tracker

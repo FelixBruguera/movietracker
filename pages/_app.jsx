@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }) {
         enableSystem
         disableTransitionOnChange
       >
-        <div className="bg-stone-800">
+        <div className="bg-stone-800 flex flex-col min-h-screen">
           <Header />
           <Component {...pageProps} />
         </div>

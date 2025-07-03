@@ -14,15 +14,9 @@ const RangeField = ({
   const [minValue, setMinValue] = useState(parseInt(defaultMin))
   const [maxValue, setMaxValue] = useState(parseInt(defaultMax))
   const onMinChange = (newValue) => {
-    if (newValue >= maxValue) {
-      setMaxValue(parseInt(newValue) + 1)
-    }
     setMinValue(newValue)
   }
   const onMaxChange = (newValue) => {
-    if (newValue <= minValue) {
-      setMinValue(parseInt(newValue) - 1)
-    }
     setMaxValue(newValue)
   }
   return (
@@ -35,9 +29,9 @@ const RangeField = ({
           <Input
             name={`${fieldName}_min`}
             type="number"
-            className="w-2/6"
+            className="w-4/9"
             min={min}
-            max={max}
+            max={maxValue}
             value={minValue}
             onChange={(e) => onMinChange(e.target.value)}
           ></Input>
@@ -49,8 +43,8 @@ const RangeField = ({
           <Input
             name={`${fieldName}_max`}
             type="number"
-            className="w-2/6"
-            min={min}
+            className="w-4/9"
+            min={minValue}
             max={max}
             value={maxValue}
             onChange={(e) => onMaxChange(e.target.value)}

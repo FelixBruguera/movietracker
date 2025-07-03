@@ -6,7 +6,7 @@ const NavLink = ({ href, title, isActive }) => {
     <Button
       asChild
       variant="outline"
-      className={`border-1 dark:border-stone-700 text-md p-4 dark:hover:bg-red-900 dark:hover:border-gray-800 ${isActive ? "dark:bg-red-800" : null}`}
+      className={`border-1 text-lg dark:hover:bg-red-900 dark:hover:border-gray-800 ${isActive ? "dark:bg-red-800" : null}`}
     >
       <Link href={href}>{title}</Link>
     </Button>

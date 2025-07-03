@@ -20,14 +20,14 @@ const PaginationWrap = ({ router, totalPages }) => {
       <PaginationContent className="gap-10">
         <PaginationItem>
           <PaginationPrevious
-            className={`dark:hover:bg-stone-900 ${page === 1 ? "pointer-events-none" : "pointer-events-auto"}`}
+            className={`dark:hover:bg-stone-900 ${page <= 1 ? "pointer-events-none" : "pointer-events-auto"}`}
             href=""
             onClick={(e) => {
               e.preventDefault()
               handleChange(page - 1)
             }}
-            ariaDisabled={page === 1}
-            tabIndex={page === 1 ? 1 : 0}
+            ariaDisabled={page <= 1}
+            tabIndex={page <= 1 ? 1 : 0}
           />
         </PaginationItem>
         <form
@@ -50,7 +50,7 @@ const PaginationWrap = ({ router, totalPages }) => {
             <p>of {totalPages}</p>
           </span>
           <Button
-            className="h-8/10 w-fit px-3 bg-stone-300 dark:bg-gray-300 dark:hover:bg-stone-900 dark:hover:text-white transition-all"
+            className="h-8/10 w-fit px-3 bg-stone-300 dark:bg-gray-300 dark:hover:bg-red-800 dark:hover:text-white transition-all"
             type="submit"
           >
             Go
@@ -58,14 +58,14 @@ const PaginationWrap = ({ router, totalPages }) => {
         </form>
         <PaginationItem>
           <PaginationNext
-            className={`dark:hover:bg-stone-900 ${page === totalPages ? "pointer-events-none" : "pointer-events-auto"}`}
+            className={`dark:hover:bg-stone-900 ${page >= totalPages ? "pointer-events-none" : "pointer-events-auto"}`}
             href=""
             onClick={(e) => {
               e.preventDefault()
               handleChange(page + 1)
             }}
-            ariaDisabled={page === totalPages}
-            tabIndex={page === totalPages ? 1 : 0}
+            ariaDisabled={page >= totalPages}
+            tabIndex={page >= totalPages ? 1 : 0}
           />
         </PaginationItem>
       </PaginationContent>

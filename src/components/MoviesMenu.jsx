@@ -14,6 +14,7 @@ import {
 import { useRouter } from "next/router"
 import MoviesMenuItem from "./MoviesMenuItem"
 import MoviesFilters from "./MoviesFilters"
+import filtersData from "../../lib/filters.json"
 
 const MoviesMenu = () => {
   const router = useRouter()
@@ -22,7 +23,7 @@ const MoviesMenu = () => {
     router.push({ query: { ...router.query, sortBy: newValue } })
   }
   const handleSortOrder = () => {
-    const newValue = router.query.sortOrder === "-1" ? 1 : -1
+    const newValue = router.query.sortOrder === "1" ? -1 : 1
     router.push({ query: { ...router.query, sortOrder: newValue } })
   }
   const handleGenre = (newValue) => {
@@ -33,14 +34,7 @@ const MoviesMenu = () => {
       router.push({ query: { ...router.query, genres: newValue } })
     }
   }
-  const ratings = {
-    year: "Release  year",
-    "imdb.rating": "IMDB Rating",
-    metacritic: "Metacritic",
-    "tomatoes.critic.rating": "Rotten Tomatoes rating",
-    "awards.wins": "Awards won",
-    runtime: "Runtime",
-  }
+  const ranges = filtersData.ranges
   const genres = [
     "Drama",
     "Comedy",
@@ -54,8 +48,9 @@ const MoviesMenu = () => {
   const handleFilter = (data) => {
     router.push({ query: { ...router.query, ...data, page: 1 } })
   }
+  const isAscending = router.query.sortOrder === "1"
   return (
-    <div className="flex items-center w-9/10 m-auto">
+    <div className="flex items-center w-9/10 mx-auto">
       <ul className="w-7/10 flex items-center justify-between">
         {genres.map((genre) => (
           <li key={genre}>
@@ -72,28 +67,28 @@ const MoviesMenu = () => {
           >
             <SelectValue placeholder="IMDB Rating">
               <ArrowDownUp />
-              {ratings[sort]}
+              {ranges[sort]}
             </SelectValue>
           </SelectTrigger>
           <SelectContent>
-            {Object.entries(ratings).map(([key, value]) => (
+            {Object.entries(ranges).map(([key, value]) => (
               <SelectItem value={key}>{value}</SelectItem>
             ))}
           </SelectContent>
         </Select>
         <Button
           title={
-            router.query.sortOrder === "-1"
-              ? "Descending order"
-              : "Ascending order"
+            isAscending
+              ? "Ascending order"
+              : "Descending order"
           }
           onClick={() => handleSortOrder()}
           className="bg-trasnparent border-1 dark:border-gray-700 hover:dark:bg-red-800 hover:cursor-pointer"
         >
-          {router.query.sortOrder === "-1" ? (
-            <ArrowDownWideNarrow color="white" />
-          ) : (
+          {isAscending ? (
             <ArrowUpWideNarrow color="white" />
+          ) : (
+            <ArrowDownWideNarrow color="white" />
           )}
         </Button>
       </div>
