@@ -53,6 +53,20 @@ const MoviesFilters = ({ handleFilter }) => {
               defaultValue={router.query.search || ""}
             />
           </FiltersField>
+          <FiltersField labelText="Search by actor" labelFor="cast">
+            <Input
+              type="text"
+              name="cast"
+              defaultValue={router.query.cast || ""}
+          />
+          </FiltersField>
+          <FiltersField labelText="Search by director" labelFor="directors">
+            <Input
+              type="text"
+              name="directors"
+              defaultValue={router.query.directors || ""}
+            />
+          </FiltersField>
           <FiltersField labelText="Genre" labelFor="genres">
             <SelectWrapper 
                 name="genres"
@@ -79,11 +93,11 @@ const MoviesFilters = ({ handleFilter }) => {
           </FiltersField>
           <RangeField
             labelText="Release year"
-            fieldName="year"
+            fieldName="released"
             min={1896}
-            max={2014}
-            defaultMin={router.query["year_min"] || 1896}
-            defaultMax={router.query["year_max"] || 2014}
+            max={2016}
+            defaultMin={router.query["released_min"] || 1896}
+            defaultMax={router.query["released_max"] || 2016}
           />
           <RangeField
             labelText="IMDB Rating"

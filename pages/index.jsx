@@ -3,6 +3,7 @@ import Link from "next/link"
 import PaginationWrap from "../src/components/Pagination"
 import { useRouter } from "next/router"
 import MoviesMenu from "../src/components/MoviesMenu"
+import MoviesSkeleton from "../src/components/MoviesSkeleton"
 
 export default function Index() {
   const router = useRouter()
@@ -16,8 +17,12 @@ export default function Index() {
   })
 
   if (isLoading) {
-    return <span>Loading...</span>
-  }
+    return (
+      <div className="flex flex-col justify-between">
+        <MoviesMenu />
+        <MoviesSkeleton />
+      </div>
+  )}
 
   if (isError) {
     return <span>Error</span>

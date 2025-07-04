@@ -11,7 +11,7 @@ describe("the movies endpoint", () => {
   describe("filtering results", () => {
     test("filtering by a range", async () => {
       const response = await fetch(
-        "http://localhost:3000/api/movies?imdb.rating=7.5,8",
+        "http://localhost:3000/api/movies?imdb.rating_min=7.5&imdb.rating_max=8",
       )
       expect(response.status).toBe(200)
       const data = await response.json()
@@ -19,7 +19,7 @@ describe("the movies endpoint", () => {
     })
     test("filtering by multiple ranges", async () => {
       const response = await fetch(
-        "http://localhost:3000/api/movies?imdb.rating=7.5,8&runtime=149,150",
+        "http://localhost:3000/api/movies?imdb.rating_min=7.5&imdb.rating_max=8&runtime_min=149&runtime_max=150",
       )
       expect(response.status).toBe(200)
       const data = await response.json()
@@ -56,6 +56,58 @@ describe("the movies endpoint", () => {
       expect(data[0].movies[0].title).toBe(
         "The Four Horsemen of the Apocalypse",
       )
+    })
+  })
+  describe("the search parameters", () => {
+    test("the search param with a single word", async () => {
+      const response = await fetch(
+        "http://localhost:3000/api/movies?search=Salomè",
+      )
+      expect(response.status).toBe(200)
+      const data = await response.json()
+      const movies = data[0].movies
+      expect(movies).toHaveLength(1)
+      expect(movies[0].title).toBe("Salomè")
+    })
+    test("the search param with multiple words", async () => {
+      const response = await fetch(
+        "http://localhost:3000/api/movies?search=The+Four+Horsemen",
+      )
+      expect(response.status).toBe(200)
+      const data = await response.json()
+      const movies = data[0].movies
+      expect(movies).toHaveLength(1)
+      expect(movies[0].title).toBe("The Four Horsemen of the Apocalypse")
+    })
+    test('the cast param', async () => {
+      const response = await fetch(
+        "http://localhost:3000/api/movies?cast=Mae+Busch",
+      )
+      expect(response.status).toBe(200)
+      const data = await response.json()
+      const movies = data[0].movies
+      expect(movies).toHaveLength(1)
+      expect(movies[0].title).toBe("Foolish Wives")
+    })
+    test('the directors param', async () => {
+      const response = await fetch(
+        "http://localhost:3000/api/movies?directors=curtis",
+      )
+      expect(response.status).toBe(200)
+      const data = await response.json()
+      const movies = data[0].movies
+      expect(movies).toHaveLength(1)
+      expect(movies[0].title).toBe("In the Land of the Head Hunters")
+    })
+    test('with a the search, casts and directors params', async () => {
+      const response = await fetch(
+        "http://localhost:3000/api/movies?directors=Wallace&search=ace+of+hearts&cast=Kirkland",
+      )
+      expect(response.status).toBe(200)
+      const data = await response.json()
+      const movies = data[0].movies
+      expect(movies).toHaveLength(1)
+      expect(movies[0].title).toBe("The Ace of Hearts")
     })
   })
   describe("with invalid requests", () => {
