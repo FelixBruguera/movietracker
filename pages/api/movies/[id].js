@@ -7,7 +7,10 @@ export default async function handler(request, response) {
   const options = { ...request.query, movie_id: id }
 
   try {
-    const data = await database.collection("movies").aggregate(pipeline(options)).next()
+    const data = await database
+      .collection("movies")
+      .aggregate(pipeline(options))
+      .next()
     return response.json(data)
   } catch (e) {
     console.error(e)

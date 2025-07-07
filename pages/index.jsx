@@ -28,7 +28,8 @@ export default function Index() {
         <MoviesMenu />
         <MoviesSkeleton />
       </div>
-  )}
+    )
+  }
 
   if (isError) {
     return <span>Error</span>
@@ -40,32 +41,36 @@ export default function Index() {
     <div className="flex flex-col justify-between">
       <MoviesMenu />
       <ul className="p-5 flex flex-wrap justify-center items-center gap-2 gap-y-0">
-        {movies.length === 0 
-        ? <li className="h-100" ><h1 className="font-bold text-lg">No results found</h1></li>
-        : movies.map((movie) => (
-          <Tooltip>
-            <li key={movie._id} className="h-90 w-60">
-              <TooltipTrigger>
-                <Link href={`/movies/${movie._id}`} className="text-center">
-                  <img
-                    src={movie.poster}
-                    alt={movie.title}
-                    title={movie.title}
-                    className="max-h-full max-w-full shadow-md rounded-sm"
-                  />
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent className='flex flex-col items-center justify-center'>
-                <p>{movie.title}</p>
-                <p>{new Date(movie.released).getFullYear()}</p>
-                <div className="flex items-center">
-                  <p>{movie.imdb.rating}</p>
-                  <Star color="goldenrod" fill="goldenrod" size={12}/>
-                </div>
-              </TooltipContent>
-            </li>
-          </Tooltip>
-        ))}
+        {movies.length === 0 ? (
+          <li className="h-100">
+            <h1 className="font-bold text-lg">No results found</h1>
+          </li>
+        ) : (
+          movies.map((movie) => (
+            <Tooltip>
+              <li key={movie._id} className="h-90 w-60">
+                <TooltipTrigger>
+                  <Link href={`/movies/${movie._id}`} className="text-center">
+                    <img
+                      src={movie.poster}
+                      alt={movie.title}
+                      title={movie.title}
+                      className="max-h-full max-w-full shadow-md rounded-sm"
+                    />
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent className="flex flex-col items-center justify-center">
+                  <p>{movie.title}</p>
+                  <p>{new Date(movie.released).getFullYear()}</p>
+                  <div className="flex items-center">
+                    <p>{movie.imdb.rating}</p>
+                    <Star color="goldenrod" fill="goldenrod" size={12} />
+                  </div>
+                </TooltipContent>
+              </li>
+            </Tooltip>
+          ))
+        )}
       </ul>
       <PaginationWrap router={router} totalPages={totalPages} />
     </div>

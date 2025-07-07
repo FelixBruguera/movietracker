@@ -79,7 +79,7 @@ describe("the movies endpoint", () => {
       expect(movies).toHaveLength(1)
       expect(movies[0].title).toBe("The Four Horsemen of the Apocalypse")
     })
-    test('the cast param', async () => {
+    test("the cast param", async () => {
       const response = await fetch(
         "http://localhost:3000/api/movies?cast=Mae+Busch",
       )
@@ -89,7 +89,7 @@ describe("the movies endpoint", () => {
       expect(movies).toHaveLength(1)
       expect(movies[0].title).toBe("Foolish Wives")
     })
-    test('the directors param', async () => {
+    test("the directors param", async () => {
       const response = await fetch(
         "http://localhost:3000/api/movies?directors=curtis",
       )
@@ -99,7 +99,7 @@ describe("the movies endpoint", () => {
       expect(movies).toHaveLength(1)
       expect(movies[0].title).toBe("In the Land of the Head Hunters")
     })
-    test('with a the search, casts and directors params', async () => {
+    test("with a the search, casts and directors params", async () => {
       const response = await fetch(
         "http://localhost:3000/api/movies?directors=Wallace&search=ace+of+hearts&cast=Kirkland",
       )

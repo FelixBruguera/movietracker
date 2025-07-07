@@ -5,7 +5,7 @@ import {
   SheetTitle,
   SheetTrigger,
   SheetFooter,
-  SheetClose
+  SheetClose,
 } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -20,13 +20,13 @@ const MoviesFilters = ({ handleFilter }) => {
   const router = useRouter()
   const genres = filtersData.genres
   const languages = filtersData.languages
-  const types = ['All', 'Movie', 'Series']
+  const types = ["All", "Movie", "Series"]
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Button
           className={`flex items-center justify-center gap-1 hover:cursor-pointer dark:bg-stone-900 border-1 border-gray-700
-            ${Object.keys(router.query).length > 0 ? 'dark:bg-red-800' : null}`}
+            ${Object.keys(router.query).length > 0 ? "dark:bg-red-800" : null}`}
           variant="ghost"
         >
           <Funnel />
@@ -59,7 +59,7 @@ const MoviesFilters = ({ handleFilter }) => {
               type="text"
               name="cast"
               defaultValue={router.query.cast || ""}
-          />
+            />
           </FiltersField>
           <FiltersField labelText="Search by director" labelFor="directors">
             <Input
@@ -69,27 +69,27 @@ const MoviesFilters = ({ handleFilter }) => {
             />
           </FiltersField>
           <FiltersField labelText="Genre" labelFor="genres">
-            <SelectWrapper 
-                name="genres"
-                defaultValue={router.query.genres || "All"}
-                title="Genre"
-                items= { genres }
+            <SelectWrapper
+              name="genres"
+              defaultValue={router.query.genres || "All"}
+              title="Genre"
+              items={genres}
             />
           </FiltersField>
           <FiltersField labelText="Language" labelFor="languages">
-            <SelectWrapper 
-                name="languages" 
-                defaultValue={router.query.languages || "All"}
-                title="Language"
-                items= { languages }
+            <SelectWrapper
+              name="languages"
+              defaultValue={router.query.languages || "All"}
+              title="Language"
+              items={languages}
             />
           </FiltersField>
           <FiltersField labelText="Type" labelFor="type">
-            <SelectWrapper 
-                name="type" 
-                defaultValue={router.query.type || "All"}
-                title="Type"
-                items= { types }
+            <SelectWrapper
+              name="type"
+              defaultValue={router.query.type || "All"}
+              title="Type"
+              items={types}
             />
           </FiltersField>
           <RangeField
@@ -122,13 +122,13 @@ const MoviesFilters = ({ handleFilter }) => {
             Submit
           </Button>
           <SheetClose asChild>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => router.push({ query: {} })}
-              >
-                Clear filters
-              </Button>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => router.push({ query: {} })}
+            >
+              Clear filters
+            </Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

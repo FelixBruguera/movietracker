@@ -6,7 +6,10 @@ export default async function handler(request, response) {
   const { database } = await connectToDatabase()
 
   try {
-    const data = await database.collection("comments").aggregate(reviewsPipeline(request.query)).toArray()
+    const data = await database
+      .collection("comments")
+      .aggregate(reviewsPipeline(request.query))
+      .toArray()
     return response.json(data)
   } catch (e) {
     console.error(e)

@@ -1,12 +1,5 @@
 import { Button } from "@/components/ui/button"
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import {
   ArrowDownUp,
   ArrowDownWideNarrow,
   ArrowUpWideNarrow,
@@ -15,10 +8,10 @@ import { useRouter } from "next/router"
 import MoviesMenuItem from "./MoviesMenuItem"
 import MoviesFilters from "./MoviesFilters"
 import filtersData from "../../lib/filters.json"
+import SelectSortBy from "./SelectSortBy"
 
 const MoviesMenu = () => {
   const router = useRouter()
-  const sort = router.query.sortBy || "imdb.rating"
   const handleSort = (newValue) => {
     router.push({ query: { ...router.query, sortBy: newValue } })
   }
@@ -35,6 +28,7 @@ const MoviesMenu = () => {
     }
   }
   const ranges = filtersData.ranges
+  const sort = router.query.sortBy || "imdb.rating"
   const genres = [
     "Drama",
     "Comedy",
@@ -60,28 +54,15 @@ const MoviesMenu = () => {
       </ul>
       <div className="flex items-center justify-evenly w-3/10">
         <MoviesFilters handleFilter={handleFilter} />
-        <Select value={sort} onValueChange={(e) => handleSort(e)}>
-          <SelectTrigger
-            className="border-1 dark:border-gray-700 dark:bg-stone-900"
-            title="Sort by"
-          >
-            <SelectValue placeholder="IMDB Rating">
-              <ArrowDownUp />
-              {ranges[sort]}
-            </SelectValue>
-          </SelectTrigger>
-          <SelectContent>
-            {Object.entries(ranges).map(([key, value]) => (
-              <SelectItem value={key}>{value}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <SelectSortBy
+          value={sort}
+          selectedValue={ranges[sort]}
+          onValueChange={(e) => handleSort(e)}
+          title="Sort Movies"
+          options={ranges}
+        />
         <Button
-          title={
-            isAscending
-              ? "Ascending order"
-              : "Descending order"
-          }
+          title={isAscending ? "Ascending order" : "Descending order"}
           onClick={() => handleSortOrder()}
           className="bg-trasnparent border-1 dark:border-gray-700 hover:dark:bg-red-800 hover:cursor-pointer"
         >
