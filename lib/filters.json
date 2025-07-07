@@ -81,7 +81,7 @@
     "Western"
   ],
   "ranges": {
-    "year": "Release  year",
+    "released": "Release  year",
     "imdb.rating": "IMDB Rating",
     "awards.wins": "Awards won",
     "runtime": "Runtime"

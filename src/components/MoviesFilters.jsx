@@ -25,7 +25,8 @@ const MoviesFilters = ({ handleFilter }) => {
     <Sheet>
       <SheetTrigger asChild>
         <Button
-          className="flex items-center justify-center gap-1 hover:cursor-pointer dark:bg-stone-900 border-1 border-gray-700"
+          className={`flex items-center justify-center gap-1 hover:cursor-pointer dark:bg-stone-900 border-1 border-gray-700
+            ${Object.keys(router.query).length > 0 ? 'dark:bg-red-800' : null}`}
           variant="ghost"
         >
           <Funnel />

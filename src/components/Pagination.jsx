@@ -6,9 +6,6 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Forward } from "lucide-react"
-import { useState } from "react"
 
 const PaginationWrap = ({ router, totalPages }) => {
   const page = parseInt(router.query.page) || 1
