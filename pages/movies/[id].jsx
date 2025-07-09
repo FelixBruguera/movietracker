@@ -7,6 +7,7 @@ import MovieDetailLink from "../../src/components/MovieDetailLink"
 import MovieDetailsList from "../../src/components/MovieDetailsList"
 import Reviews from "../../src/components/Reviews"
 import MovieLinkList from "../../src/components/MovieLinkList"
+import Poster from "../../src/components/Poster"
 
 export default function MoviePage() {
   const router = useRouter()
@@ -38,12 +39,7 @@ export default function MoviePage() {
     <div className="container mx-auto p-4">
       <div className="flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/3">
-          <img
-            src={movie.poster}
-            alt={movie.title}
-            className="rounded-lg shadow-lg size-screen"
-            priority
-          />
+          <Poster src={movie.poster} alt={movie.title} size="l" />
         </div>
         <div className="w-full md:w-2/3 flex flex-col gap-3">
           <h1 className="text-3xl font-bold mb-2">{movie.title}</h1>

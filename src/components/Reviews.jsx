@@ -61,23 +61,26 @@ export default function Reviews() {
         />
       </div>
 
-      {data.reviews && data.reviews.length > 0 ? (
-        <ul className="space-y-4">
-          {data.reviews.map((review) => (
-            <Review data={review} />
-          ))}
-        </ul>
+      {data.reviews?.length > 0 ? (
+        <>
+          <ul className="space-y-4">
+            {data.reviews.map((review) => (
+              <Review data={review} />
+            ))}
+          </ul>
+          <div className="mt-4">
+            {data.info.totalPages > 1 && (
+              <PaginationWrap
+                router={router}
+                totalPages={data.info.totalPages}
+                pageQueryParam="reviewPage"
+              />
+            )}
+          </div>
+        </>
       ) : (
         <p>No reviews yet.</p>
       )}
-
-      <div className="mt-4">
-        <PaginationWrap
-          router={router}
-          totalPages={data.info.totalPages}
-          pageQueryParam="reviewPage"
-        />
-      </div>
     </div>
   )
 }

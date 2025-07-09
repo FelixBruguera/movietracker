@@ -9,7 +9,8 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { Calendar, Star } from "lucide-react"
+import { Star } from "lucide-react"
+import Poster from "../src/components/Poster"
 
 export default function Index() {
   const router = useRouter()
@@ -40,7 +41,10 @@ export default function Index() {
   return (
     <div className="flex flex-col justify-between">
       <MoviesMenu />
-      <ul className="p-5 flex flex-wrap justify-center items-center gap-2 gap-y-0">
+      <ul
+        className="p-5 flex flex-wrap justify-center items-center gap-2 gap-y-0"
+        aria-label="movies"
+      >
         {movies.length === 0 ? (
           <li className="h-100">
             <h1 className="font-bold text-lg">No results found</h1>
@@ -51,17 +55,14 @@ export default function Index() {
               <li key={movie._id} className="h-90 w-60">
                 <TooltipTrigger>
                   <Link href={`/movies/${movie._id}`} className="text-center">
-                    <img
-                      src={movie.poster}
-                      alt={movie.title}
-                      title={movie.title}
-                      className="max-h-full max-w-full shadow-md rounded-sm"
-                    />
+                    <Poster src={movie.poster} alt={movie.title} />
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent className="flex flex-col items-center justify-center">
                   <p>{movie.title}</p>
-                  <p>{new Date(movie.released).getFullYear()}</p>
+                  <p>
+                    {movie.released && new Date(movie.released).getFullYear()}
+                  </p>
                   <div className="flex items-center">
                     <p>{movie.imdb.rating}</p>
                     <Star color="goldenrod" fill="goldenrod" size={12} />

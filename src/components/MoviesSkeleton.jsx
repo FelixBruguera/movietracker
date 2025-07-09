@@ -6,7 +6,10 @@ const MoviesSkeleton = () => {
   return (
     <div className="p-5 flex flex-wrap justify-center items-center gap-2 gap-y-2">
       {items.map((item) => (
-        <Skeleton className="h-95 w-60 rounded-sm dark:bg-stone-600" />
+        <Skeleton
+          key={item}
+          className="h-95 w-60 rounded-sm dark:bg-stone-600"
+        />
       ))}
     </div>
   )
