@@ -1,10 +1,10 @@
 import MovieDetailLink from "./MovieDetailLink"
 import MovieDetailList from "./MovieDetailsList"
 
-const MovieDetailsList = ({ title, items, param }) => {
+const MovieLinkList = ({ title, items, param }) => {
   return (
     <div>
-      <h2 className="text-2xl font-semibold mb-2">{title}</h2>
+      <h2 className="text-2xl font-semibold mb-2 ">{title}</h2>
       <MovieDetailList>
         {items.map((item) => (
           <MovieDetailLink href={`/?${param}=${item}`} title={title}>
@@ -16,4 +16,4 @@ const MovieDetailsList = ({ title, items, param }) => {
   )
 }
 
-export default MovieDetailsList
+export default MovieLinkList

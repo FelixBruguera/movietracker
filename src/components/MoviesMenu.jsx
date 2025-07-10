@@ -9,6 +9,7 @@ import MoviesMenuItem from "./MoviesMenuItem"
 import MoviesFilters from "./MoviesFilters"
 import filtersData from "../../lib/filters.json"
 import SelectSortBy from "./SelectSortBy"
+import SortOrderToggle from "./SortOrderToggle"
 
 const MoviesMenu = () => {
   const router = useRouter()
@@ -61,17 +62,7 @@ const MoviesMenu = () => {
           title="Sort Movies"
           options={ranges}
         />
-        <Button
-          title={isAscending ? "Ascending order" : "Descending order"}
-          onClick={() => handleSortOrder()}
-          className="bg-trasnparent border-1 dark:border-gray-700 hover:dark:bg-red-800 hover:cursor-pointer"
-        >
-          {isAscending ? (
-            <ArrowUpWideNarrow color="white" />
-          ) : (
-            <ArrowDownWideNarrow color="white" />
-          )}
-        </Button>
+        <SortOrderToggle isAscending={isAscending} onClick={handleSortOrder} />
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { useRouter } from "next/router"
-import MoviesSkeleton from "../../src/components/MoviesSkeleton"
+import MovieSkeleton from "../../src/components/MovieSkeleton"
 import { Calendar, Clock4, LibraryBig, Trophy } from "lucide-react"
 import MovieDetail from "../../src/components/MovieDetail"
 import MovieDetailLink from "../../src/components/MovieDetailLink"
@@ -27,7 +27,7 @@ export default function MoviePage() {
   if (isLoading) {
     return (
       <div className="flex flex-col justify-between">
-        <MoviesSkeleton />
+        <MovieSkeleton />
       </div>
     )
   }
@@ -88,7 +88,7 @@ export default function MoviePage() {
               </MovieDetailLink>
             ))}
           </MovieDetailsList>
-          <p className="text-md text-stone-300 text-justify w-9/10">
+          <p className="text-md text-slate-800 dark:text-stone-300 text-justify w-9/10 my-1">
             {movie.fullplot}
           </p>
           {movie.cast?.length > 0 && (

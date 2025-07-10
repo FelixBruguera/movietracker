@@ -5,6 +5,11 @@ import Review from "./Review"
 import SortOrderToggle from "./SortOrderToggle"
 import { ArrowDownUp } from "lucide-react"
 import SelectSortBy from "./SelectSortBy"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 export default function Reviews() {
   const router = useRouter()
@@ -31,6 +36,19 @@ export default function Reviews() {
       { scroll: false },
     )
   }
+  const ratingScale = {
+    1: "bg-red-400",
+    2: "bg-red-300",
+    3: "bg-red-200",
+    4: "bg-yellow-200",
+    5: "bg-yellow-300",
+    6: "bg-green-100",
+    7: "bg-green-200",
+    8: "bg-green-300",
+    9: "bg-green-400",
+    10: "bg-green-500",
+  }
+
   if (isLoading) {
     return (
       <div className="flex flex-col justify-between">
@@ -43,11 +61,29 @@ export default function Reviews() {
     return <span>Error loading movie details.</span>
   }
   const sortBy = router.query.sortBy || "date"
+  const averageRating =
+    data.info.averageRating && Math.ceil(data.info.averageRating)
 
   return (
     <div>
-      <div className="flex justify-between items-center my-4">
-        <h2 className="text-2xl font-semibold w-9/10">Reviews</h2>
+      <div className="flex justify-between items-center my-5">
+        <div className="flex items-center gap-3 w-9/10">
+          <h2 className="text-3xl font-semibold">Reviews</h2>
+          {averageRating && (
+            <Tooltip>
+              <TooltipTrigger>
+                <div className="flex flex-col items-center justify-center">
+                  <p
+                    className={`px-3 py-1 ${ratingScale[averageRating]} dark:text-black font-bold rounded-lg`}
+                  >
+                    {averageRating}
+                  </p>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>Average rating</TooltipContent>
+            </Tooltip>
+          )}
+        </div>
         <SelectSortBy
           value={sortBy}
           selectedValue={sortOptions[sortBy]}
@@ -65,7 +101,7 @@ export default function Reviews() {
         <>
           <ul className="space-y-4">
             {data.reviews.map((review) => (
-              <Review data={review} />
+              <Review data={review} color={ratingScale[review.rating]} />
             ))}
           </ul>
           <div className="mt-4">

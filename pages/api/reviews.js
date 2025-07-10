@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb"
 import { connectToDatabase } from "../../lib/_mongodb"
-import reviewsPipeline from "../../lib/reviewsPipeline"
+import reviewsPipeline from "../../lib/_reviewsPipeline"
 
 export default async function handler(request, response) {
   const { database } = await connectToDatabase()

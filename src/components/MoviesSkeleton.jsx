@@ -2,7 +2,6 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 const MoviesSkeleton = () => {
   const items = Array.from(Array(10).keys())
-  console.log(items)
   return (
     <div className="p-5 flex flex-wrap justify-center items-center gap-2 gap-y-2">
       {items.map((item) => (

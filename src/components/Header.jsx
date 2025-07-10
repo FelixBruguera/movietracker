@@ -3,6 +3,7 @@ import NavLink from "./NavLink"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/router"
+import { ModeToggle } from "@/components/ui/mode-toggle"
 
 const Header = () => {
   const router = useRouter()
@@ -25,7 +26,10 @@ const Header = () => {
           isActive={router.pathname === "/users"}
         />
       </div>
-      <Button>Logout</Button>
+      <div className="flex items-center justify-evenly w-1/10">
+        <ModeToggle />
+        <Button>Logout</Button>
+      </div>
     </nav>
   )
 }

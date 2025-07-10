@@ -30,6 +30,6 @@
     "**/*.ts",
     "**/*.tsx",
     "tailwind.config.js"
-  ],
+, "components/ui/mode-toggle.jsx"  ],
   "exclude": ["node_modules"]
 }

@@ -17,7 +17,7 @@ const SelectSortBy = ({
   return (
     <Select value={value} onValueChange={(e) => onValueChange(e)}>
       <SelectTrigger
-        className="w-40 border-1 dark:border-gray-700 dark:bg-stone-900"
+        className="w-40 border-1 border-gray-400 bg-gray-100 dark:border-gray-700 dark:bg-stone-900"
         name={title}
         title={title}
       >
