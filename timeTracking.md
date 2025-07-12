@@ -13,3 +13,4 @@
 | 7.07.2025  | 0.5     | Add the SelectSortBy and MovieLinkList components |
 | 9.07.2025  | 6     | Install playwright and add tests, add the /users/create endpoint and tests, add the Poster component that handles broken images, refactor the reviews component to only show pagination when there's more than 1 page and refactor the movies pipeline to allow sorting by the release date |
 | 10.07.2025  | 3     | Add dark and light mode toggle and update the styles of the components to support both modes. Add the average rating to the output of reivewsPipeline and display it in the reviews component, update the styling of the review component and add a loading skeleton to the movies/id route
+| 12.07.2025  | 3     | Implement authentication with Better Auth, add the Toaster component to display notifications and the login and signup routes
