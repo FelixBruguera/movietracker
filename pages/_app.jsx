@@ -7,9 +7,9 @@ import { Toaster } from "@/components/ui/sonner"
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: false
-    }
-  }
+      refetchOnWindowFocus: false,
+    },
+  },
 })
 
 export default function App({ Component, pageProps }) {

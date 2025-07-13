@@ -10,6 +10,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import ReviewForm from "./ReviewForm"
 
 export default function Reviews() {
   const router = useRouter()
@@ -96,7 +97,7 @@ export default function Reviews() {
           onClick={handleSortOrder}
         />
       </div>
-
+      <ReviewForm previousReview={data.currentUserReview} />
       {data.reviews?.length > 0 ? (
         <>
           <ul className="space-y-4">

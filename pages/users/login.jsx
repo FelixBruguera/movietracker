@@ -9,38 +9,48 @@ import { useRouter } from "next/router"
 const Login = () => {
   const router = useRouter()
   const { data: session } = authClient.useSession()
-  if (session) { 
-    router.push('/')
-    toast('Already signed in')
+  if (session) {
+    router.push("/")
+    toast("Already signed in")
   }
   const onSubmit = async (e) => {
     e.preventDefault()
-    await authClient.signIn.username({
-      username: e.target.user.value,
-      password: e.target.password.value,
-    }, {
-        onSuccess: () => router.push('/'),    
-        onError: (response) => toast(response.error.message)
-    })
+    await authClient.signIn.username(
+      {
+        username: e.target.user.value,
+        password: e.target.password.value,
+      },
+      {
+        onRequest: () => toast("Signing you in..."),
+        onSuccess: async () => await authClient.revokeOtherSessions(),
+        onError: (response) => toast(response.error.message),
+      },
+    )
   }
 
   return (
-    <AuthForm title='Login' onSubmit={onSubmit}>
-        <AuthInput type="text" name="user" labelText='Username'/>
-        <AuthInput
-          type="password"
-          name="password"
-          labelText='Password'
-        />
-        <div className="flex items-center justify-evenly">
-          <Button type="submit">
-            Send
-          </Button>
-          <Button asChild>
-            <Link href="/users/signup">Sign up</Link>
-          </Button>
-        </div>
-      </AuthForm>
+    <AuthForm title="Login" onSubmit={onSubmit}>
+      <AuthInput
+        type="text"
+        name="user"
+        id="username"
+        labelText="Username"
+        minLength="3"
+      />
+      <AuthInput
+        type="password"
+        name="password"
+        id="password"
+        labelText="Password"
+        minLength="8"
+      />
+      <div className="flex items-center justify-evenly">
+        <Button type="submit">Send</Button>
+        <Button asChild>
+          <Link href="/users/signup">Sign up</Link>
+        </Button>
+      </div>
+    </AuthForm>
   )
 }
 

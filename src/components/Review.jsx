@@ -1,5 +1,3 @@
-import { Star } from "lucide-react"
-
 const Review = ({ data, color }) => {
   return (
     <li
@@ -8,7 +6,7 @@ const Review = ({ data, color }) => {
     >
       <div className="flex flex-col gap-1">
         <div className="flex gap-2 items-center">
-          <p className="font-bold">{data.name}</p>
+          <p className="font-bold">{data.userInfo.username}</p>
           <p className="text-sm text-stone-600 dark:text-gray-400">
             {new Date(data.date).toLocaleDateString()}
           </p>
