@@ -11,12 +11,15 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import ReviewForm from "./ReviewForm"
+import { authClient } from "@/lib/auth-client.ts"
 
 export default function Reviews() {
   const router = useRouter()
+  const { data: session } = authClient.useSession()
+  const currentUser = session?.user?.id
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["reviews", router.query],
+    queryKey: ["reviews", router.query, currentUser],
     queryFn: () =>
       fetch(`/api/reviews?${new URLSearchParams(router.query)}`)
         .then((res) => res.json())
@@ -97,7 +100,10 @@ export default function Reviews() {
           onClick={handleSortOrder}
         />
       </div>
-      <ReviewForm previousReview={data.currentUserReview} />
+      <ReviewForm
+        previousReview={data.currentUserReview}
+        currentUser={currentUser}
+      />
       {data.reviews?.length > 0 ? (
         <>
           <ul className="space-y-4">

@@ -17,7 +17,7 @@ const PaginationWrap = ({ router, totalPages }) => {
       <PaginationContent className="gap-10">
         <PaginationItem>
           <PaginationPrevious
-            className={`hover:bg-stone-900 hover:text-white ${page <= 1 ? "pointer-events-none" : "pointer-events-auto"}`}
+            className={`hover:bg-stone-900 dark:hover:bg-stone-950 hover:text-white ${page <= 1 ? "pointer-events-none" : "pointer-events-auto"}`}
             href=""
             onClick={(e) => {
               e.preventDefault()
@@ -47,7 +47,7 @@ const PaginationWrap = ({ router, totalPages }) => {
             <p>of {totalPages}</p>
           </span>
           <Button
-            className="h-8/10 w-fit px-3 bg-stone-800 dark:bg-gray-300 dark:hover:bg-red-800 dark:hover:text-white transition-all"
+            className="h-8/10 w-fit px-3 bg-stone-800 hover:bg-red-800 hover:cursor-pointer dark:bg-gray-300 dark:hover:bg-red-800 dark:hover:text-white transition-all"
             type="submit"
           >
             Go
@@ -55,7 +55,7 @@ const PaginationWrap = ({ router, totalPages }) => {
         </form>
         <PaginationItem>
           <PaginationNext
-            className={`hover:bg-stone-900 hover:text-white ${page >= totalPages ? "pointer-events-none" : "pointer-events-auto"}`}
+            className={`hover:bg-stone-900 dark:hover:bg-stone-950 hover:text-white ${page >= totalPages ? "pointer-events-none" : "pointer-events-auto"}`}
             href=""
             onClick={(e) => {
               e.preventDefault()

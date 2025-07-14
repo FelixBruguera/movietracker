@@ -9,7 +9,7 @@ import { authClient } from "@/lib/auth-client.ts"
 import { Button } from "@/components/ui/button"
 import { ChevronDown, User, LogOut } from "lucide-react"
 
-const UserDropdown = ({ router }) => {
+const UserDropdown = () => {
   const { data: session } = authClient.useSession()
   const logout = async () => await authClient.signOut()
   if (!session) {

@@ -13,7 +13,7 @@ import { toast } from "sonner"
 import { useRouter } from "next/router"
 import axios from "axios"
 
-const ReviewForm = ({ previousReview }) => {
+const ReviewForm = ({ previousReview, currentUser }) => {
   const router = useRouter()
   const queryClient = useQueryClient()
   const previousText = previousReview?.text
@@ -25,7 +25,7 @@ const ReviewForm = ({ previousReview }) => {
     mutationFn: (newReview) =>
       axios.post(`/api/reviews?id=${router.query.id}`, newReview),
     onSuccess: () => {
-      queryClient.invalidateQueries(["reviews", router.query])
+      queryClient.invalidateQueries(["reviews", router.query, currentUser])
       return toast("Succesfully Added")
     },
     onError: (error) => toast(error.response.statusText),
@@ -44,7 +44,7 @@ const ReviewForm = ({ previousReview }) => {
         value={text}
         onChange={(e) => setText(e.target.value)}
         required
-        minLength='3'
+        minLength="3"
       />
       <Select
         id="rating"

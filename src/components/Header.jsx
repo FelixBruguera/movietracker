@@ -32,7 +32,7 @@ const Header = () => {
       </div>
       <div className="flex items-center justify-evenly w-2/10">
         <ModeToggle />
-        <UserDropdown router={router} />
+        <UserDropdown />
       </div>
     </nav>
   )
