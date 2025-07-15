@@ -51,7 +51,10 @@ const ReviewForm = ({ previousReview, currentUser }) => {
         value={rating}
         onValueChange={(e) => setRating(parseInt(e))}
       >
-        <SelectTrigger className="dark:bg-stone-900 w-1/10" title="Your Rating">
+        <SelectTrigger
+          className="dark:bg-stone-900 w-fit lg:w-1/10"
+          title="Your Rating"
+        >
           {rating}
         </SelectTrigger>
         <SelectContent>

@@ -149,3 +149,13 @@
     color: rgba(250, 250, 250, 0.9);
   }
 }
+@media (max-width: 1024px) {
+  .brokenImage {
+    height: calc(var(--spacing) * 63);
+    width: calc(var(--spacing) * 42);
+  }
+  .brokenImageLarge {
+    height: 50dvh;
+    width: 100%;
+  }
+}

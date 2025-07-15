@@ -6,18 +6,17 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { ArrowDownUp } from "lucide-react"
+import { useRouter } from "next/router"
 
-const SelectSortBy = ({
-  value,
-  selectedValue,
-  onValueChange,
-  title,
-  options,
-}) => {
+const SelectSortBy = ({ value, selectedValue, title, options }) => {
+  const router = useRouter()
+  const onValueChange = (newValue) => {
+    router.push({ query: { ...router.query, sortBy: newValue } })
+  }
   return (
     <Select value={value} onValueChange={(e) => onValueChange(e)}>
       <SelectTrigger
-        className="w-40 border-1 border-gray-400 bg-gray-100 dark:border-gray-700 dark:bg-stone-900"
+        className="text-xs lg:text-sm w-40 border-1 border-gray-400 bg-gray-100 dark:border-gray-700 dark:bg-stone-900"
         name={title}
         title={title}
       >

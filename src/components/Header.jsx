@@ -9,30 +9,36 @@ const Header = () => {
   const router = useRouter()
 
   return (
-    <nav className="flex items-center justify-around h-20 p-2 mb-2">
+    <nav className="flex flex-col lg:flex-row items-center justify-around h-30 lg:h-20 p-2 mb-2">
       <Link
         href={"/"}
-        className="flex items-center gap-1 text-xl font-bold w-fit"
+        className="flex items-center gap-1 text-2xl font-bold w-fit"
       >
-        <Clapperboard />
+        <Clapperboard className="size-8" />
         Movie Tracker
       </Link>
-      <div className="flex items-center justify-evenly w-6/10">
-        <NavLink href={"/"} title="Movies" isActive={router.pathname === "/"} />
-        <NavLink
-          href={"/lists"}
-          title="Lists"
-          isActive={router.pathname === "/lists"}
-        />
-        <NavLink
-          href={"/users"}
-          title="Users"
-          isActive={router.pathname === "/users"}
-        />
-      </div>
-      <div className="flex items-center justify-evenly w-2/10">
-        <ModeToggle />
-        <UserDropdown />
+      <div className="flex items-center justify-between w-full lg:w-8/10">
+        <div className="flex items-center justify-evenly w-7/10">
+          <NavLink
+            href={"/"}
+            title="Movies"
+            isActive={router.pathname === "/"}
+          />
+          <NavLink
+            href={"/lists"}
+            title="Lists"
+            isActive={router.pathname === "/lists"}
+          />
+          <NavLink
+            href={"/users"}
+            title="Users"
+            isActive={router.pathname === "/users"}
+          />
+        </div>
+        <div className="flex items-center justify-evenly w-3/10">
+          <ModeToggle />
+          <UserDropdown />
+        </div>
       </div>
     </nav>
   )

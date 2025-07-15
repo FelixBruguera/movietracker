@@ -1,12 +1,19 @@
 import { ArrowDownWideNarrow, ArrowUpWideNarrow } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useRouter } from "next/router"
 
-const SortOrderToggle = ({ isAscending, onClick }) => {
+const SortOrderToggle = () => {
+  const router = useRouter()
+  const isAscending = router.query.sortOrder === "1"
+  const handleSortOrder = () => {
+    const newValue = isAscending ? -1 : 1
+    router.push({ query: { ...router.query, sortOrder: newValue } })
+  }
   return (
     <Button
       title={isAscending ? "Ascending order" : "Descending order"}
-      onClick={() => onClick()}
-      className="bg-trasnparent border-1 dark:border-gray-700 border-gray-400 hover:dark:bg-red-800 hover:bg-red-800 hover:cursor-pointer group"
+      onClick={() => handleSortOrder()}
+      className="bg-transparent border-1 dark:border-gray-700 border-gray-400 hover:dark:bg-red-800 hover:bg-red-800 hover:cursor-pointer group"
     >
       {isAscending ? (
         <ArrowUpWideNarrow className=" text-stone-900 dark:text-white group-hover:text-white transition-all" />

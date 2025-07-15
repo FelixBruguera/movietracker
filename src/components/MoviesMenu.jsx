@@ -1,9 +1,3 @@
-import { Button } from "@/components/ui/button"
-import {
-  ArrowDownUp,
-  ArrowDownWideNarrow,
-  ArrowUpWideNarrow,
-} from "lucide-react"
 import { useRouter } from "next/router"
 import MoviesMenuItem from "./MoviesMenuItem"
 import MoviesFilters from "./MoviesFilters"
@@ -13,13 +7,6 @@ import SortOrderToggle from "./SortOrderToggle"
 
 const MoviesMenu = () => {
   const router = useRouter()
-  const handleSort = (newValue) => {
-    router.push({ query: { ...router.query, sortBy: newValue } })
-  }
-  const handleSortOrder = () => {
-    const newValue = router.query.sortOrder === "1" ? -1 : 1
-    router.push({ query: { ...router.query, sortOrder: newValue } })
-  }
   const handleGenre = (newValue) => {
     if (router.query.genres === newValue) {
       const { genres, ...newQuery } = router.query
@@ -43,26 +30,24 @@ const MoviesMenu = () => {
   const handleFilter = (data) => {
     router.push({ query: { ...router.query, ...data, page: 1 } })
   }
-  const isAscending = router.query.sortOrder === "1"
   return (
-    <div className="flex items-center w-9/10 mx-auto">
-      <ul className="w-7/10 flex items-center justify-between">
+    <div className="flex flex-col gap-3 lg:gap-0 lg:flex-row items-center w-9/10 mx-auto">
+      <ul className="w-full lg:w-7/10 flex flex-wrap items-center justify-center gap-1 lg:gap-0 lg:justify-between">
         {genres.map((genre) => (
           <li key={genre}>
             <MoviesMenuItem title={genre} onClick={handleGenre} />
           </li>
         ))}
       </ul>
-      <div className="flex items-center justify-evenly w-3/10">
+      <div className="flex items-center justify-evenly w-full lg:w-3/10">
         <MoviesFilters handleFilter={handleFilter} />
         <SelectSortBy
           value={sort}
           selectedValue={ranges[sort]}
-          onValueChange={(e) => handleSort(e)}
           title="Sort Movies"
           options={ranges}
         />
-        <SortOrderToggle isAscending={isAscending} onClick={handleSortOrder} />
+        <SortOrderToggle />
       </div>
     </div>
   )

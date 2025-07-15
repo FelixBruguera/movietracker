@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import PaginationWrap from "./Pagination"
+import PaginationWrap from "./PaginationWrap"
 import { useRouter } from "next/router"
 import Review from "./Review"
 import SortOrderToggle from "./SortOrderToggle"
@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/tooltip"
 import ReviewForm from "./ReviewForm"
 import { authClient } from "@/lib/auth-client.ts"
+import ReviewsSkeleton from "./ReviewsSkeleton"
+import ErrorMessage from "./ErrorMessage"
 
 export default function Reviews() {
   const router = useRouter()
@@ -54,15 +56,11 @@ export default function Reviews() {
   }
 
   if (isLoading) {
-    return (
-      <div className="flex flex-col justify-between">
-        <p>Loading...</p>
-      </div>
-    )
+    return <ReviewsSkeleton />
   }
 
   if (isError) {
-    return <span>Error loading movie details.</span>
+    return <ErrorMessage />
   }
   const sortBy = router.query.sortBy || "date"
   const averageRating =
@@ -70,7 +68,7 @@ export default function Reviews() {
 
   return (
     <div>
-      <div className="flex justify-between items-center my-5">
+      <div className="flex justify-between items-center my-8 lg:my-5">
         <div className="flex items-center gap-3 w-9/10">
           <h2 className="text-3xl font-semibold">Reviews</h2>
           {averageRating && (

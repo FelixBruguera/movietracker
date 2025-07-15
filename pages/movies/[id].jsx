@@ -8,6 +8,7 @@ import MovieDetailsList from "../../src/components/MovieDetailsList"
 import Reviews from "../../src/components/Reviews"
 import MovieLinkList from "../../src/components/MovieLinkList"
 import Poster from "../../src/components/Poster"
+import ErrorMessage from "../../src/components/ErrorMessage"
 
 export default function MoviePage() {
   const router = useRouter()
@@ -33,19 +34,20 @@ export default function MoviePage() {
   }
 
   if (isError) {
-    return <span>Error loading movie details.</span>
+    return <ErrorMessage />
   }
   return (
     <div className="container mx-auto p-4">
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="w-full md:w-1/3">
+      <div className="flex flex-col lg:flex-row gap-8">
+        <div className="w-3/4 mx-auto lg:w-1/3">
           <Poster src={movie.poster} alt={movie.title} size="l" />
         </div>
-        <div className="w-full md:w-2/3 flex flex-col gap-3">
-          <h1 className="text-3xl font-bold mb-2">{movie.title}</h1>
+        <div className="w-full text lg:w-2/3 flex flex-col gap-3">
+          <h1 className="text-2xl lg:text-3xl font-bold mb-2 mx-auto lg:mx-0">
+            {movie.title}
+          </h1>
           <MovieDetailsList>
             <MovieDetail title="Release year">
-              {" "}
               <Calendar size={iconSize} />
               {movie.year}
             </MovieDetail>
@@ -88,7 +90,7 @@ export default function MoviePage() {
               </MovieDetailLink>
             ))}
           </MovieDetailsList>
-          <p className="text-md text-slate-800 dark:text-stone-300 text-justify w-9/10 my-1">
+          <p className="text-md text-slate-800 dark:text-stone-300 text-justify w-9/10 my-1 mx-3 lg:mx-0">
             {movie.fullplot}
           </p>
           {movie.cast?.length > 0 && (

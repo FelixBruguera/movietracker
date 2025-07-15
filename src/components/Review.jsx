@@ -7,11 +7,11 @@ const Review = ({ data, color }) => {
       <div className="flex flex-col gap-1">
         <div className="flex gap-2 items-center">
           <p className="font-bold">{data.userInfo.username}</p>
-          <p className="text-sm text-stone-600 dark:text-gray-400">
+          <p className="text-xs lg:text-sm text-stone-600 dark:text-gray-400">
             {new Date(data.date).toLocaleDateString()}
           </p>
         </div>
-        <p className="w-9/10 text-justify text-stone-800 dark:text-gray-200">
+        <p className="w-9/10 text-sm lg:text-base text-justify text-stone-800 dark:text-gray-200">
           {data.text}
         </p>
       </div>

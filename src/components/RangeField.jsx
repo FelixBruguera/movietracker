@@ -23,13 +23,16 @@ const RangeField = ({
     <FiltersField labelText={labelText} className="flex flex-row">
       <div className="flex">
         <div className="flex w-2/4 justify-evenly">
-          <Label className="text-stone-400" htmlFor={`${fieldName}_min`}>
+          <Label
+            className="text-stone-400 text-xs lg:text-sm"
+            htmlFor={`${fieldName}_min`}
+          >
             More than
           </Label>
           <Input
             name={`${fieldName}_min`}
             type="number"
-            className="w-4/9"
+            className="w-4/9 text-sm"
             min={min}
             max={maxValue}
             value={minValue}
@@ -37,13 +40,16 @@ const RangeField = ({
           ></Input>
         </div>
         <div className="flex w-2/4 justify-evenly">
-          <Label className="text-stone-400" htmlFor={`${fieldName}_max`}>
+          <Label
+            className="text-stone-400 text-xs lg:text-sm"
+            htmlFor={`${fieldName}_max`}
+          >
             Less than
           </Label>
           <Input
             name={`${fieldName}_max`}
             type="number"
-            className="w-4/9"
+            className="w-4/9 text-sm"
             min={minValue}
             max={max}
             value={maxValue}
