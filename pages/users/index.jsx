@@ -43,7 +43,7 @@ export default function UsersPage() {
           )}
         </ul>
       </div>
-      <PaginationWrap router={router} totalPages={totalPages} />
+      <PaginationWrap totalPages={totalPages} />
     </div>
   )
 }

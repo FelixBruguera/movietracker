@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 const Review = ({ data, color }) => {
   return (
     <li
@@ -6,7 +8,12 @@ const Review = ({ data, color }) => {
     >
       <div className="flex flex-col gap-1">
         <div className="flex gap-2 items-center">
-          <p className="font-bold">{data.userInfo.username}</p>
+          <Link
+            href={`/users/${data.userInfo._id}`}
+            className="font-bold hover:text-red-800 transition-all"
+          >
+            {data.userInfo.username}
+          </Link>
           <p className="text-xs lg:text-sm text-stone-600 dark:text-gray-400">
             {new Date(data.date).toLocaleDateString()}
           </p>

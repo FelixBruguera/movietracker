@@ -6,11 +6,16 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination"
 import { Button } from "@/components/ui/button"
+import { useRouter } from "next/router"
 
-const PaginationWrap = ({ router, totalPages }) => {
+const PaginationWrap = ({ totalPages, scrollTarget = "" }) => {
+  const router = useRouter()
   const page = parseInt(router.query.page) || 1
   const handleChange = (newPage) => {
-    router.push({ query: { ...router.query, page: newPage } })
+    router.push({
+      hash: scrollTarget,
+      query: { ...router.query, page: newPage },
+    })
   }
   return (
     <Pagination className="p-2">

@@ -7,7 +7,11 @@ const SortOrderToggle = () => {
   const isAscending = router.query.sortOrder === "1"
   const handleSortOrder = () => {
     const newValue = isAscending ? -1 : 1
-    router.push({ query: { ...router.query, sortOrder: newValue } })
+    router.push(
+      { query: { ...router.query, sortOrder: newValue, page: 1 } },
+      "",
+      { scroll: false },
+    )
   }
   return (
     <Button

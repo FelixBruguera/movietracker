@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 const ReviewsSkeleton = () => {
   return (
-    <div className="flex flex-col gap-5 my-8 lg:my-5">
+    <div id="reviews" className="flex flex-col gap-5 my-8 lg:my-5">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Skeleton className="h-10 w-40 lg:w-80 dark:bg-stone-600" />

@@ -11,7 +11,9 @@ import { useRouter } from "next/router"
 const SelectSortBy = ({ value, selectedValue, title, options }) => {
   const router = useRouter()
   const onValueChange = (newValue) => {
-    router.push({ query: { ...router.query, sortBy: newValue } })
+    router.push({ query: { ...router.query, sortBy: newValue, page: 1 } }, "", {
+      scroll: false,
+    })
   }
   return (
     <Select value={value} onValueChange={(e) => onValueChange(e)}>

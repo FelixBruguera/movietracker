@@ -3,17 +3,14 @@ import PaginationWrap from "./PaginationWrap"
 import { useRouter } from "next/router"
 import Review from "./Review"
 import SortOrderToggle from "./SortOrderToggle"
-import { ArrowDownUp } from "lucide-react"
 import SelectSortBy from "./SelectSortBy"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
 import ReviewForm from "./ReviewForm"
 import { authClient } from "@/lib/auth-client.ts"
 import ReviewsSkeleton from "./ReviewsSkeleton"
 import ErrorMessage from "./ErrorMessage"
+import reviewsInfo from "@/lib/reviews.json"
+import AverageRating from "./AverageRating"
+import TotalReviews from "./TotalReviews"
 
 export default function Reviews() {
   const router = useRouter()
@@ -28,32 +25,8 @@ export default function Reviews() {
         .then((data) => data[0]),
   })
 
-  const sortOptions = { date: "Date", rating: "Rating" }
-  const handleSort = (e) => {
-    router.push({ query: { ...router.query, sortBy: e, page: 1 } }, "", {
-      scroll: false,
-    })
-  }
-  const handleSortOrder = () => {
-    const newValue = router.query.sortOrder === "1" ? -1 : 1
-    router.push(
-      { query: { ...router.query, sortOrder: newValue, page: 1 } },
-      "",
-      { scroll: false },
-    )
-  }
-  const ratingScale = {
-    1: "bg-red-400",
-    2: "bg-red-300",
-    3: "bg-red-200",
-    4: "bg-yellow-200",
-    5: "bg-yellow-300",
-    6: "bg-green-100",
-    7: "bg-green-200",
-    8: "bg-green-300",
-    9: "bg-green-400",
-    10: "bg-green-500",
-  }
+  const sortOptions = reviewsInfo.sortOptions
+  const ratingScale = reviewsInfo.ratingScale
 
   if (isLoading) {
     return <ReviewsSkeleton />
@@ -65,38 +38,28 @@ export default function Reviews() {
   const sortBy = router.query.sortBy || "date"
   const averageRating =
     data.info.averageRating && Math.ceil(data.info.averageRating)
+  const totalReviews = data.info.totalReviews
 
   return (
-    <div>
+    <div id="reviews">
       <div className="flex justify-between items-center my-8 lg:my-5">
         <div className="flex items-center gap-3 w-9/10">
           <h2 className="text-3xl font-semibold">Reviews</h2>
+          {totalReviews > 0 && <TotalReviews total={totalReviews} />}
           {averageRating && (
-            <Tooltip>
-              <TooltipTrigger>
-                <div className="flex flex-col items-center justify-center">
-                  <p
-                    className={`px-3 py-1 ${ratingScale[averageRating]} dark:text-black font-bold rounded-lg`}
-                  >
-                    {averageRating}
-                  </p>
-                </div>
-              </TooltipTrigger>
-              <TooltipContent>Average rating</TooltipContent>
-            </Tooltip>
+            <AverageRating
+              rating={averageRating}
+              color={ratingScale[averageRating]}
+            />
           )}
         </div>
         <SelectSortBy
           value={sortBy}
           selectedValue={sortOptions[sortBy]}
-          onValueChange={(e) => handleSort(e)}
           title="Sort Reviews"
           options={sortOptions}
         />
-        <SortOrderToggle
-          isAscending={router.query.sortOrder === "1"}
-          onClick={handleSortOrder}
-        />
+        <SortOrderToggle />
       </div>
       <ReviewForm
         previousReview={data.currentUserReview}
@@ -112,9 +75,8 @@ export default function Reviews() {
           <div className="mt-4">
             {data.info.totalPages > 1 && (
               <PaginationWrap
-                router={router}
                 totalPages={data.info.totalPages}
-                pageQueryParam="reviewPage"
+                scrollTarget="reviews"
               />
             )}
           </div>

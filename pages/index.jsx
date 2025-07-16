@@ -74,7 +74,7 @@ export default function Index() {
           ))
         )}
       </ul>
-      <PaginationWrap router={router} totalPages={totalPages} />
+      <PaginationWrap totalPages={totalPages} />
     </div>
   )
 }
