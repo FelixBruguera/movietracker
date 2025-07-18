@@ -6,16 +6,16 @@ import userListsPipeline from "../../../lib/_userListsPipeline"
 export default async function GET(request, response) {
   const tabConfig = {
     reviews: {
-        collection: "comments",
-        pipeline: userReviewsPipeline,
+      collection: "comments",
+      pipeline: userReviewsPipeline,
     },
     diary: {
-        collection: "diary",
-        pipeline: userDiaryPipeline,
+      collection: "diary",
+      pipeline: userDiaryPipeline,
     },
     lists: {
-        collection: "lists",
-        pipeline: userListsPipeline,
+      collection: "lists",
+      pipeline: userListsPipeline,
     },
   }
   const { database } = await connectToDatabase()

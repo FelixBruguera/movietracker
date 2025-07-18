@@ -30,7 +30,7 @@ export default function UserPage() {
   const tabs = ["Reviews", "Diary", "Lists"]
   const currentTab = otherParams.tab
   const handleTabChange = (newTab) =>
-    router.push({ query: { ...router.query, tab: newTab } })
+    router.push({ query: { ...router.query, tab: newTab, page: 1 } })
   return (
     <div className="p-5">
       <div className="w-full mx-auto pb-10 flex flex-col gap-2">

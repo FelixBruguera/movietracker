@@ -18,4 +18,5 @@
 | 14.07.2025  | 3     | Refactor the movies pipeline to improve code readability, moving the definition of valid options and settings to a single object and improving the creation of the match stage for ranges, add the currentUser's ID to the reviews query so it refetches the reviews when the user status changes, fix the pagination buttons hover in dark mode
 | 15.07.2025  | 6     | Add the users route, index endpoint and index component. Add responsive styles to most components. Add two error handling components, one for route erros and the other for fetch errors and moved the functions that handle sort by and sort order changes to their respective components
 | 16.07.2025  | 6     | Implement the ui and api endpoint of user profiles. Refactor parts of the reviews component into smaller components
+| 18.07.2025  | 4     | Implement the diary tab in the user profile and refactor some parts of the reviews component into reusable components
 

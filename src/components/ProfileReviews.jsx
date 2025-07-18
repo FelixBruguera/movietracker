@@ -4,28 +4,29 @@ import ProfileReview from "./ProfileReview"
 import SortOrderToggle from "./SortOrderToggle"
 import SelectSortBy from "./SelectSortBy"
 import PaginationWrap from "./PaginationWrap"
-import TotalReviews from "./TotalReviews"
+import Total from "./Total"
+import ListHeading from "./ListHeading"
+import ListHeadingTitle from "./ListHeadingTitle"
 
 const ProfileReviews = ({ data, params }) => {
   const sortOptions = reviewsInfo.sortOptions
   const ratingScale = reviewsInfo.ratingScale
-  const sortBy = params.sortBy || "date"
+  const sortBy = params.sortBy === "rating" ? "rating" : "date"
   const averageRating =
     data.info.averageRating && Math.ceil(data.info.averageRating)
 
   return (
     <div>
-      <div className="flex justify-between items-center my-8 lg:my-5">
-        <div className="flex items-center gap-3 w-9/10">
-          <h2 className="text-3xl font-semibold">Reviews</h2>
-          <TotalReviews total={data.info.totalReviews} />
+      <ListHeading>
+        <ListHeadingTitle title="Reviews">
+          <Total total={data.info.totalReviews} label="Total Reviews" />
           {averageRating && (
             <AverageRating
               rating={averageRating}
               color={ratingScale[averageRating]}
             />
           )}
-        </div>
+        </ListHeadingTitle>
         <SelectSortBy
           value={sortBy}
           selectedValue={sortOptions[sortBy]}
@@ -33,7 +34,7 @@ const ProfileReviews = ({ data, params }) => {
           options={sortOptions}
         />
         <SortOrderToggle />
-      </div>
+      </ListHeading>
       {data.reviews?.length > 0 ? (
         <>
           <ul className="space-y-4">

@@ -10,8 +10,8 @@ const ProfileReview = ({ data, color }) => {
         className="size-50 bg-stone-900 p-1 lg:bg-transparent w-full rounded-t-2xl lg:size-40 lg:p-auto"
       >
         <Poster
-          src={data.movieInfo?.poster}
-          alt={data.movieInfo?.title}
+          src={data.movieInfo.poster}
+          alt={data.movieInfo.title}
           size="s"
         />
       </Link>

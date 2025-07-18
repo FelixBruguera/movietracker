@@ -1,5 +1,3 @@
-const ProfileLists = ({ data, params }) => {
-
-}
+const ProfileLists = ({ data, params }) => {}
 
 export default ProfileLists

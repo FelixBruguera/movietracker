@@ -22,7 +22,7 @@ const PaginationWrap = ({ totalPages, scrollTarget = "" }) => {
       <PaginationContent className="gap-10">
         <PaginationItem>
           <PaginationPrevious
-            className={`hover:bg-stone-900 dark:hover:bg-stone-950 hover:text-white ${page <= 1 ? "pointer-events-none" : "pointer-events-auto"}`}
+            className={`hover:bg-stone-900 dark:hover:bg-stone-950 hover:text-white ${page <= 1 ? "pointer-events-none text-stone-500" : "pointer-events-auto"}`}
             href=""
             onClick={(e) => {
               e.preventDefault()
@@ -60,7 +60,7 @@ const PaginationWrap = ({ totalPages, scrollTarget = "" }) => {
         </form>
         <PaginationItem>
           <PaginationNext
-            className={`hover:bg-stone-900 dark:hover:bg-stone-950 hover:text-white ${page >= totalPages ? "pointer-events-none" : "pointer-events-auto"}`}
+            className={`hover:bg-stone-900 dark:hover:bg-stone-950 hover:text-white ${page >= totalPages ? "pointer-events-none text-stone-500" : "pointer-events-auto"}`}
             href=""
             onClick={(e) => {
               e.preventDefault()

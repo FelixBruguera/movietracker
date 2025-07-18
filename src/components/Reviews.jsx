@@ -10,7 +10,9 @@ import ReviewsSkeleton from "./ReviewsSkeleton"
 import ErrorMessage from "./ErrorMessage"
 import reviewsInfo from "@/lib/reviews.json"
 import AverageRating from "./AverageRating"
-import TotalReviews from "./TotalReviews"
+import Total from "./Total"
+import ListHeadingTitle from "./ListHeadingTitle"
+import ListHeading from "./ListHeading"
 
 export default function Reviews() {
   const router = useRouter()
@@ -42,17 +44,18 @@ export default function Reviews() {
 
   return (
     <div id="reviews">
-      <div className="flex justify-between items-center my-8 lg:my-5">
-        <div className="flex items-center gap-3 w-9/10">
-          <h2 className="text-3xl font-semibold">Reviews</h2>
-          {totalReviews > 0 && <TotalReviews total={totalReviews} />}
+      <ListHeading>
+        <ListHeadingTitle title="Reviews">
+          {totalReviews > 0 && (
+            <Total total={totalReviews} label="Total Reviews" />
+          )}
           {averageRating && (
             <AverageRating
               rating={averageRating}
               color={ratingScale[averageRating]}
             />
           )}
-        </div>
+        </ListHeadingTitle>
         <SelectSortBy
           value={sortBy}
           selectedValue={sortOptions[sortBy]}
@@ -60,7 +63,7 @@ export default function Reviews() {
           options={sortOptions}
         />
         <SortOrderToggle />
-      </div>
+      </ListHeading>
       <ReviewForm
         previousReview={data.currentUserReview}
         currentUser={currentUser}
