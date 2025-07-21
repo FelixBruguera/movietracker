@@ -15,8 +15,8 @@ const DiaryRow = ({ data, group }) => {
       : format(new Date(year, month - 1), "MMMM u")
   return (
     <li key={data.date} className="flex items-center justify-start">
-      <p className="w-1/8 font-bold text-lg">{date}</p>
-      <div className="flex flex-wrap">
+      <p className="w-1/10 font-bold text-lg">{date}</p>
+      <div className="flex flex-wrap w-9/10">
         {data.watched.map((movie) => (
           <Tooltip>
             <TooltipTrigger className="size-50 bg-stone-900 p-1 lg:bg-transparent rounded-t-2xl lg:size-40 lg:p-auto">
@@ -26,7 +26,7 @@ const DiaryRow = ({ data, group }) => {
             </TooltipTrigger>
             <TooltipContent className="flex flex-col items-center justify-center">
               <p>{movie.title}</p>
-              <p>{new Date(movie.date).toLocaleDateString()}</p>
+              <p>{movie.date.split("T")[0]}</p>
             </TooltipContent>
           </Tooltip>
         ))}

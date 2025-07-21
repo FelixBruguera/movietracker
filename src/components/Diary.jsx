@@ -6,9 +6,9 @@ import SelectSortBy from "./SelectSortBy"
 import SortOrderToggle from "./SortOrderToggle"
 import Total from "./Total"
 
-const Diary = ({ data, params }) => {
+const Diary = ({ data, sortKey }) => {
   const sortOptions = { monthly: "Monthly", yearly: "Yearly" }
-  const sortBy = params.sortBy === "yearly" ? "yearly" : "monthly"
+  const sortBy = sortKey === "yearly" ? "yearly" : "monthly"
   return (
     <div>
       <ListHeading>

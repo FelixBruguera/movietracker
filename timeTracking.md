@@ -19,4 +19,6 @@
 | 15.07.2025  | 6     | Add the users route, index endpoint and index component. Add responsive styles to most components. Add two error handling components, one for route erros and the other for fetch errors and moved the functions that handle sort by and sort order changes to their respective components
 | 16.07.2025  | 6     | Implement the ui and api endpoint of user profiles. Refactor parts of the reviews component into smaller components
 | 18.07.2025  | 4     | Implement the diary tab in the user profile and refactor some parts of the reviews component into reusable components
+| 20.07.2025  | 5     | Refactor the reviews ui and endpoint. Implement review editing and removal. Add tests for creating, editing and deleting reviews
+| 21.07.2025  | 6     | Implement log creation, updating and removal and tests for each
 

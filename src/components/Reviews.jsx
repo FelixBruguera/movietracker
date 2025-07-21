@@ -46,7 +46,14 @@ export default function Reviews() {
 
   return (
     <div id="reviews">
-       {userReview && <UserReview data={userReview} color={ratingScale[userReview.rating]} currentUser={currentUser} query={router.query} />}
+      {userReview && (
+        <UserReview
+          data={userReview}
+          color={ratingScale[userReview.rating]}
+          currentUser={currentUser}
+          query={router.query}
+        />
+      )}
       <ListHeading>
         <ListHeadingTitle title="Reviews">
           {totalReviews > 0 && (
@@ -67,10 +74,12 @@ export default function Reviews() {
         />
         <SortOrderToggle />
       </ListHeading>
-      {!userReview && <ReviewForm
-        previousReview={data.currentUserReview}
-        currentUser={currentUser}
-      />}
+      {!userReview && session && (
+        <ReviewForm
+          previousReview={data.currentUserReview}
+          currentUser={currentUser}
+        />
+      )}
       {data.reviews?.length > 0 ? (
         <>
           <ul className="space-y-4">

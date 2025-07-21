@@ -4,9 +4,12 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { ModeToggle } from "@/components/ui/mode-toggle"
 import UserDropdown from "./UserDropdown"
+import LogDialog from "./LogDialog"
+import { authClient } from "@/lib/auth-client.ts"
 
 const Header = () => {
   const router = useRouter()
+  const { data: session } = authClient.useSession()
 
   return (
     <nav className="flex flex-col lg:flex-row items-center justify-around h-30 lg:h-20 p-2 mb-2">
@@ -36,6 +39,7 @@ const Header = () => {
           />
         </div>
         <div className="flex items-center justify-evenly w-3/10">
+          {session && <LogDialog />}
           <ModeToggle />
           <UserDropdown />
         </div>

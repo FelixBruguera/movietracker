@@ -22,8 +22,7 @@ const ReviewForm = ({ previousReview, currentUser }) => {
   const [rating, setRating] = useState(previousRating || 1)
   const ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   const mutation = useMutation({
-    mutationFn: (newReview) =>
-      axios.post(`/api/reviews`, newReview),
+    mutationFn: (newReview) => axios.post(`/api/reviews`, newReview),
     onSuccess: () => {
       queryClient.invalidateQueries(["reviews", router.query, currentUser.id])
       return toast("Succesfully Added")
@@ -35,7 +34,11 @@ const ReviewForm = ({ previousReview, currentUser }) => {
       className="flex items-center justify-between my-5"
       onSubmit={(e) => {
         e.preventDefault()
-        mutation.mutate({ text: text, rating: rating, movie_id: router.query.id })
+        mutation.mutate({
+          text: text,
+          rating: rating,
+          movie_id: router.query.id,
+        })
       }}
     >
       <Textarea

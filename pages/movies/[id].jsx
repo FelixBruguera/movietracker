@@ -9,12 +9,15 @@ import Reviews from "../../src/components/Reviews"
 import MovieLinkList from "../../src/components/MovieLinkList"
 import Poster from "../../src/components/Poster"
 import ErrorMessage from "../../src/components/ErrorMessage"
+import LogDialog from "../../src/components/LogDialog"
+import LogManager from "../../src/components/LogManager"
+import { authClient } from "@/lib/auth-client.ts"
 
 export default function MoviePage() {
   const router = useRouter()
-  console.log(router)
   const { id } = router.query
   const iconSize = 20
+  const { data: session } = authClient.useSession()
 
   const {
     data: movie,
@@ -43,9 +46,19 @@ export default function MoviePage() {
           <Poster src={movie.poster} alt={movie.title} size="l" />
         </div>
         <div className="w-full text lg:w-2/3 flex flex-col gap-3">
-          <h1 className="text-2xl lg:text-3xl font-bold mb-2 mx-auto lg:mx-0">
-            {movie.title}
-          </h1>
+          <div className="flex items-center justify-between w-11/12">
+            <h1 className="text-2xl lg:text-3xl font-bold mb-2 mx-auto lg:mx-0">
+              {movie.title}
+            </h1>
+            <div className="flex items-center gap-2">
+              {session && (
+                <>
+                  <LogManager movie={movie} />
+                  <LogDialog movie={movie} />
+                </>
+              )}
+            </div>
+          </div>
           <MovieDetailsList>
             <MovieDetail title="Release year">
               <Calendar size={iconSize} />
