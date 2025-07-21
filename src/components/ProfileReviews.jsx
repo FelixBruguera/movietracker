@@ -8,10 +8,10 @@ import Total from "./Total"
 import ListHeading from "./ListHeading"
 import ListHeadingTitle from "./ListHeadingTitle"
 
-const ProfileReviews = ({ data, params }) => {
+const ProfileReviews = ({ data, sortKey }) => {
   const sortOptions = reviewsInfo.sortOptions
   const ratingScale = reviewsInfo.ratingScale
-  const sortBy = params.sortBy === "rating" ? "rating" : "date"
+  const sortBy = sortKey === "rating" ? "rating" : "date"
   const averageRating =
     data.info.averageRating && Math.ceil(data.info.averageRating)
 

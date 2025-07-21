@@ -23,9 +23,9 @@ const ReviewForm = ({ previousReview, currentUser }) => {
   const ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   const mutation = useMutation({
     mutationFn: (newReview) =>
-      axios.post(`/api/reviews?id=${router.query.id}`, newReview),
+      axios.post(`/api/reviews`, newReview),
     onSuccess: () => {
-      queryClient.invalidateQueries(["reviews", router.query, currentUser])
+      queryClient.invalidateQueries(["reviews", router.query, currentUser.id])
       return toast("Succesfully Added")
     },
     onError: (error) => toast(error.response.statusText),
@@ -35,7 +35,7 @@ const ReviewForm = ({ previousReview, currentUser }) => {
       className="flex items-center justify-between my-5"
       onSubmit={(e) => {
         e.preventDefault()
-        mutation.mutate({ text: text, rating: rating })
+        mutation.mutate({ text: text, rating: rating, movie_id: router.query.id })
       }}
     >
       <Textarea
@@ -52,7 +52,7 @@ const ReviewForm = ({ previousReview, currentUser }) => {
         onValueChange={(e) => setRating(parseInt(e))}
       >
         <SelectTrigger
-          className="dark:bg-stone-900 w-fit lg:w-1/10"
+          className="lg:w-1/10 text-xs lg:text-sm border-1 border-gray-400 bg-gray-100 dark:border-gray-700 dark:bg-stone-900"
           title="Your Rating"
         >
           {rating}

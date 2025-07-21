@@ -13,14 +13,15 @@ import AverageRating from "./AverageRating"
 import Total from "./Total"
 import ListHeadingTitle from "./ListHeadingTitle"
 import ListHeading from "./ListHeading"
+import UserReview from "./UserReview"
 
 export default function Reviews() {
   const router = useRouter()
   const { data: session } = authClient.useSession()
-  const currentUser = session?.user?.id
+  const currentUser = session?.user
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["reviews", router.query, currentUser],
+    queryKey: ["reviews", router.query, currentUser?.id],
     queryFn: () =>
       fetch(`/api/reviews?${new URLSearchParams(router.query)}`)
         .then((res) => res.json())
@@ -41,9 +42,11 @@ export default function Reviews() {
   const averageRating =
     data.info.averageRating && Math.ceil(data.info.averageRating)
   const totalReviews = data.info.totalReviews
+  const userReview = data.currentUserReview
 
   return (
     <div id="reviews">
+       {userReview && <UserReview data={userReview} color={ratingScale[userReview.rating]} currentUser={currentUser} query={router.query} />}
       <ListHeading>
         <ListHeadingTitle title="Reviews">
           {totalReviews > 0 && (
@@ -64,10 +67,10 @@ export default function Reviews() {
         />
         <SortOrderToggle />
       </ListHeading>
-      <ReviewForm
+      {!userReview && <ReviewForm
         previousReview={data.currentUserReview}
         currentUser={currentUser}
-      />
+      />}
       {data.reviews?.length > 0 ? (
         <>
           <ul className="space-y-4">
