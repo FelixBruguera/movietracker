@@ -13,28 +13,27 @@ export default async function handler(request, response) {
       const { rating, text, movie_id } = request.body
       try {
         await database.collection("comments").findOneAndUpdate(
-            {
+          {
             user_id: ObjectId.createFromHexString(session.user.id),
             movie_id: ObjectId.createFromHexString(movie_id),
-            },
-            {
+          },
+          {
             $set: {
-                rating: rating,
-                text: text,
+              rating: rating,
+              text: text,
             },
             $setOnInsert: {
-                date: new Date(),
+              date: new Date(),
             },
-            },
-            { upsert: true },
+          },
+          { upsert: true },
         )
-            return response.status(201).send()
+        return response.status(201).send()
       } catch {
         return response.status(500).send()
       }
     }
-  }
-  else {
+  } else {
     try {
       const data = await database
         .collection("comments")

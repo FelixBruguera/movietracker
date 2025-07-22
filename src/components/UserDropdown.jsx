@@ -34,7 +34,7 @@ const UserDropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        className="w-fit lg:max-w-50 overflow-clip whitespace-nowrap flex items-center gap-3 border-1 
+        className="w-fit lg:max-w-50 border-stone-700 lg:border-transparent overflow-clip whitespace-nowrap flex items-center gap-3 border-1 
             hover:bg-gray-100 hover:dark:bg-stone-900 rounded-lg p-2 hover:cursor-pointer transition-all"
       >
         <User size={20} />
@@ -43,8 +43,13 @@ const UserDropdown = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem>
-          <CircleUserRound />
-          <Link href={`/users/${session.user.id}`}>Profile</Link>
+          <Link
+            href={`/users/${session.user.id}`}
+            className="flex items-center gap-2"
+          >
+            <CircleUserRound />
+            <p>Profile</p>
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => logout()}>
           <LogOut />

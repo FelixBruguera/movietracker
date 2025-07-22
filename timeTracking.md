@@ -21,4 +21,5 @@
 | 18.07.2025  | 4     | Implement the diary tab in the user profile and refactor some parts of the reviews component into reusable components
 | 20.07.2025  | 5     | Refactor the reviews ui and endpoint. Implement review editing and removal. Add tests for creating, editing and deleting reviews
 | 21.07.2025  | 6     | Implement log creation, updating and removal and tests for each
+| 22.07.2025  | 1     | Refactor the users endpoint and routes
 

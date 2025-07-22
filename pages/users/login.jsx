@@ -22,7 +22,13 @@ const Login = () => {
       },
       {
         onRequest: () => toast("Signing you in..."),
-        onSuccess: async () => await authClient.revokeOtherSessions(),
+        onSuccess: async () => {
+          try {
+            await authClient.revokeOtherSessions()
+          } catch {
+            toast("Something went wrong")
+          }
+        },
         onError: (response) => toast(response.error.message),
       },
     )
