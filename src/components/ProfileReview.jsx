@@ -4,10 +4,10 @@ import Poster from "./Poster"
 const ProfileReview = ({ data, color }) => {
   const movieHref = `/movies/${data.movie_id}`
   return (
-    <li className="flex items-center flex-col lg:flex-row" key={data._id}>
+    <li className="flex items-center flex-col md:flex-row max-w-500 mx-auto" key={data._id}>
       <Link
         href={movieHref}
-        className="size-50 bg-stone-900 p-1 lg:bg-transparent w-full rounded-t-2xl lg:size-40 lg:p-auto"
+        className="size-50 bg-zinc-300 dark:bg-stone-900 p-1 md:bg-transparent md:dark:bg-transparent w-full rounded-t-2xl md:size-40 md:p-auto"
       >
         <Poster
           src={data.movieInfo.poster}
@@ -16,7 +16,7 @@ const ProfileReview = ({ data, color }) => {
         />
       </Link>
       <div
-        className="w-full lg:w-9/10 border p-4 rounded-b-lg lg:rounded-lg bg-zinc-300 dark:bg-stone-900 
+        className="w-full md:w-9/10 border p-4 rounded-b-lg lg:rounded-lg bg-zinc-300 dark:bg-stone-900 
             hover:border-zinc-400 dark:hover:border-stone-600 flex items-center justify-between transition-all"
       >
         <div className="flex flex-col gap-1 w-9/10">
@@ -31,7 +31,7 @@ const ProfileReview = ({ data, color }) => {
               {new Date(data.date).toLocaleDateString()}
             </p>
           </div>
-          <p className="w-full text-sm lg:text-base text-justify text-stone-800 dark:text-gray-200">
+          <p className="w-9/10 md:w-full text-sm lg:text-base text-justify text-stone-800 dark:text-gray-200">
             {data.text}
           </p>
         </div>

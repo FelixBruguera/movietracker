@@ -20,7 +20,7 @@ const Review = ({ data, userInfo = null, color }) => {
             {new Date(data.date).toLocaleDateString()}
           </p>
         </div>
-        <p className="w-full text-sm lg:text-base text-justify text-stone-800 dark:text-gray-200">
+        <p className="w-9/10 lg:w-full text-sm lg:text-base text-justify text-stone-800 dark:text-gray-200">
           {data.text}
         </p>
       </div>

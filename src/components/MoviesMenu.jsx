@@ -32,7 +32,7 @@ const MoviesMenu = () => {
   }
   return (
     <div className="flex flex-col gap-3 lg:gap-0 lg:flex-row items-center w-9/10 mx-auto">
-      <ul className="w-full lg:w-7/10 flex flex-wrap items-center justify-center gap-1 lg:gap-0 lg:justify-between">
+      <ul className="hidden lg:flex w-full lg:w-7/10 flex-wrap items-center justify-center gap-1 lg:gap-0 lg:justify-between">
         {genres.map((genre) => (
           <li key={genre}>
             <MoviesMenuItem title={genre} onClick={handleGenre} />

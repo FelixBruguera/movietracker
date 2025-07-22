@@ -45,12 +45,12 @@ export default function MoviePage() {
         <div className="w-3/4 mx-auto lg:w-1/3">
           <Poster src={movie.poster} alt={movie.title} size="l" />
         </div>
-        <div className="w-full text lg:w-2/3 flex flex-col gap-3">
-          <div className="flex items-center justify-between w-11/12">
-            <h1 className="text-2xl lg:text-3xl font-bold mb-2 mx-auto lg:mx-0">
+        <div className="w-full lg:w-2/3 flex flex-col gap-3">
+          <div className="flex items-center justify-between w-full lg:w-11/12">
+            <h1 className="text-2xl lg:text-3xl font-bold mb-2 mx-3 lg:mx-0">
               {movie.title}
             </h1>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-4 lg:gap-2">
               {session && (
                 <>
                   <LogManager movie={movie} />

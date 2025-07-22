@@ -151,8 +151,9 @@
 }
 @media (max-width: 1024px) {
   .brokenImage {
-    height: calc(var(--spacing) * 63);
-    width: calc(var(--spacing) * 42);
+    height: calc(var(--spacing) * 40);
+    width: calc(var(--spacing) * 28);
+    font-size: 14px;
   }
   .brokenImageLarge {
     height: 50dvh;

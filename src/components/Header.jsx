@@ -12,7 +12,7 @@ const Header = () => {
   const { data: session } = authClient.useSession()
 
   return (
-    <nav className="flex flex-col lg:flex-row items-center justify-around h-30 lg:h-20 p-2 mb-2">
+    <nav className="flex flex-col lg:flex-row items-center justify-around h-40 lg:h-20 p-2 mb-2 w-dvw lg:w-full">
       <Link
         href={"/"}
         className="flex items-center gap-1 text-2xl font-bold w-fit"
@@ -20,8 +20,8 @@ const Header = () => {
         <Clapperboard className="size-8" />
         Movie Tracker
       </Link>
-      <div className="flex items-center justify-between w-full lg:w-8/10">
-        <div className="flex items-center justify-evenly w-7/10">
+      <div className="flex flex-col gap-2 lg:gap-0 lg:flex-row items-center justify-between w-full lg:w-8/10">
+        <div className="flex items-center justify-evenly w-full">
           <NavLink
             href={"/"}
             title="Movies"
@@ -38,7 +38,7 @@ const Header = () => {
             isActive={router.pathname === "/users"}
           />
         </div>
-        <div className="flex items-center justify-evenly w-3/10">
+        <div className="flex items-center lg:justify-between justify-evenly w-8/10 lg:w-3/10">
           {session && <LogDialog />}
           <ModeToggle />
           <UserDropdown />

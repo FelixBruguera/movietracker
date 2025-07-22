@@ -13,7 +13,7 @@ const LogFormItem = ({ movie, setSelected }) => {
       </div>
       <div className="flex justify-between items-center w-full">
         <h3 className="text-base font-bold max-w-8/10">{movie.title}</h3>
-        <p className="text-sm dark:text-gray-300">
+        <p className="text-xs lg:text-sm dark:text-gray-300">
           {new Date(movie.released).getFullYear()}
         </p>
       </div>

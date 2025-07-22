@@ -44,7 +44,7 @@ const LogManager = ({ movie }) => {
       <DialogTriggerWrap label="Manage your logs">
         <NotebookPen size={20} />
       </DialogTriggerWrap>
-      <DialogContent className="overflow-auto w-fit min-w-110">
+      <DialogContent className="overflow-auto w-fit min-w-80 lg:min-w-110">
         <DialogHeader>
           <DialogTitle>Your logs for {movie.title}</DialogTitle>
         </DialogHeader>

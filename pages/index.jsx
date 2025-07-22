@@ -53,7 +53,7 @@ export default function Index() {
         ) : (
           movies.map((movie) => (
             <Tooltip>
-              <li key={movie._id} className="h-63 lg:h-90 w-42 lg:w-60">
+              <li key={movie._id} className="h-40 lg:h-90 w-28 lg:w-60">
                 <TooltipTrigger>
                   <Link href={`/movies/${movie._id}`} className="text-center">
                     <Poster src={movie.poster} alt={movie.title} />
