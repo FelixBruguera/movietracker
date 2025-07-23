@@ -10,7 +10,14 @@ export default async function handler(request, response) {
     if (!session) {
       return response.status(401).send()
     } else {
-      const { rating, text, movie_id } = request.body
+      const { text, movie_id } = request.body
+      const rating = parseInt(request.body.rating)
+      if (isNaN(rating) || rating < 1 || rating > 10) {
+        return response.status(400).json({ error: "Rating must be 1-10" });
+      }
+      if (typeof text !== "string" || text.length > 5000) {
+        return response.status(400).json({ error: "Invalid comment" });
+      }
       try {
         await database.collection("comments").findOneAndUpdate(
           {

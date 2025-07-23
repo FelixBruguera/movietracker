@@ -52,7 +52,7 @@ const LogDialog = ({ movie = "" }) => {
               }}
             >
               <div className="flex flex-col gap-3 items-center">
-                <Label htmlFor="date" className="dark:text-stone-400">
+                <Label htmlFor="date" className="text-stone-600 dark:text-stone-400">
                   Date
                 </Label>
                 <input

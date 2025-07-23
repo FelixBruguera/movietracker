@@ -10,7 +10,7 @@ const LogForm = ({ setSelected }) => {
   const { data, isLoading, isError } = useDebounce(search)
   return (
     <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-2">
-      <Label htmlFor="movie" className="text-stone-300">
+      <Label htmlFor="movie" className="text-stone-600 dark:text-stone-300">
         Movie
       </Label>
       <Input

@@ -22,4 +22,7 @@
 | 20.07.2025  | 5     | Refactor the reviews ui and endpoint. Implement review editing and removal. Add tests for creating, editing and deleting reviews
 | 21.07.2025  | 6     | Implement log creation, updating and removal and tests for each
 | 22.07.2025  | 1     | Refactor the users endpoint and routes
+| 22.07.2025  | 2     | Add responsive styles to the new components
+| 23.07.2025  | 3     | Restyle the movies index, add more responsive styles and fix light mode. Improve validation in the api and add more tests
+
 

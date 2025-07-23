@@ -10,7 +10,7 @@ const Total = ({ total, label }) => {
       <TooltipTrigger>
         <div className="flex flex-col items-center justify-center">
           <p
-            className={`px-3 py-1 bg-zinc-300 dark:bg-stone-900 text-black dark:text-white font-bold rounded-lg`}
+            className={`px-3 py-1 bg-zinc-200 dark:bg-stone-900 text-black dark:text-white font-bold rounded-lg`}
             aria-label={label}
           >
             {total}

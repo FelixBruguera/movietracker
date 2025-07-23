@@ -3,6 +3,7 @@ import ProfileHeader from "../../../src/components/ProfileHeader"
 import { useQuery } from "@tanstack/react-query"
 import ErrorMessage from "../../../src/components/ErrorMessage"
 import Diary from "../../../src/components/Diary"
+import ProfileSkeleton from "../../../src/components/ProfileSkeleton"
 
 export default function ProfileDiary() {
   const router = useRouter()
@@ -15,7 +16,7 @@ export default function ProfileDiary() {
         .then((data) => data[0]),
   })
   if (isLoading) {
-    return <div className="flex flex-col justify-between"></div>
+    return <ProfileSkeleton />
   }
 
   if (isError) {

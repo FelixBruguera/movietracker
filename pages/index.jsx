@@ -43,7 +43,7 @@ export default function Index() {
     <div className="flex flex-col justify-between">
       <MoviesMenu />
       <ul
-        className="p-5 flex flex-wrap justify-center items-center gap-2 gap-y-0"
+        className="p-5 flex flex-wrap justify-evenly items-center gap-y-1"
         aria-label="movies"
       >
         {movies.length === 0 ? (
@@ -53,7 +53,7 @@ export default function Index() {
         ) : (
           movies.map((movie) => (
             <Tooltip>
-              <li key={movie._id} className="h-40 lg:h-90 w-28 lg:w-60">
+              <li key={movie._id} className="h-40 lg:h-68 w-28 lg:w-45">
                 <TooltipTrigger>
                   <Link href={`/movies/${movie._id}`} className="text-center">
                     <Poster src={movie.poster} alt={movie.title} />

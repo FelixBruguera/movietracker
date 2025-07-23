@@ -13,7 +13,7 @@ const ProfileHeader = (props) => {
           <h1 className="font-bold text-3xl">{props.username}</h1>
         </div>
       </div>
-      <ul className="flex items-center justify-evenly w-full mx-auto border-b-1 border-b-stone-700 pb-2 lg:px-60">
+      <ul className="flex items-center justify-evenly w-full mx-auto border-b-1 border-b-stone-300 dark:border-b-stone-700 pb-2 lg:px-60">
         {Object.entries(tabs).map(([key, value]) => (
           <ProfileTab
             title={key}

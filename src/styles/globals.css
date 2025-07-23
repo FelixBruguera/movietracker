@@ -127,8 +127,8 @@
   color: rgba(0, 0, 0, 0.8);
   font-weight: 500;
   font-size: 18px;
-  height: calc(var(--spacing) * 90);
-  width: calc(var(--spacing) * 60);
+  height: calc(var(--spacing) * 68);
+  width: calc(var(--spacing) * 45);
   padding-top: 5%;
   &:is(.dark *) {
     background-color: rgba(250, 250, 250, 0.2);

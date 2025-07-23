@@ -21,7 +21,7 @@ export default function App({ Component, pageProps }) {
         enableSystem
         disableTransitionOnChange
       >
-        <div className="bg-zinc-200 dark:bg-stone-800 flex flex-col min-h-screen max-w-screen">
+        <div className="bg-zinc-100 dark:bg-stone-800 flex flex-col min-h-screen max-w-screen">
           <Header />
           <Component {...pageProps} />
           <Toaster />
