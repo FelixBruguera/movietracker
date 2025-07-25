@@ -1,6 +1,5 @@
 import { ObjectId } from "mongodb"
 import { connectToDatabase } from "../../../lib/_mongodb"
-import reviewsPipeline from "../../../lib/_reviewsPipeline"
 import { auth } from "@/lib/auth.ts"
 
 export default async function handler(request, response) {

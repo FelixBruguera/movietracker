@@ -1,6 +1,6 @@
 import Poster from "src/components/Poster.jsx"
 
-const LogFormItem = ({ movie, setSelected }) => {
+const MovieSearchItem = ({ movie, setSelected }) => {
   return (
     <li
       key={movie._id}
@@ -21,4 +21,4 @@ const LogFormItem = ({ movie, setSelected }) => {
   )
 }
 
-export default LogFormItem
+export default MovieSearchItem

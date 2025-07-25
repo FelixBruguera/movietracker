@@ -2,10 +2,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useState } from "react"
 import useDebounce from "../../hooks/useDebounce"
-import LogFormItem from "./LogFormItem"
-import LogsFormSkeleton from "./LogsFormSkeleton"
+import MovieSearchItem from "./MovieSearchItem"
+import MovieSearchSkeleton from "./MovieSearchSkeleton"
 
-const LogForm = ({ setSelected }) => {
+const MovieSearch = ({ setSelected }) => {
   const [search, setSearch] = useState("")
   const { data, isLoading, isError } = useDebounce(search)
   return (
@@ -20,11 +20,11 @@ const LogForm = ({ setSelected }) => {
         onChange={(e) => setSearch(e.target.value)}
       />
       <ul className="h-100 w-full flex flex-col gap-3 mt-2">
-        {isLoading && <LogsFormSkeleton />}
+        {isLoading && <MovieSearchSkeleton />}
         {isError && <li>Something went wrong</li>}
         {data.length > 0
           ? data.map((movie) => (
-              <LogFormItem movie={movie} setSelected={setSelected} />
+              <MovieSearchItem movie={movie} setSelected={setSelected} />
             ))
           : !isLoading && search.length > 2 && <li>No Results</li>}
       </ul>
@@ -32,4 +32,4 @@ const LogForm = ({ setSelected }) => {
   )
 }
 
-export default LogForm
+export default MovieSearch

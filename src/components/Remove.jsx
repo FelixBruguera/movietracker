@@ -16,7 +16,7 @@ const Remove = (props) => {
       <AlertDialogTrigger
         aria-label="Delete"
         title="Delete"
-        className="hover:text-red-800 hover:cursor-pointer transition-all"
+        className={props.className}
       >
         {props.children}
       </AlertDialogTrigger>

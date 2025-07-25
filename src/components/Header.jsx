@@ -4,8 +4,9 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { ModeToggle } from "@/components/ui/mode-toggle"
 import UserDropdown from "./UserDropdown"
-import LogDialog from "./LogDialog"
+import DialogWrapper from "./DialogWrapper"
 import { authClient } from "@/lib/auth-client.ts"
+import NewLog from "./NewLog"
 
 const Header = () => {
   const router = useRouter()
@@ -39,7 +40,10 @@ const Header = () => {
           />
         </div>
         <div className="flex items-center lg:justify-between justify-evenly w-8/10 lg:w-3/10">
-          {session && <LogDialog />}
+          {session && 
+          <DialogWrapper title='New Log' label='Add a new log'>
+            <NewLog />
+          </DialogWrapper>}
           <ModeToggle />
           <UserDropdown />
         </div>

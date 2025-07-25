@@ -24,5 +24,6 @@
 | 22.07.2025  | 1     | Refactor the users endpoint and routes
 | 22.07.2025  | 2     | Add responsive styles to the new components
 | 23.07.2025  | 3     | Restyle the movies index, add more responsive styles and fix light mode. Improve validation in the api and add more tests
+| 25.07.2025  | 8     | Add the lists and lists/[id] api endpoints. Add the lists and list ui components. Refactor the LogDialog component to make it reusable
 
 

@@ -1,17 +1,18 @@
 import { useQuery } from "@tanstack/react-query"
 import { useRouter } from "next/router"
-import MovieSkeleton from "../../src/components/MovieSkeleton"
+import MovieSkeleton from "src/components/MovieSkeleton"
 import { Calendar, Clock4, LibraryBig, Trophy } from "lucide-react"
-import MovieDetail from "../../src/components/MovieDetail"
-import MovieDetailLink from "../../src/components/MovieDetailLink"
-import MovieDetailsList from "../../src/components/MovieDetailsList"
-import Reviews from "../../src/components/Reviews"
-import MovieLinkList from "../../src/components/MovieLinkList"
-import Poster from "../../src/components/Poster"
-import ErrorMessage from "../../src/components/ErrorMessage"
-import LogDialog from "../../src/components/LogDialog"
-import LogManager from "../../src/components/LogManager"
+import MovieDetail from "src/components/MovieDetail"
+import MovieDetailLink from "src/components/MovieDetailLink"
+import MovieDetailsList from "src/components/MovieDetailsList"
+import Reviews from "src/components/Reviews"
+import MovieLinkList from "src/components/MovieLinkList"
+import Poster from "src/components/Poster"
+import ErrorMessage from "src/components/ErrorMessage"
+import LogManager from "src/components/LogManager"
 import { authClient } from "@/lib/auth-client.ts"
+import NewLog from "../../src/components/NewLog"
+import DialogWrapper from "../../src/components/DialogWrapper"
 
 export default function MoviePage() {
   const router = useRouter()
@@ -54,7 +55,9 @@ export default function MoviePage() {
               {session && (
                 <>
                   <LogManager movie={movie} />
-                  <LogDialog movie={movie} />
+                  <DialogWrapper title='New log' label='Add a new log' movie={movie} >
+                    <NewLog />
+                  </DialogWrapper>
                 </>
               )}
             </div>
@@ -103,7 +106,7 @@ export default function MoviePage() {
               </MovieDetailLink>
             ))}
           </MovieDetailsList>
-          <p className="text-md text-slate-800 dark:text-stone-300 text-justify w-9/10 my-1 mx-3 lg:mx-0">
+          <p className="text-base text-slate-800 dark:text-stone-300 text-justify w-9/10 my-1 mx-3 lg:mx-0">
             {movie.fullplot}
           </p>
           {movie.cast?.length > 0 && (
