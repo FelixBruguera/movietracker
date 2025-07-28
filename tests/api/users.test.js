@@ -12,7 +12,6 @@ describe("the sign-up endpoint", () => {
           headers: { "Content-Type": "application/json" },
         },
       )
-      console.log(response)
       expect(response.status).toBe(400)
       const responseMessage = await response.json()
       expect(responseMessage.message).toBe("Invalid email")

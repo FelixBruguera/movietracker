@@ -14,8 +14,13 @@ const DiaryRow = ({ data, group }) => {
       ? format(new Date(year, 1, 1), "yyyy")
       : format(new Date(year, month - 1), "MMMM u")
   return (
-    <li key={data.date} className="flex flex-col items-center justify-start group">
-      <p className="my-3 p-1 w-full text-center font-bold text-lg lg:text-xl border-b-1 border-stone-300 dark:border-stone-700">{date}</p>
+    <li
+      key={data.date}
+      className="flex flex-col items-center justify-start group"
+    >
+      <p className="my-3 p-1 w-full text-center font-bold text-lg lg:text-xl border-b-1 border-stone-300 dark:border-stone-700">
+        {date}
+      </p>
       <div className="flex flex-wrap w-full items-center justify-start lg:gap-2">
         {data.watched.map((movie) => (
           <Tooltip>

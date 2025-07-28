@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Funnel } from "lucide-react"
-import filtersData from "../../lib/filters.json"
+import filtersData from "lib/filters.json"
 import { useRouter } from "next/router"
 import FiltersField from "./FiltersField"
 import RangeField from "./RangeField"

@@ -11,12 +11,12 @@ const ListCard = ({ list }) => {
       <Link href={`/lists/${list._id}`} className="p-5">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1">
-              <TableProperties size={24} />
-              <h3 className="text-lg md:text-xl text-nowrap max-w-7/10 md:max-w-8/10 overflow-hidden text-ellipsis font-bold">
-                {list.name}
-              </h3>
+            <TableProperties />
+            <h3 className="text-lg md:text-xl text-nowrap max-w-9/10 md:max-w-9/10 overflow-hidden text-ellipsis font-bold">
+              {list.name}
+            </h3>
           </div>
-          {list.isPrivate && <Lock size={20} aria-label="Private list"/>}
+          {list.isPrivate && <Lock aria-label="Private list" />}
         </div>
         <div className="flex items-center text-sm md:text-base text-stone-600 dark:text-stone-400 gap-1 group-hover:text-stone-400">
           <p className="text-stone-800 dark:text-stone-200 group-hover:text-stone-200">

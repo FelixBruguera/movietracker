@@ -4,7 +4,7 @@ import ErrorMessage from "src/components/ErrorMessage"
 import ListHeading from "src/components/ListHeading"
 import ListHeadingTitle from "src/components/ListHeadingTitle"
 import Total from "src/components/Total"
-import { Calendar, Trash, UserCircle } from "lucide-react"
+import { Calendar, Lock, Trash, UserCircle } from "lucide-react"
 import ListDetail from "src/components/ListDetail"
 import Link from "next/link"
 import { authClient } from "@/lib/auth-client.ts"
@@ -23,27 +23,30 @@ import {
 import Remove from "src/components/Remove"
 import axios from "axios"
 import { toast } from "sonner"
+import UpdateList from "src/components/UpdateList"
+import DeleteList from "src/components/DeleteList"
+import ListSkeleton from "src/components/ListSkeleton"
 
 export default function ProfileIndex() {
   const router = useRouter()
   const queryClient = useQueryClient()
-    const { data: session } = authClient.useSession()
+  const { data: session } = authClient.useSession()
   const { id, ...otherParams } = router.query
   const { data, isLoading, isError } = useQuery({
     queryKey: ["list", router.query],
     queryFn: () =>
-      axios.get(`/api/lists/${id}?${new URLSearchParams(otherParams)}`)
+      axios.get(`/api/lists/${id}?${new URLSearchParams(otherParams)}`),
   })
   const mutation = useMutation({
     mutationFn: (movieId) => axios.delete(`/api/lists/${id}/${movieId}`),
     onSuccess: () => {
-        queryClient.invalidateQueries(['list'])
-        toast('Succesfully removed')
+      queryClient.invalidateQueries(["list"])
+      toast("Succesfully removed")
     },
-    onError: (error) => toast(error.response.statusText)
+    onError: (error) => toast(error.response.statusText),
   })
   if (isLoading) {
-    return <p>Loading</p>
+    return <ListSkeleton />
   }
 
   if (isError) {
@@ -52,73 +55,103 @@ export default function ProfileIndex() {
   const list = data.data.list
   const movies = data.data.list.movies
   const user = data.data.userInfo[0]
-  const sortOptions = {'date': 'Added date'}
-
+  const sortOptions = { date: "Added date" }
 
   return (
     <div className="p-5 w-9/10 mx-auto">
-        <div className="w-full flex items-start justify-between">
-            <div className="w-9/10 flex flex-col gap-2">
-                <h1 className="text-3xl font-bold">{list.name}</h1>
-                <div className="w-fit flex items-center gap-3">
-                <Link href={`/users/${user._id}`} className="hover:text-red-800 transition-all">
-                    <ListDetail>
-                            <UserCircle size={20}/>
-                            <p className="text-lg">{user.username}</p>
-                    </ListDetail>
-                </Link>
-                <ListDetail>
-                    <Calendar size={20}/>
-                    <p className="text-base text-stone-200">{new Date(list.createdAt).toLocaleDateString()}</p>
-                </ListDetail>
-            </div>
-                <p className="text-lg text-stone-200 text-justify">{list.description}</p>
-            </div>
-            {session?.user.id === user._id && 
-            (
-            <DialogWrapper title={`Adding to ${list.name}`} label='Add a movie to your list'>
-                <AddToList listId={list._id} />
-            </DialogWrapper>
-        )}
+      <div className="w-full flex items-start justify-between">
+        <div className="w-9/10 flex flex-col gap-2">
+          <h1 className="text-2xl lg:text-3xl font-bold">{list.name}</h1>
+          <div className="w-fit flex items-center gap-3">
+            <Link
+              href={`/users/${user._id}`}
+              className="hover:text-red-800 transition-all"
+            >
+              <ListDetail>
+                <UserCircle />
+                <p className="flex">{user.username}</p>
+              </ListDetail>
+            </Link>
+            <ListDetail>
+              <Calendar aria-label="Created at" />
+              <p className="text-stone-600 dark:text-stone-200 text-sm lg:text-base">
+                {new Date(list.createdAt).toLocaleDateString()}
+              </p>
+            </ListDetail>
+            {list.isPrivate && (
+              <ListDetail>
+                <Lock aria-label="Private List" title="Private List" />
+              </ListDetail>
+            )}
+          </div>
+          <p className="text-base lg:text-lg text-stone-600 dark:text-stone-200 text-justify">
+            {list.description}
+          </p>
         </div>
-        <ListHeading>
-            <ListHeadingTitle title='Movies'>
-                <Total total={data.data.info.totalMovies} label='Total Movies'/>
-            </ListHeadingTitle>
-            <SelectSortBy
-            value='date'
-            selectedValue={sortOptions['date']}
-            title="Sort Movies"
-            options={sortOptions}
-            />
-            <SortOrderToggle />
-        </ListHeading>
-        <ul className="flex flex-wrap py-5 items-center justify-evenly gap-y-1" aria-label="Movies">
-            { movies.length > 0 && movies.map(movie => {
-                return (
-                    <ContextMenu>
-                        <ContextMenuTrigger>
-                            <li key={movie._id} className="relative h-40 lg:h-71 w-28 lg:w-47 group">
-                                <Link href={`/movies/${movie._id}`} className="text-center">
-                                    <Poster src={movie.poster} alt={movie.title} />
-                                </Link>
-                            </li>
-                        </ContextMenuTrigger>
-                        <ContextMenuContent>
-                            <ContextMenuItem asChild>
-                                <Remove title={`Removing ${movie.title} from ${list.name}`} mutation={() => mutation.mutate(movie._id)} className='w-full dark:hover:bg-stone-900 hover:cursor-pointer'>
-                                    <div className="flex items-center text-sm dark:text-stone-300 gap-2">
-                                        <Trash size={16}/>
-                                        Remove
-                                    </div>
-                                </Remove>
-                            </ContextMenuItem>
-                        </ContextMenuContent>
-                    </ContextMenu>
-                )
-            })}
-        </ul>
-        {data.data.info.totalPages > 1 && <PaginationWrap totalPages={data.data.info.totalPages} /> }
+        {session?.user.id === user._id && (
+          <>
+            <DialogWrapper
+              title={`Adding to ${list.name}`}
+              label="Add a movie to your list"
+            >
+              <AddToList listId={list._id} />
+            </DialogWrapper>
+            <UpdateList list={list} />
+            <DeleteList list={list} />
+          </>
+        )}
+      </div>
+      <ListHeading>
+        <ListHeadingTitle title="Movies">
+          <Total total={data.data.info.totalMovies} label="Total Movies" />
+        </ListHeadingTitle>
+        <SelectSortBy
+          value="date"
+          selectedValue={sortOptions["date"]}
+          title="Sort Movies"
+          options={sortOptions}
+        />
+        <SortOrderToggle />
+      </ListHeading>
+      <ul
+        className="flex flex-wrap py-2 lg:py-5 items-center justify-evenly lg:justify-start gap-x-0 lg:gap-x-2 gap-y-1"
+        aria-label="Movies"
+      >
+        {movies.length > 0 &&
+          movies.map((movie) => {
+            return (
+              <ContextMenu>
+                <ContextMenuTrigger>
+                  <li
+                    key={movie._id}
+                    className="relative h-41 lg:h-71 w-27 lg:w-47 group"
+                  >
+                    <Link href={`/movies/${movie._id}`} className="text-center">
+                      <Poster src={movie.poster} alt={movie.title} />
+                    </Link>
+                  </li>
+                </ContextMenuTrigger>
+                <ContextMenuContent>
+                  <ContextMenuItem asChild>
+                    <Remove
+                      title={`Removing ${movie.title} from ${list.name}`}
+                      mutation={() => mutation.mutate(movie._id)}
+                      className="w-full dark:hover:bg-stone-900 hover:cursor-pointer"
+                    >
+                      <div className="flex items-center text-sm dark:text-stone-300 gap-2">
+                        <Trash />
+                        Remove
+                      </div>
+                    </Remove>
+                  </ContextMenuItem>
+                </ContextMenuContent>
+              </ContextMenu>
+            )
+          })}
+      </ul>
+      {data.data.info.totalPages > 1 && (
+        <PaginationWrap totalPages={data.data.info.totalPages} />
+      )}
     </div>
   )
 }

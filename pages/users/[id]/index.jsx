@@ -1,9 +1,9 @@
 import { useRouter } from "next/router"
-import ProfileHeader from "../../../src/components/ProfileHeader"
-import ProfileReviews from "../../../src/components/ProfileReviews"
+import ProfileHeader from "src/components/ProfileHeader"
+import ProfileReviews from "src/components/ProfileReviews"
 import { useQuery } from "@tanstack/react-query"
-import ErrorMessage from "../../../src/components/ErrorMessage"
-import ProfileSkeleton from "../../../src/components/ProfileSkeleton"
+import ErrorMessage from "src/components/ErrorMessage"
+import ProfileSkeleton from "src/components/ProfileSkeleton"
 
 export default function ProfileIndex() {
   const router = useRouter()

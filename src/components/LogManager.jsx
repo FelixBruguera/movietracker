@@ -3,12 +3,13 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog"
 import { NotebookPen } from "lucide-react"
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query"
 import { toast } from "sonner"
 import axios from "axios"
-import DialogTriggerWrap from "./DialogTriggerWrap"
+import TriggerButton from "./TriggerButton"
 import LogManagerItem from "./LogManagerItem"
 
 const LogManager = ({ movie }) => {
@@ -41,9 +42,11 @@ const LogManager = ({ movie }) => {
   })
   return (
     <Dialog>
-      <DialogTriggerWrap label="Manage your logs">
-        <NotebookPen size={20} />
-      </DialogTriggerWrap>
+      <DialogTrigger aria-label="Manage your logs">
+        <TriggerButton>
+          <NotebookPen />
+        </TriggerButton>
+      </DialogTrigger>
       <DialogContent className="overflow-auto w-fit min-w-80 lg:min-w-110">
         <DialogHeader>
           <DialogTitle>Your logs for {movie.title}</DialogTitle>

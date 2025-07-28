@@ -23,7 +23,7 @@ const UserDropdown = () => {
   const logout = async () => await authClient.signOut()
   if (!session) {
     return (
-      <Button asChild ariaLabel="Login">
+      <Button asChild aria-label="Login">
         <Link href="/users/login">
           <LogIn />
           <p className="hidden lg:block">Login</p>
@@ -37,9 +37,9 @@ const UserDropdown = () => {
         className="w-fit lg:max-w-50 border-zinc-300 dark:border-stone-700 lg:border-transparent dark:lg:border-transparent overflow-clip whitespace-nowrap flex items-center gap-3 border-1 
             hover:bg-gray-100 hover:dark:bg-stone-900 rounded-lg p-2 hover:cursor-pointer transition-all"
       >
-        <User size={20} />
+        <User />
         <p className="hidden lg:block">{session.user.username}</p>
-        <ChevronDown size={20} />
+        <ChevronDown />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem>

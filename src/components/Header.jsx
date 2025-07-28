@@ -18,7 +18,7 @@ const Header = () => {
         href={"/"}
         className="flex items-center gap-1 text-2xl font-bold w-fit"
       >
-        <Clapperboard className="size-8" />
+        <Clapperboard className="!size-8" />
         Movie Tracker
       </Link>
       <div className="flex flex-col gap-2 lg:gap-0 lg:flex-row items-center justify-between w-full lg:w-8/10">
@@ -40,10 +40,11 @@ const Header = () => {
           />
         </div>
         <div className="flex items-center lg:justify-between justify-evenly w-8/10 lg:w-3/10">
-          {session && 
-          <DialogWrapper title='New Log' label='Add a new log'>
-            <NewLog />
-          </DialogWrapper>}
+          {session && (
+            <DialogWrapper title="New Log" label="Add a new log">
+              <NewLog />
+            </DialogWrapper>
+          )}
           <ModeToggle />
           <UserDropdown />
         </div>

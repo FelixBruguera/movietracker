@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
-import PaginationWrap from "../../src/components/PaginationWrap"
+import PaginationWrap from "src/components/PaginationWrap"
 import { useRouter } from "next/router"
-import ErrorMessage from "../../src/components/ErrorMessage"
-import UsersMenu from "../../src/components/UsersMenu"
-import UserCard from "../../src/components/UserCard"
-import UsersSkeleton from "../../src/components/UsersSkeleton"
+import ErrorMessage from "src/components/ErrorMessage"
+import UsersMenu from "src/components/UsersMenu"
+import UserCard from "src/components/UserCard"
+import UsersSkeleton from "src/components/UsersSkeleton"
 
 export default function UsersPage() {
   const router = useRouter()

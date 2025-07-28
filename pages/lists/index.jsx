@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
-import PaginationWrap from "../../src/components/PaginationWrap"
+import PaginationWrap from "src/components/PaginationWrap"
 import { useRouter } from "next/router"
-import ErrorMessage from "../../src/components/ErrorMessage"
-import UsersSkeleton from "../../src/components/UsersSkeleton"
-import ListsMenu from "../../src/components/ListsMenu"
-import ListCard from "../../src/components/ListCard"
+import ErrorMessage from "src/components/ErrorMessage"
+import UsersSkeleton from "src/components/UsersSkeleton"
+import ListsMenu from "src/components/ListsMenu"
+import ListCard from "src/components/ListCard"
 
 export default function UsersPage() {
   const router = useRouter()
@@ -43,7 +43,7 @@ export default function UsersPage() {
           )}
         </ul>
       </div>
-      {totalPages > 1 && <PaginationWrap totalPages={totalPages} /> }
+      {totalPages > 1 && <PaginationWrap totalPages={totalPages} />}
     </div>
   )
 }

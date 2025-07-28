@@ -4,7 +4,10 @@ import Poster from "./Poster"
 const ProfileReview = ({ data, color }) => {
   const movieHref = `/movies/${data.movie_id}`
   return (
-    <li className="flex items-center flex-col md:flex-row max-w-500 mx-auto" key={data._id}>
+    <li
+      className="flex items-center flex-col md:flex-row max-w-500 mx-auto"
+      key={data._id}
+    >
       <Link
         href={movieHref}
         className="size-50 bg-zinc-200 dark:bg-stone-900 p-1 md:bg-transparent md:dark:bg-transparent w-full rounded-t-2xl md:size-40 md:p-auto"

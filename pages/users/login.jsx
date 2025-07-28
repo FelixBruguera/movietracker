@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button"
-import AuthInput from "../../src/components/AuthInput"
+import AuthInput from "src/components/AuthInput"
 import Link from "next/link"
 import { authClient } from "@/lib/auth-client.ts"
 import { toast } from "sonner"
-import AuthForm from "../../src/components/AuthForm"
+import AuthForm from "src/components/AuthForm"
 import { useRouter } from "next/router"
 
 const Login = () => {

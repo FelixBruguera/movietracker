@@ -1,5 +1,5 @@
-import { connectToDatabase } from "../../../lib/_mongodb.js"
-import pipeline from "../../../lib/_moviePipeline.js"
+import { connectToDatabase } from "lib/_mongodb.js"
+import pipeline from "lib/_moviePipeline.js"
 
 export default async function handler(request, response) {
   const { database } = await connectToDatabase()

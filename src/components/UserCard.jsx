@@ -10,7 +10,7 @@ const UserCard = ({ user }) => {
     >
       <Link href={`/users/${user._id}`} className="p-5">
         <div className="flex items-center gap-1">
-          <UserCircle size={24} />
+          <UserCircle className="!size-7" />
           <h3 className="text-lg md:text-xl text-nowrap max-w-7/10 md:max-w-8/10 overflow-hidden text-ellipsis font-bold">
             {user.username}
           </h3>

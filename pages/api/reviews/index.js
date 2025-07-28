@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb"
-import { connectToDatabase } from "../../../lib/_mongodb"
-import reviewsPipeline from "../../../lib/_reviewsPipeline"
+import { connectToDatabase } from "lib/_mongodb"
+import reviewsPipeline from "lib/_reviewsPipeline"
 import { auth } from "@/lib/auth.ts"
 
 export default async function handler(request, response) {
@@ -13,10 +13,10 @@ export default async function handler(request, response) {
       const { text, movie_id } = request.body
       const rating = parseInt(request.body.rating)
       if (isNaN(rating) || rating < 1 || rating > 10) {
-        return response.status(400).json({ error: "Rating must be 1-10" });
+        return response.status(400).json({ error: "Rating must be 1-10" })
       }
       if (typeof text !== "string" || text.length > 5000) {
-        return response.status(400).json({ error: "Invalid comment" });
+        return response.status(400).json({ error: "Invalid comment" })
       }
       try {
         await database.collection("comments").findOneAndUpdate(

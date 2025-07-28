@@ -1,7 +1,7 @@
 import { useRouter } from "next/router"
 import MoviesMenuItem from "./MoviesMenuItem"
 import MoviesFilters from "./MoviesFilters"
-import filtersData from "../../lib/filters.json"
+import filtersData from "lib/filters.json"
 import SelectSortBy from "./SelectSortBy"
 import SortOrderToggle from "./SortOrderToggle"
 
@@ -10,7 +10,7 @@ const MoviesMenu = () => {
   const handleGenre = (newValue) => {
     if (router.query.genres === newValue) {
       const { genres, ...newQuery } = router.query
-      router.push({ query: {...newQuery, page: 1 } })
+      router.push({ query: { ...newQuery, page: 1 } })
     } else {
       router.push({ query: { ...router.query, genres: newValue, page: 1 } })
     }

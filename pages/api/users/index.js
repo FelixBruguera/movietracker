@@ -1,5 +1,5 @@
-import { connectToDatabase } from "../../../lib/_mongodb"
-import usersPipeline from "../../../lib/_usersPipeline"
+import { connectToDatabase } from "lib/_mongodb"
+import usersPipeline from "lib/_usersPipeline"
 
 export default async function GET(request, response) {
   const { database } = await connectToDatabase()

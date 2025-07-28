@@ -9,7 +9,7 @@ const ProfileHeader = (props) => {
     <div className="p-5">
       <div className="w-full mx-auto pb-10 flex flex-col gap-2">
         <div className="flex items-center justify-center gap-2">
-          <UserCircle size={48} />
+          <UserCircle className="!size-10" />
           <h1 className="font-bold text-3xl">{props.username}</h1>
         </div>
       </div>

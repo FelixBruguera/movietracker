@@ -1,7 +1,7 @@
 import { authClient } from "@/lib/auth-client.ts"
-import AuthInput from "../../src/components/AuthInput"
+import AuthInput from "src/components/AuthInput"
 import { Button } from "@/components/ui/button"
-import AuthForm from "../../src/components/AuthForm"
+import AuthForm from "src/components/AuthForm"
 import { toast } from "sonner"
 import { useRouter } from "next/router"
 

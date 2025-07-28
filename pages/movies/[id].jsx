@@ -11,13 +11,12 @@ import Poster from "src/components/Poster"
 import ErrorMessage from "src/components/ErrorMessage"
 import LogManager from "src/components/LogManager"
 import { authClient } from "@/lib/auth-client.ts"
-import NewLog from "../../src/components/NewLog"
-import DialogWrapper from "../../src/components/DialogWrapper"
+import NewLog from "src/components/NewLog"
+import DialogWrapper from "src/components/DialogWrapper"
 
 export default function MoviePage() {
   const router = useRouter()
   const { id } = router.query
-  const iconSize = 20
   const { data: session } = authClient.useSession()
 
   const {
@@ -55,7 +54,11 @@ export default function MoviePage() {
               {session && (
                 <>
                   <LogManager movie={movie} />
-                  <DialogWrapper title='New log' label='Add a new log' movie={movie} >
+                  <DialogWrapper
+                    title="New log"
+                    label="Add a new log"
+                    movie={movie}
+                  >
                     <NewLog />
                   </DialogWrapper>
                 </>
@@ -64,11 +67,11 @@ export default function MoviePage() {
           </div>
           <MovieDetailsList>
             <MovieDetail title="Release year">
-              <Calendar size={iconSize} />
+              <Calendar />
               {movie.year}
             </MovieDetail>
             <MovieDetail title="Runtime">
-              <Clock4 size={iconSize} />
+              <Clock4 />
               {movie.runtime} minutes
             </MovieDetail>
             <MovieDetail title="IMDB Rating">
@@ -96,7 +99,7 @@ export default function MoviePage() {
               </MovieDetail>
             )}
             <MovieDetail title="Awards">
-              <Trophy size={iconSize} fill="goldenrod" color="goldenrod" />
+              <Trophy fill="goldenrod" color="goldenrod" />
               {movie.awards.wins} Awards
             </MovieDetail>
             {movie.genres?.map((genre) => (

@@ -5,41 +5,43 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Plus } from "lucide-react"
+import { Edit } from "lucide-react"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
 import axios from "axios"
 import TriggerButton from "./TriggerButton"
 import ListForm from "./ListForm"
+import { useRouter } from "next/router"
 import { useState } from "react"
 
-const ListDialog = () => {
-  const queryClient = useQueryClient()
+const UpdateList = ({ list }) => {
+  const router = useRouter()
   const [open, setOpen] = useState(false)
+  const queryClient = useQueryClient()
   const mutation = useMutation({
-    mutationFn: (newEntry) => axios.post("/api/lists", newEntry),
+    mutationFn: (newEntry) => axios.patch(`/api/lists/${list._id}`, newEntry),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["list", router.query] })
       setOpen(false)
-      queryClient.invalidateQueries({ queryKey: ["lists"] })
-      toast("Succesfully Added")
+      toast("Succesfully Updated")
     },
     onError: (error) => toast(error.response.statusText),
   })
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger aria-label="Create a new list">
+      <DialogTrigger aria-label="Update your list" title="Update your list">
         <TriggerButton>
-          <Plus />
+          <Edit />
         </TriggerButton>
       </DialogTrigger>
       <DialogContent className="overflow-auto w-150">
         <DialogHeader>
-          <DialogTitle>New List</DialogTitle>
+          <DialogTitle>Updating {list.name} </DialogTitle>
         </DialogHeader>
-        <ListForm mutation={mutation} />
+        <ListForm list={list} mutation={mutation} />
       </DialogContent>
     </Dialog>
   )
 }
 
-export default ListDialog
+export default UpdateList

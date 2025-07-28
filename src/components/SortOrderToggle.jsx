@@ -20,9 +20,9 @@ const SortOrderToggle = () => {
       className="bg-transparent border-1 dark:border-gray-700 border-gray-400 hover:dark:bg-red-800 hover:bg-red-800 hover:cursor-pointer group"
     >
       {isAscending ? (
-        <ArrowUpWideNarrow className=" text-stone-900 dark:text-white group-hover:text-white transition-all" />
+        <ArrowUpWideNarrow className="!size-3.5 text-stone-900 dark:text-white group-hover:text-white transition-all" />
       ) : (
-        <ArrowDownWideNarrow className="text-stone-900 dark:text-white group-hover:text-white transition-all" />
+        <ArrowDownWideNarrow className="!size-3.5 text-stone-900 dark:text-white group-hover:text-white transition-all" />
       )}
     </Button>
   )

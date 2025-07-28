@@ -18,7 +18,7 @@ test.describe("as a logged in user", () => {
       await expect(page.getByText("testuser")).toBeVisible()
     })
     test("Adding a log", async ({ page }) => {
-      await page.getByLabel("Add a diary log").click()
+      await page.getByLabel("Add a new log").click()
       await page.getByRole("textbox").fill("Horsemen")
       await page.getByText("The Four Horsemen of the Apocalypse").click()
       await page.getByText("Save").click()

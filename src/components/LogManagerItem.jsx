@@ -34,13 +34,11 @@ const LogManagerItem = ({ log, update, remove }) => {
             title="Deleting your log"
             mutation={() => remove.mutate({ logId: log._id })}
           >
-            <Button
-              variant="destructive"
-              type="button"
-              className="hover:cursor-pointer hover:bg-red-800 dark:hover:bg-red-800"
+            <div
+              className="hover:cursor-pointer bg-red-800 hover:bg-red-900 dark:hover:bg-red-900"
             >
               Delete
-            </Button>
+            </div>
           </Remove>
         </div>
       </form>
