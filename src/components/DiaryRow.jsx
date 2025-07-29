@@ -21,12 +21,12 @@ const DiaryRow = ({ data, group }) => {
       <p className="my-3 p-1 w-full text-center font-bold text-lg lg:text-xl border-b-1 border-stone-300 dark:border-stone-700">
         {date}
       </p>
-      <div className="flex flex-wrap w-full items-center justify-start lg:gap-2">
+      <div className="flex flex-wrap w-full items-center justify-start gap-1 lg:gap-5">
         {data.watched.map((movie) => (
           <Tooltip>
-            <TooltipTrigger className="h-40 w-28 lg:bg-transparent rounded-t-2xl lg:h-45 lg:w-30">
+            <TooltipTrigger className="lg:bg-transparent rounded-t-2xl">
               <Link href={`/movies/${movie._id}`}>
-                <Poster src={movie.poster} alt={movie.title} size="s" />
+                <Poster src={movie.poster} alt={movie.title} size="small" />
               </Link>
             </TooltipTrigger>
             <TooltipContent className="flex flex-col items-center justify-center">

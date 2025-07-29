@@ -58,13 +58,11 @@ export default async function handler(request, response) {
         .collection("lists")
         .findOne({ _id: list_id, user_id: user_id })
       if (check) {
-        const result = await database
-          .collection("lists_movies")
-          .insertOne({
-            movie_id: movie_id,
-            list_id: list_id,
-            createdAt: new Date(),
-          })
+        const result = await database.collection("lists_movies").insertOne({
+          movie_id: movie_id,
+          list_id: list_id,
+          createdAt: new Date(),
+        })
         await mongoSession.commitTransaction()
         if (result.insertedId) {
           return response.status(200).send()

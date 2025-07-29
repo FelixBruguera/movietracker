@@ -17,7 +17,7 @@ const Total = ({ total, label }) => {
           </p>
         </div>
       </TooltipTrigger>
-      <TooltipContent>{label}</TooltipContent>
+      <TooltipContent>{<p>{label}</p>}</TooltipContent>
     </Tooltip>
   )
 }

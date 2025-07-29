@@ -10,12 +10,12 @@ const ProfileReview = ({ data, color }) => {
     >
       <Link
         href={movieHref}
-        className="size-50 bg-zinc-200 dark:bg-stone-900 p-1 md:bg-transparent md:dark:bg-transparent w-full rounded-t-2xl md:size-40 md:p-auto"
+        className=" bg-zinc-200 dark:bg-stone-900 p-1 md:bg-transparent md:dark:bg-transparent rounded-t-2xl  md:p-auto"
       >
         <Poster
           src={data.movieInfo.poster}
           alt={data.movieInfo.title}
-          size="s"
+          size="small"
         />
       </Link>
       <div

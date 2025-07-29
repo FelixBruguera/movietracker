@@ -5,7 +5,7 @@ const UserReviewButton = (props) => {
       onClick={props.onClick}
       aria-label={label}
       title={label}
-      className={`bg-transparent dark:text-stone-300
+      className={`p-2 rounded-md bg-transparent dark:text-stone-300
                 ${props.isActive && "dark:bg-stone-900 bg-zinc-300"}
                 hover:dark:bg-stone-900 hover:bg-zinc-300 hover:cursor-pointer transition-all`}
     >

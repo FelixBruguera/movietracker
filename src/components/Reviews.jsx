@@ -45,7 +45,7 @@ export default function Reviews() {
   const userReview = data.currentUserReview
 
   return (
-    <div id="reviews">
+    <div id="reviews" className="max-w-400 mx-auto">
       {userReview && (
         <UserReview
           data={userReview}

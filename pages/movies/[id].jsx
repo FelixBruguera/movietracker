@@ -13,6 +13,7 @@ import LogManager from "src/components/LogManager"
 import { authClient } from "@/lib/auth-client.ts"
 import NewLog from "src/components/NewLog"
 import DialogWrapper from "src/components/DialogWrapper"
+import MovieDescription from "../../src/components/MovieDescription"
 
 export default function MoviePage() {
   const router = useRouter()
@@ -40,10 +41,10 @@ export default function MoviePage() {
     return <ErrorMessage />
   }
   return (
-    <div className="container mx-auto p-4">
+    <div className="mx-auto p-4">
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="w-3/4 mx-auto lg:w-1/3">
-          <Poster src={movie.poster} alt={movie.title} size="l" />
+          <Poster src={movie.poster} alt={movie.title} size="large" />
         </div>
         <div className="w-full lg:w-2/3 flex flex-col gap-3">
           <div className="flex items-center justify-between w-full lg:w-11/12">
@@ -109,9 +110,13 @@ export default function MoviePage() {
               </MovieDetailLink>
             ))}
           </MovieDetailsList>
-          <p className="text-base text-slate-800 dark:text-stone-300 text-justify w-9/10 my-1 mx-3 lg:mx-0">
-            {movie.fullplot}
-          </p>
+          <div className="flex flex-col items-start gap-3 text-base text-slate-800 dark:text-stone-300 text-justify w-9/10 my-1 mx-3 lg:mx-0">
+            {movie.fullplot.length > 1000 ? (
+              <MovieDescription description={movie.fullplot} />
+            ) : (
+              <p>{movie.fullplot}</p>
+            )}
+          </div>
           {movie.cast?.length > 0 && (
             <MovieLinkList title="Cast" items={movie.cast} param="cast" />
           )}

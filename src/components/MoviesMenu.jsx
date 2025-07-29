@@ -4,9 +4,11 @@ import MoviesFilters from "./MoviesFilters"
 import filtersData from "lib/filters.json"
 import SelectSortBy from "./SelectSortBy"
 import SortOrderToggle from "./SortOrderToggle"
+import { useState } from "react"
 
 const MoviesMenu = () => {
   const router = useRouter()
+  const [filterOpen, setFilterOpen] = useState(false)
   const handleGenre = (newValue) => {
     if (router.query.genres === newValue) {
       const { genres, ...newQuery } = router.query
@@ -29,6 +31,7 @@ const MoviesMenu = () => {
   ]
   const handleFilter = (data) => {
     router.push({ query: { ...router.query, ...data, page: 1 } })
+    setFilterOpen(false)
   }
   return (
     <div className="flex flex-col gap-3 lg:gap-0 lg:flex-row items-center w-9/10 mx-auto">
@@ -40,7 +43,11 @@ const MoviesMenu = () => {
         ))}
       </ul>
       <div className="flex items-center justify-evenly w-full lg:w-3/10">
-        <MoviesFilters handleFilter={handleFilter} />
+        <MoviesFilters
+          handleFilter={handleFilter}
+          filterOpen={filterOpen}
+          setFilterOpen={setFilterOpen}
+        />
         <SelectSortBy
           value={sort}
           selectedValue={ranges[sort]}

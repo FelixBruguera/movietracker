@@ -16,13 +16,13 @@ import FiltersField from "./FiltersField"
 import RangeField from "./RangeField"
 import SelectWrapper from "./SelectWrapper"
 
-const MoviesFilters = ({ handleFilter }) => {
+const MoviesFilters = ({ handleFilter, filterOpen, setFilterOpen }) => {
   const router = useRouter()
   const genres = filtersData.genres
   const languages = filtersData.languages
   const types = ["All", "Movie", "Series"]
   return (
-    <Sheet>
+    <Sheet open={filterOpen} onOpenChange={setFilterOpen}>
       <SheetTrigger asChild>
         <Button
           className={`text-xs lg:text-sm flex items-center justify-center gap-1 hover:cursor-pointer bg-gray-100 border-gray-400 hover:bg-stone-200 dark:bg-stone-900 border-1 dark:border-gray-700 transition-all
@@ -118,11 +118,9 @@ const MoviesFilters = ({ handleFilter }) => {
           />
         </form>
         <SheetFooter>
-          <SheetClose asChild>
-            <Button type="submit" form="filters">
-              Submit
-            </Button>
-          </SheetClose>
+          <Button type="submit" form="filters">
+            Submit
+          </Button>
           <SheetClose asChild>
             <Button
               type="button"

@@ -114,7 +114,7 @@ export default function ProfileIndex() {
         <SortOrderToggle />
       </ListHeading>
       <ul
-        className="flex flex-wrap py-2 lg:py-5 items-center justify-evenly lg:justify-start gap-x-0 lg:gap-x-2 gap-y-1"
+        className="flex flex-wrap py-2 lg:py-5 items-center justify-around lg:justify-start gap-x-0 lg:gap-x-4 gap-y-1"
         aria-label="Movies"
       >
         {movies.length > 0 &&
@@ -122,10 +122,7 @@ export default function ProfileIndex() {
             return (
               <ContextMenu>
                 <ContextMenuTrigger>
-                  <li
-                    key={movie._id}
-                    className="relative h-41 lg:h-71 w-27 lg:w-47 group"
-                  >
+                  <li key={movie._id} className="group">
                     <Link href={`/movies/${movie._id}`} className="text-center">
                       <Poster src={movie.poster} alt={movie.title} />
                     </Link>
