@@ -27,6 +27,7 @@
 | 25.07.2025  | 8     | Add the lists and lists/[id] api endpoints. Add the lists and list ui components. Refactor the LogDialog component to make it reusable
 | 28.07.2025  | 7     | Added the forms and mutations to update and delete lists and added tests. Moved the form for creating lists into it's own component. Refactor the DialogTriggerWrap component to make it compatible with Dialogs and AlertDialogs. Added the default icon sizing to globals.css. Changed the import paths from relative to absolute
 | 29.07.2025  | 2     | Minor refactors, moved all the image sizing to the poster component and add a "read more" function to movies with long descriptions
+| 01.08.2025  | 10     | Implement the lists tab on profiles. Add dynamic titles. Refactor the profile pipelines to handle users with no reviews or logs. Refactor the login logic
 
 
 

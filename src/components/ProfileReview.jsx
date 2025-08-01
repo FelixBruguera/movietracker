@@ -30,7 +30,7 @@ const ProfileReview = ({ data, color }) => {
             >
               {data.movieInfo.title}
             </Link>
-            <p className="text-xs lg:text-sm text-stone-600 dark:text-gray-400">
+            <p className="text-xs lg:text-sm text-stone-600 dark:text-stone-400">
               {new Date(data.date).toLocaleDateString()}
             </p>
           </div>

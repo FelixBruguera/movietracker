@@ -10,7 +10,7 @@ const SelectWrapper = ({ name, defaultValue, title, items, className }) => {
   return (
     <Select name={name} defaultValue={defaultValue}>
       <SelectTrigger
-        className={`w-full border-1 dark:border-gray-700 dark:bg-stone-900 ${className}`}
+        className={`w-full border-1 dark:border-stone-700 dark:bg-stone-900 ${className}`}
         title={title}
       >
         <SelectValue />

@@ -25,7 +25,7 @@ const Diary = ({ data, sortKey }) => {
       </ListHeading>
       {data.movies?.length > 0 ? (
         <>
-          <ul className="flex flex-col gap-5 justify-end w-full">
+          <ul className="flex flex-col gap-5 justify-end w-full max-w-500 mx-auto">
             {data.movies.map((row) => (
               <DiaryRow data={row} group={sortBy} />
             ))}

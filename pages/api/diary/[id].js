@@ -10,6 +10,7 @@ export default async function handler(request, response) {
   } else if (request.method === "PATCH") {
     const id = request.query.id
     const date = request.body.date
+    const formattedDate = new Date(`${date} 0:00:00:000Z`)
     const query = await database.collection("diary").updateOne(
       {
         _id: ObjectId.createFromHexString(id),
@@ -17,7 +18,9 @@ export default async function handler(request, response) {
       },
       {
         $set: {
-          date: new Date(`${date} 0:00:00:000Z`),
+          date: formattedDate,
+          month: formattedDate.getMonth(),
+          year: formattedDate.getFullYear()
         },
       },
     )

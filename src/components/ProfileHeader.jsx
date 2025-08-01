@@ -1,12 +1,17 @@
 import { UserCircle } from "lucide-react"
 import ProfileTab from "./ProfileTab"
 import { useRouter } from "next/router"
+import Head from "next/head"
 
 const ProfileHeader = (props) => {
   const router = useRouter()
   const tabs = { Reviews: "", Diary: "diary", Lists: "lists" }
   return (
     <div className="p-5">
+      <Head>
+        <title>{props.username}</title>
+        <meta property="og:title" content={props.username} />
+      </Head>
       <div className="w-full mx-auto pb-10 flex flex-col gap-2">
         <div className="flex items-center justify-center gap-2">
           <UserCircle className="!size-10" />

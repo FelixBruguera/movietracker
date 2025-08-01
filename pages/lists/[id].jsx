@@ -26,6 +26,7 @@ import { toast } from "sonner"
 import UpdateList from "src/components/UpdateList"
 import DeleteList from "src/components/DeleteList"
 import ListSkeleton from "src/components/ListSkeleton"
+import Head from "next/head"
 
 export default function ProfileIndex() {
   const router = useRouter()
@@ -58,7 +59,11 @@ export default function ProfileIndex() {
   const sortOptions = { date: "Added date" }
 
   return (
-    <div className="p-5 w-9/10 mx-auto">
+    <div className="p-5 w-9/10 max-w-500 mx-auto">
+      <Head>
+        <title>{list.name}</title>
+        <meta property="og:title" content={list.name} />
+      </Head>
       <div className="w-full flex items-start justify-between">
         <div className="w-9/10 flex flex-col gap-2">
           <h1 className="text-2xl lg:text-3xl font-bold">{list.name}</h1>

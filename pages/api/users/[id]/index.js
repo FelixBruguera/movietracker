@@ -5,7 +5,7 @@ export default async function GET(request, response) {
   const { database } = await connectToDatabase()
   try {
     const data = await database
-      .collection("comments")
+      .collection("user")
       .aggregate(userReviewsPipeline(request.query))
       .toArray()
     return response.json(data)

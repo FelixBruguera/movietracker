@@ -5,7 +5,7 @@ const UserCard = ({ user }) => {
   return (
     <li
       key={user.id}
-      className="w-9/10 mx-auto md:w-75 flex flex-col gap-1 border-1 rounded-lg border-gray-400 dark:border-gray-700 
+      className="w-9/10 mx-auto md:w-75 flex flex-col gap-1 border-1 rounded-lg border-stone-300 dark:border-stone-700 
             hover:bg-stone-900 hover:text-white transition-all hover:border-stone-900 group"
     >
       <Link href={`/users/${user._id}`} className="p-5">

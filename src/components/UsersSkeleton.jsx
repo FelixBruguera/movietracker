@@ -5,8 +5,7 @@ const UsersSkeleton = () => {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center w-full">
-        <span aria-hidden={true} className="w-7/10"></span>
-        <div className="flex items-center justify-evenly w-full lg:w-3/10">
+        <div className="flex items-center justify-end w-full lg:w-full px-5">
           <Skeleton className="h-10 w-40 dark:bg-stone-600" />
           <Skeleton className="h-10 w-10 dark:bg-stone-600" />
         </div>

@@ -5,6 +5,7 @@ import { authClient } from "@/lib/auth-client.ts"
 import { toast } from "sonner"
 import AuthForm from "src/components/AuthForm"
 import { useRouter } from "next/router"
+import { useEffect } from "react"
 
 const Login = () => {
   const router = useRouter()
@@ -22,17 +23,15 @@ const Login = () => {
       },
       {
         onRequest: () => toast("Signing you in..."),
-        onSuccess: async () => {
-          try {
-            await authClient.revokeOtherSessions()
-          } catch {
-            toast("Something went wrong")
-          }
-        },
         onError: (response) => toast(response.error.message),
       },
     )
   }
+  useEffect(
+    () => {
+      authClient.revokeOtherSessions()
+    },
+    [session])
 
   return (
     <AuthForm title="Login" onSubmit={onSubmit}>

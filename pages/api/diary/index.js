@@ -10,10 +10,13 @@ export default async function handler(request, response) {
   }
   if (request.method === "POST") {
     const { date, movie_id } = request.body
+    const formattedDate = new Date(`${date} 0:00:00:000Z`)
     const query = await database.collection("diary").insertOne({
       user_id: ObjectId.createFromHexString(session.user.id),
       movie_id: ObjectId.createFromHexString(movie_id),
-      date: new Date(`${date} 0:00:00:000Z`),
+      date: formattedDate,
+      month: formattedDate.getMonth(),
+      year: formattedDate.getFullYear()
     })
     if (query.insertedId) {
       return response.status(201).json(query)

@@ -6,7 +6,7 @@ const Review = ({ data, userInfo = null, color }) => {
   return (
     <li
       key={data._id}
-      className="border p-4 rounded-lg bg-zinc-200 dark:bg-stone-900 hover:border-gray-400 dark:hover:border-stone-600 flex items-center justify-between transition-all"
+      className="border p-4 rounded-lg bg-zinc-200 dark:bg-stone-900 hover:border-stone-400 dark:hover:border-stone-600 flex items-center justify-between transition-all"
     >
       <div className="flex flex-col gap-1 w-9/10">
         <div className="flex gap-2 items-center">
@@ -16,7 +16,7 @@ const Review = ({ data, userInfo = null, color }) => {
           >
             {user.username}
           </Link>
-          <p className="text-xs lg:text-sm text-stone-600 dark:text-gray-400">
+          <p className="text-xs lg:text-sm text-stone-600 dark:text-stone-400">
             {new Date(data.date).toLocaleDateString()}
           </p>
         </div>

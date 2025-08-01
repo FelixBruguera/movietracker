@@ -8,8 +8,7 @@ const UsersMenu = () => {
   const sort = router.query.sortBy || "reviews"
   return (
     <div className="flex items-center w-full">
-      <span aria-hidden={true} className="w-7/10"></span>
-      <div className="flex items-center justify-evenly w-full lg:w-3/10">
+      <div className="flex items-center justify-end w-full lg:w-full px-5">
         <SelectSortBy
           value={sort}
           selectedValue={sortOptions[sort]}

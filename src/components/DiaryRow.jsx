@@ -7,12 +7,12 @@ import {
 } from "@/components/ui/tooltip"
 import { format } from "date-fns"
 
+
 const DiaryRow = ({ data, group }) => {
-  const [year, month] = data.date.split("-")
   const date =
     group === "yearly"
-      ? format(new Date(year, 1, 1), "yyyy")
-      : format(new Date(year, month - 1), "MMMM u")
+      ? format(new Date(data.date, 1, 1), "yyyy")
+      : format(new Date(data.date[0], data.date[1] - 1), "MMMM u")
   return (
     <li
       key={data.date}

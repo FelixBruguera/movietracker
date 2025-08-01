@@ -56,9 +56,7 @@ export default function Reviews() {
       )}
       <ListHeading>
         <ListHeadingTitle title="Reviews">
-          {totalReviews > 0 && (
-            <Total total={totalReviews} label="Total Reviews" />
-          )}
+          <Total total={totalReviews} label="Total Reviews" />
           {averageRating && (
             <AverageRating
               rating={averageRating}

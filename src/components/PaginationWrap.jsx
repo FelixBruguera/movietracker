@@ -47,7 +47,7 @@ const PaginationWrap = ({ totalPages, scrollTarget = "" }) => {
               min={1}
               max={totalPages}
               name="page"
-              className="w-13 h-full border-1 dark:border-gray-500 border-gray-400 rounded-md px-1"
+              className="w-13 h-full border-1 dark:border-gray-500 border-stone-500 rounded-md px-1"
             />
             <p>of {totalPages}</p>
           </span>

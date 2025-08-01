@@ -12,6 +12,7 @@ import {
 import { Star } from "lucide-react"
 import Poster from "../src/components/Poster"
 import ErrorMessage from "../src/components/ErrorMessage"
+import Head from "next/head"
 
 export default function Index() {
   const router = useRouter()

@@ -5,6 +5,9 @@ import {
 } from "@/components/ui/tooltip"
 
 const Total = ({ total, label }) => {
+  if (!total || total < 1) {
+    return null
+  }
   return (
     <Tooltip>
       <TooltipTrigger>

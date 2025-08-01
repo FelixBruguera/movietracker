@@ -5,8 +5,9 @@ import { Label } from "@/components/ui/label"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 
-const ListForm = ({ list = null, mutation }) => {
-  const [isPrivate, setIsPrivate] = useState(list?.isPrivate || true)
+const ListForm = ({ list, mutation }) => {
+  const startingValue = list?.isPrivate === false ? false : true
+  const [isPrivate, setIsPrivate] = useState(startingValue)
   return (
     <form
       className="flex flex-col gap-10 w-full"

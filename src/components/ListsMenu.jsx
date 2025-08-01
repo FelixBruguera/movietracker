@@ -21,7 +21,7 @@ const ListsMenu = () => {
   }
   return (
     <div className="flex items-center w-full px-9">
-      <div aria-hidden={true} className="w-6/10">
+      <div className="lg:w-8/10">
         <ul className="hidden lg:flex w-fit items-center justify-center gap-5 lg:justify-between">
           {filters.map((genre) => (
             <li key={genre}>
@@ -30,10 +30,10 @@ const ListsMenu = () => {
           ))}
         </ul>
       </div>
-      <div className="w-2/10 flex items-center justify-end">
+      <div className="w-1/10 flex items-center justify-end">
         {session && <ListDialog />}
       </div>
-      <div className="flex items-center justify-end gap-3 w-full lg:w-2/10">
+      <div className="flex items-center justify-end w-full lg:w-fit">
         <SelectSortBy
           value={sort}
           selectedValue={sortOptions[sort]}

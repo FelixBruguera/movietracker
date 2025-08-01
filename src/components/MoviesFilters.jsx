@@ -25,7 +25,7 @@ const MoviesFilters = ({ handleFilter, filterOpen, setFilterOpen }) => {
     <Sheet open={filterOpen} onOpenChange={setFilterOpen}>
       <SheetTrigger asChild>
         <Button
-          className={`text-xs lg:text-sm flex items-center justify-center gap-1 hover:cursor-pointer bg-gray-100 border-gray-400 hover:bg-stone-200 dark:bg-stone-900 border-1 dark:border-gray-700 transition-all
+          className={`text-xs lg:text-sm flex items-center justify-center gap-1 hover:cursor-pointer bg-gray-100 border-stone-300 hover:bg-stone-200 dark:bg-stone-900 border-1 dark:border-stone-700 transition-all
             ${Object.keys(router.query).length > 0 ? "bg-red-800 text-white dark:bg-red-800" : null}`}
           variant="ghost"
         >

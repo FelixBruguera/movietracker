@@ -14,6 +14,7 @@ import { authClient } from "@/lib/auth-client.ts"
 import NewLog from "src/components/NewLog"
 import DialogWrapper from "src/components/DialogWrapper"
 import MovieDescription from "../../src/components/MovieDescription"
+import Head from "next/head"
 
 export default function MoviePage() {
   const router = useRouter()
@@ -42,6 +43,10 @@ export default function MoviePage() {
   }
   return (
     <div className="mx-auto p-4">
+      <Head>
+        <title>{movie.title}</title>
+        <meta property="og:title" content={movie.title} />
+      </Head>
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="w-3/4 mx-auto lg:w-1/3">
           <Poster src={movie.poster} alt={movie.title} size="large" />
@@ -111,7 +116,7 @@ export default function MoviePage() {
             ))}
           </MovieDetailsList>
           <div className="flex flex-col items-start gap-3 text-base text-slate-800 dark:text-stone-300 text-justify w-9/10 my-1 mx-3 lg:mx-0">
-            {movie.fullplot.length > 1000 ? (
+            {movie.fullplot?.length > 1000 ? (
               <MovieDescription description={movie.fullplot} />
             ) : (
               <p>{movie.fullplot}</p>
