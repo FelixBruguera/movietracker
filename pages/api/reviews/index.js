@@ -4,13 +4,15 @@ import reviewsPipeline from "lib/_reviewsPipeline"
 import { auth } from "@/lib/auth.ts"
 
 export default async function handler(request, response) {
-  const { database } = await connectToDatabase()
+  const { mongoClient, database } = await connectToDatabase()
   const session = await auth.api.getSession({ headers: request.headers })
   if (request.method === "POST") {
     if (!session) {
       return response.status(401).send()
     } else {
+      const mongoSession = mongoClient.startSession()
       const { text, movie_id } = request.body
+      const userId = ObjectId.createFromHexString(session.user.id)
       const rating = parseInt(request.body.rating)
       if (isNaN(rating) || rating < 1 || rating > 10) {
         return response.status(400).json({ error: "Rating must be 1-10" })
@@ -19,25 +21,29 @@ export default async function handler(request, response) {
         return response.status(400).json({ error: "Invalid comment" })
       }
       try {
-        await database.collection("comments").findOneAndUpdate(
+        mongoSession.startTransaction()
+        await database.collection("comments").insertOne({
+          user_id: userId,
+          movie_id: ObjectId.createFromHexString(movie_id),
+          rating: rating,
+          text: text,
+          date: new Date(),
+        })
+        await database.collection("user").findOneAndUpdate(
           {
-            user_id: ObjectId.createFromHexString(session.user.id),
-            movie_id: ObjectId.createFromHexString(movie_id),
+            _id: userId,
           },
           {
-            $set: {
-              rating: rating,
-              text: text,
-            },
-            $setOnInsert: {
-              date: new Date(),
-            },
+            $inc: { reviews: 1 },
           },
-          { upsert: true },
         )
+        await mongoSession.commitTransaction()
         return response.status(201).send()
-      } catch {
+      } catch (error) {
+        console.log(error)
         return response.status(500).send()
+      } finally {
+        await mongoSession.endSession()
       }
     }
   } else {

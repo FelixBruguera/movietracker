@@ -9,7 +9,7 @@ export default async function handler(request, response) {
     if (!session) {
       return response.status(401).send()
     } else {
-      const listId = ObjectId.createFromHexString(request.query.id)
+      const list_id = ObjectId.createFromHexString(request.query.id)
       const movieId = ObjectId.createFromHexString(request.query.movieId)
       const user_id = ObjectId.createFromHexString(session.user.id)
       const mongoSession = mongoClient.startSession()
@@ -17,18 +17,22 @@ export default async function handler(request, response) {
         mongoSession.startTransaction()
         const check = await database
           .collection("lists")
-          .findOne({ _id: listId, user_id: user_id })
-        if (check) {
-          const result = await database
-            .collection("lists_movies")
-            .deleteOne({ list_id: listId, movie_id: movieId })
-          await mongoSession.commitTransaction()
-          if (result.deletedCount === 1) {
-            return response.status(204).send()
-          }
-        } else {
+          .findOneAndUpdate(
+            { _id: list_id, user_id: user_id },
+            { $inc: { movies: -1 } },
+            { session: mongoSession },
+          )
+        if (!check) {
           return response.status(404).send()
         }
+        await database
+          .collection("lists_movies")
+          .deleteOne(
+            { list_id: list_id, movie_id: movieId },
+            { session: mongoSession },
+          )
+        await mongoSession.commitTransaction()
+        return response.status(204).send()
       } catch {
         return response.status(404).send()
       } finally {

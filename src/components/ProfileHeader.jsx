@@ -1,7 +1,7 @@
-import { UserCircle } from "lucide-react"
 import ProfileTab from "./ProfileTab"
 import { useRouter } from "next/router"
 import Head from "next/head"
+import Avatar from "./Avatar"
 
 const ProfileHeader = (props) => {
   const router = useRouter()
@@ -13,8 +13,12 @@ const ProfileHeader = (props) => {
         <meta property="og:title" content={props.username} />
       </Head>
       <div className="w-full mx-auto pb-10 flex flex-col gap-2">
-        <div className="flex items-center justify-center gap-2">
-          <UserCircle className="!size-10" />
+        <div className="flex items-center justify-center gap-3">
+          <Avatar
+            src={props.image}
+            alt={`${props.username}'s avatar`}
+            size="large"
+          />
           <h1 className="font-bold text-3xl">{props.username}</h1>
         </div>
       </div>

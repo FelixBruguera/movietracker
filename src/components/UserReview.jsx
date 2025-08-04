@@ -11,11 +11,20 @@ import axios from "axios"
 const UserReview = ({ data, color, currentUser, query }) => {
   const [isEditing, setIsEditing] = useState(false)
   const queryClient = useQueryClient()
-  const mutation = useMutation({
+  const deleteMutation = useMutation({
     mutationFn: () => axios.delete(`/api/reviews/${data._id}`),
     onSuccess: () => {
       queryClient.invalidateQueries(["reviews", query, currentUser.id])
       return toast("Succesfully Deleted")
+    },
+    onError: (error) => toast(error.response.statusText),
+  })
+  const updateMutation = useMutation({
+    mutationFn: (newReview) =>
+      axios.patch(`/api/reviews/${data._id}`, newReview),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["reviews", query, currentUser.id])
+      return toast("Succesfully Updated")
     },
     onError: (error) => toast(error.response.statusText),
   })
@@ -34,7 +43,7 @@ const UserReview = ({ data, color, currentUser, query }) => {
           </UserReviewButton>
           <Remove
             title={"Deleting your review"}
-            mutation={() => mutation.mutate()}
+            mutation={() => deleteMutation.mutate()}
           >
             <UserReviewButton label="Delete your review">
               <Trash />
@@ -43,11 +52,15 @@ const UserReview = ({ data, color, currentUser, query }) => {
         </div>
       </div>
       {isEditing ? (
-        <ReviewForm previousReview={data} currentUser={currentUser} />
+        <ReviewForm previousReview={data} mutation={updateMutation} />
       ) : (
         <Review
           data={data}
-          userInfo={{ _id: currentUser.id, username: currentUser.username }}
+          userInfo={{
+            _id: currentUser.id,
+            username: currentUser.username,
+            image: currentUser.image,
+          }}
           color={color}
         />
       )}

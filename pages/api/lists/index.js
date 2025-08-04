@@ -26,6 +26,8 @@ export default async function handler(request, response) {
           name: name,
           description: description,
           isPrivate: isPrivate,
+          movies: 0,
+          followers: 0,
           createdAt: new Date(),
         })
         return response.status(201).send()

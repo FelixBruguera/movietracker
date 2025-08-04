@@ -8,27 +8,15 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { useState } from "react"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { toast } from "sonner"
 import { useRouter } from "next/router"
-import axios from "axios"
 
-const ReviewForm = ({ previousReview, currentUser }) => {
+const ReviewForm = ({ previousReview, mutation }) => {
   const router = useRouter()
-  const queryClient = useQueryClient()
   const previousText = previousReview?.text
   const previousRating = previousReview?.rating
   const [text, setText] = useState(previousText || "")
   const [rating, setRating] = useState(previousRating || 1)
   const ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-  const mutation = useMutation({
-    mutationFn: (newReview) => axios.post(`/api/reviews`, newReview),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["reviews", router.query, currentUser.id])
-      return toast("Succesfully Added")
-    },
-    onError: (error) => toast(error.response.statusText),
-  })
   return (
     <form
       className="flex items-center justify-between my-5"

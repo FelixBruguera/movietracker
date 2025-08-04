@@ -23,7 +23,7 @@ export default function ProfileIndex() {
     return <ErrorMessage />
   }
   return (
-    <ProfileHeader username={data.user.username}>
+    <ProfileHeader username={data.user.username} image={data.user.image}>
       <ProfileReviews data={data} sortKey={otherParams.sortBy} />
     </ProfileHeader>
   )

@@ -8,24 +8,33 @@ import { authClient } from "@/lib/auth-client.ts"
 const ListsMenu = () => {
   const router = useRouter()
   const { data: session } = authClient.useSession()
-  const sortOptions = { followers: "Followers", date: "Creation date" }
-  const sort = router.query.sortBy || "date"
-  const filters = ["Your lists", "Following"]
+  const sortOptions = {
+    followers: "Followers",
+    date: "Creation date",
+    movies: "Movies",
+  }
+  const sort = router.query.sortBy || "movies"
+  const filters = { "Your lists": "user", Following: "following" }
   const handleFilter = (newValue) => {
-    if (router.query.filter === newValue) {
-      const { genres, ...newQuery } = router.query
+    const value = filters[newValue]
+    if (router.query.filter === value) {
+      const { filter, ...newQuery } = router.query
       router.push({ query: { ...newQuery, page: 1 } })
     } else {
-      router.push({ query: { ...router.query, filter: newValue, page: 1 } })
+      router.push({ query: { ...router.query, filter: value, page: 1 } })
     }
   }
   return (
     <div className="flex items-center w-full px-9">
       <div className="lg:w-8/10">
         <ul className="hidden lg:flex w-fit items-center justify-center gap-5 lg:justify-between">
-          {filters.map((genre) => (
-            <li key={genre}>
-              <MoviesMenuItem title={genre} onClick={handleFilter} />
+          {Object.keys(filters).map((filter) => (
+            <li key={filter}>
+              <MoviesMenuItem
+                title={filter}
+                onClick={handleFilter}
+                isActive={router.query.filter === filters[filter]}
+              />
             </li>
           ))}
         </ul>

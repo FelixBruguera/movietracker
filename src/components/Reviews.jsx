@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import PaginationWrap from "./PaginationWrap"
 import { useRouter } from "next/router"
 import Review from "./Review"
@@ -14,11 +14,14 @@ import Total from "./Total"
 import ListHeadingTitle from "./ListHeadingTitle"
 import ListHeading from "./ListHeading"
 import UserReview from "./UserReview"
+import axios from "axios"
+import { toast } from "sonner"
 
 export default function Reviews() {
   const router = useRouter()
   const { data: session } = authClient.useSession()
   const currentUser = session?.user
+  const queryClient = useQueryClient()
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["reviews", router.query, currentUser?.id],
@@ -26,6 +29,14 @@ export default function Reviews() {
       fetch(`/api/reviews?${new URLSearchParams(router.query)}`)
         .then((res) => res.json())
         .then((data) => data[0]),
+  })
+  const mutation = useMutation({
+    mutationFn: (newReview) => axios.post(`/api/reviews`, newReview),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["reviews", router.query, currentUser.id])
+      return toast("Succesfully Added")
+    },
+    onError: (error) => toast(error.response.statusText),
   })
 
   const sortOptions = reviewsInfo.sortOptions
@@ -75,7 +86,7 @@ export default function Reviews() {
       {!userReview && session && (
         <ReviewForm
           previousReview={data.currentUserReview}
-          currentUser={currentUser}
+          mutation={mutation}
         />
       )}
       {data.reviews?.length > 0 ? (

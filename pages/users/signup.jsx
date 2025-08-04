@@ -20,6 +20,8 @@ export default function SignUp() {
         username: data.username.value,
         password: data.password.value,
         email: data.email.value,
+        image: `https://www.gravatar.com/avatar/${data.username.value}?d=identicon&s=200&r=pg`,
+        reviews: 0,
       },
       {
         onError: (response) => toast(response.error.message),

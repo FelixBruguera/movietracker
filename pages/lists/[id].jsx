@@ -4,29 +4,24 @@ import ErrorMessage from "src/components/ErrorMessage"
 import ListHeading from "src/components/ListHeading"
 import ListHeadingTitle from "src/components/ListHeadingTitle"
 import Total from "src/components/Total"
-import { Calendar, Lock, Trash, UserCircle } from "lucide-react"
+import { Calendar, Lock } from "lucide-react"
 import ListDetail from "src/components/ListDetail"
 import Link from "next/link"
 import { authClient } from "@/lib/auth-client.ts"
 import DialogWrapper from "src/components/DialogWrapper"
 import AddToList from "src/components/AddToList"
-import Poster from "src/components/Poster"
 import SelectSortBy from "src/components/SelectSortBy"
 import SortOrderToggle from "src/components/SortOrderToggle"
 import PaginationWrap from "src/components/PaginationWrap"
-import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuTrigger,
-} from "@/components/ui/context-menu"
-import Remove from "src/components/Remove"
 import axios from "axios"
 import { toast } from "sonner"
 import UpdateList from "src/components/UpdateList"
 import DeleteList from "src/components/DeleteList"
 import ListSkeleton from "src/components/ListSkeleton"
 import Head from "next/head"
+import Avatar from "src/components/Avatar"
+import ListMovieWithContext from "src/components/ListMovieWithContext"
+import Poster from "../../src/components/Poster"
 
 export default function ProfileIndex() {
   const router = useRouter()
@@ -54,12 +49,12 @@ export default function ProfileIndex() {
     return <ErrorMessage />
   }
   const list = data.data.list
-  const movies = data.data.list.movies
+  const movies = data.data.list.moviesData
   const user = data.data.userInfo[0]
   const sortOptions = { date: "Added date" }
 
   return (
-    <div className="p-5 w-9/10 max-w-500 mx-auto">
+    <div className="p-5 w-full lg:w-9/10 lg:max-w-500 mx-auto">
       <Head>
         <title>{list.name}</title>
         <meta property="og:title" content={list.name} />
@@ -70,10 +65,10 @@ export default function ProfileIndex() {
           <div className="w-fit flex items-center gap-3">
             <Link
               href={`/users/${user._id}`}
-              className="hover:text-red-800 transition-all"
+              className="hover:text-red-800 transition-all w-fit"
             >
               <ListDetail>
-                <UserCircle />
+                <Avatar src={user.image} size="xs" />
                 <p className="flex">{user.username}</p>
               </ListDetail>
             </Link>
@@ -89,7 +84,7 @@ export default function ProfileIndex() {
               </ListDetail>
             )}
           </div>
-          <p className="text-base lg:text-lg text-stone-600 dark:text-stone-200 text-justify">
+          <p className="text-base lg:text-lg w-full text-stone-600 dark:text-stone-200 text-justify">
             {list.description}
           </p>
         </div>
@@ -123,33 +118,21 @@ export default function ProfileIndex() {
         aria-label="Movies"
       >
         {movies.length > 0 &&
-          movies.map((movie) => {
-            return (
-              <ContextMenu>
-                <ContextMenuTrigger>
-                  <li key={movie._id} className="group">
-                    <Link href={`/movies/${movie._id}`} className="text-center">
-                      <Poster src={movie.poster} alt={movie.title} />
-                    </Link>
-                  </li>
-                </ContextMenuTrigger>
-                <ContextMenuContent>
-                  <ContextMenuItem asChild>
-                    <Remove
-                      title={`Removing ${movie.title} from ${list.name}`}
-                      mutation={() => mutation.mutate(movie._id)}
-                      className="w-full dark:hover:bg-stone-900 hover:cursor-pointer"
-                    >
-                      <div className="flex items-center text-sm dark:text-stone-300 gap-2">
-                        <Trash />
-                        Remove
-                      </div>
-                    </Remove>
-                  </ContextMenuItem>
-                </ContextMenuContent>
-              </ContextMenu>
-            )
-          })}
+          movies.map((movie) =>
+            session?.user.id === user._id ? (
+              <ListMovieWithContext
+                listName={list.name}
+                movie={movie}
+                mutation={mutation}
+              />
+            ) : (
+              <li key={movie._id} className="group">
+                <Link href={`/movies/${movie._id}`} className="text-center">
+                  <Poster src={movie.poster} alt={movie.title} />
+                </Link>
+              </li>
+            ),
+          )}
       </ul>
       {data.data.info.totalPages > 1 && (
         <PaginationWrap totalPages={data.data.info.totalPages} />

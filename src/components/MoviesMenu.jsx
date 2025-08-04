@@ -38,7 +38,11 @@ const MoviesMenu = () => {
       <ul className="hidden lg:flex w-full lg:w-7/10 flex-wrap items-center justify-center gap-1 lg:gap-0 lg:justify-between">
         {genres.map((genre) => (
           <li key={genre}>
-            <MoviesMenuItem title={genre} onClick={handleGenre} />
+            <MoviesMenuItem
+              title={genre}
+              onClick={handleGenre}
+              isActive={router.query.genres === genre}
+            />
           </li>
         ))}
       </ul>

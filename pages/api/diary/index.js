@@ -16,7 +16,7 @@ export default async function handler(request, response) {
       movie_id: ObjectId.createFromHexString(movie_id),
       date: formattedDate,
       month: formattedDate.getMonth(),
-      year: formattedDate.getFullYear()
+      year: formattedDate.getFullYear(),
     })
     if (query.insertedId) {
       return response.status(201).json(query)

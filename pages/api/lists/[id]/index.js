@@ -38,9 +38,11 @@ export default async function handler(request, response) {
       )
       if (query.modifiedCount === 1) {
         return response.status(200).send()
+      } else {
+        return response.status(404).send()
       }
     } catch (error) {
-      return response.status(500).send()
+      return response.status(404).send()
     }
   }
 
@@ -56,18 +58,24 @@ export default async function handler(request, response) {
       mongoSession.startTransaction()
       const check = await database
         .collection("lists")
-        .findOne({ _id: list_id, user_id: user_id })
-      if (check) {
-        const result = await database.collection("lists_movies").insertOne({
+        .findOneAndUpdate(
+          { _id: list_id, user_id: user_id },
+          { $inc: { movies: 1 } },
+          { session: mongoSession },
+        )
+      if (!check) {
+        return response.status(404).send()
+      }
+      await database.collection("lists_movies").insertOne(
+        {
           movie_id: movie_id,
           list_id: list_id,
           createdAt: new Date(),
-        })
-        await mongoSession.commitTransaction()
-        if (result.insertedId) {
-          return response.status(200).send()
-        }
-      }
+        },
+        { session: mongoSession },
+      )
+      await mongoSession.commitTransaction()
+      return response.status(200).send()
     } catch (error) {
       if (error.code === 11000) {
         return response.status(422).json({ error: "Duplicated movie" })
@@ -99,6 +107,7 @@ export default async function handler(request, response) {
         .collection("lists")
         .aggregate(pipeline(request.query, session?.user.id))
         .next()
+      console.log(data)
       if (data.list) {
         return response.json(data)
       } else {

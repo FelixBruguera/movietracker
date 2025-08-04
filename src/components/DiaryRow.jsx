@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/tooltip"
 import { format } from "date-fns"
 
-
 const DiaryRow = ({ data, group }) => {
   const date =
     group === "yearly"

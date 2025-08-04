@@ -12,7 +12,7 @@ describe("the lists endpoint", async () => {
   describe("with invalid requests", () => {
     test("it only allows the creator of a list to delete it", async () => {
       const response = await fetch(
-        "http://localhost:3000/api/lists/6887585795c1bd3a57ef8b13",
+        "http://localhost:3000/api/lists/6890c5e3ab93b6c177fbdd11",
         {
           method: "DELETE",
           headers: { Cookie: cookie, "Content-Type": "application/json" },
@@ -22,7 +22,7 @@ describe("the lists endpoint", async () => {
     })
     test("it only allows the creator of a list to update it", async () => {
       const response = await fetch(
-        "http://localhost:3000/api/lists/6887585795c1bd3a57ef8b13",
+        "http://localhost:3000/api/lists/6890c5e3ab93b6c177fbdd11",
         {
           method: "PATCH",
           body: JSON.stringify({
@@ -36,7 +36,7 @@ describe("the lists endpoint", async () => {
     })
     test("it only allows the creator of a list to add movies to it", async () => {
       const response = await fetch(
-        "http://localhost:3000/api/lists/6887585795c1bd3a57ef8b13",
+        "http://localhost:3000/api/lists/6890c5e3ab93b6c177fbdd11",
         {
           method: "POST",
           body: JSON.stringify({ movie_id: "685bd17544ae5742f06ad52b" }),
@@ -44,16 +44,26 @@ describe("the lists endpoint", async () => {
         },
       )
       expect(response.status).toBe(404)
+      const listAfter = await fetch(
+        "http://localhost:3000/api/lists/6890c5e3ab93b6c177fbdd11",
+      ).then((data) => data.json())
+      expect(listAfter.list.movies).toEqual(1)
+      expect(listAfter.list.moviesData).toHaveLength(1)
     })
     test("it only allows the creator of a list to delete movies from it", async () => {
       const response = await fetch(
-        "http://localhost:3000/api/lists/6887585795c1bd3a57ef8b13/685bd15944ae5742f06ad529",
+        "http://localhost:3000/api/lists/6890c5e3ab93b6c177fbdd11/685bd15944ae5742f06ad529",
         {
           method: "DELETE",
           headers: { Cookie: cookie, "Content-Type": "application/json" },
         },
       )
       expect(response.status).toBe(404)
+      const listAfter = await fetch(
+        "http://localhost:3000/api/lists/6890c5e3ab93b6c177fbdd11",
+      ).then((data) => data.json())
+      expect(listAfter.list.movies).toEqual(1)
+      expect(listAfter.list.moviesData).toHaveLength(1)
     })
   })
 })

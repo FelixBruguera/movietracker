@@ -21,6 +21,19 @@ test.describe("as a logged in user", () => {
       await page.getByText("Lists").click()
       await expect(page.getByText("Seeded List")).not.toBeVisible()
     })
+    test("The buttons for list options are not visible in another user's list", async ({
+      page,
+    }) => {
+      await page.getByText("Lists").click()
+      await page.getByRole("link", { name: "Public List" }).click()
+      await expect(page.getByLabel("Delete")).not.toBeVisible()
+      await expect(page.getByLabel("Update your list")).not.toBeVisible()
+      await expect(page.getByLabel("Add a movie")).not.toBeVisible()
+      await page
+        .getByAltText("The Four Horsemen of the Apocalypse")
+        .click({ button: "right" })
+      await expect(page.getByText("Remove")).not.toBeVisible()
+    })
     test("Creating a list", async ({ page }) => {
       await page.getByText("Lists").click()
       await page.getByLabel("Create a new list").click()
@@ -72,7 +85,7 @@ test.describe("as a logged in user", () => {
       await page.getByText("Delete").click()
       await expect(page.getByText("Succesfully Removed")).toBeVisible()
       await expect(page.getByAltText("Foolish Wives")).not.toBeVisible()
-      await expect(page.getByLabel("Total Movies")).toHaveText("0")
+      await expect(page.getByLabel("Total Movies")).not.toBeVisible()
     })
     test("Deleting a list", async ({ page }) => {
       await page.getByText("Lists").click()
@@ -84,5 +97,19 @@ test.describe("as a logged in user", () => {
         page.getByRole("link", { name: "Deleting soon" }),
       ).not.toBeVisible()
     })
+  })
+})
+test.describe("As a visitor", () => {
+  test("The buttons for list options are not visible", async ({ page }) => {
+    await page.goto("/")
+    await page.getByText("Lists").click()
+    await page.getByRole("link", { name: "Public List" }).click()
+    await expect(page.getByLabel("Delete")).not.toBeVisible()
+    await expect(page.getByLabel("Update your list")).not.toBeVisible()
+    await expect(page.getByLabel("Add a movie")).not.toBeVisible()
+    await page
+      .getByAltText("The Four Horsemen of the Apocalypse")
+      .click({ button: "right" })
+    await expect(page.getByText("Remove")).not.toBeVisible()
   })
 })

@@ -23,7 +23,7 @@ export default function ProfileDiary() {
     return <ErrorMessage />
   }
   return (
-    <ProfileHeader username={data.user.username}>
+    <ProfileHeader username={data.user.username} image={data.user.image}>
       <ProfileLists data={data} />
     </ProfileHeader>
   )

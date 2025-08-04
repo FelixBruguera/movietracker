@@ -27,11 +27,9 @@ const Login = () => {
       },
     )
   }
-  useEffect(
-    () => {
-      authClient.revokeOtherSessions()
-    },
-    [session])
+  useEffect(() => {
+    authClient.revokeOtherSessions()
+  }, [session])
 
   return (
     <AuthForm title="Login" onSubmit={onSubmit}>

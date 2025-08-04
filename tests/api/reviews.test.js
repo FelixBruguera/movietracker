@@ -35,6 +35,22 @@ describe("the reviews endpoint", async () => {
         },
       )
       expect(response.status).toBe(404)
+      const userAfter = await fetch(
+        "http://localhost:3000/api/users/59b99dc7cfa9a34dcd7885dd",
+      ).then((data) => data.json())
+      expect(userAfter[0].info.totalReviews).toEqual(1)
+      expect(userAfter[0].reviews).toHaveLength(1)
+    })
+    test("it only allows the creator of a review to update it", async () => {
+      const response = await fetch(
+        "http://localhost:3000/api/reviews/5a9427648b0beebeb6957a21",
+        {
+          method: "PATCH",
+          body: JSON.stringify({ text: "testing", rating: "5" }),
+          headers: { Cookie: cookie, "Content-Type": "application/json" },
+        },
+      )
+      expect(response.status).toBe(404)
     })
   })
 })

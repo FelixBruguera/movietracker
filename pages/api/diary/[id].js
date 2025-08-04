@@ -20,7 +20,7 @@ export default async function handler(request, response) {
         $set: {
           date: formattedDate,
           month: formattedDate.getMonth(),
-          year: formattedDate.getFullYear()
+          year: formattedDate.getFullYear(),
         },
       },
     )
