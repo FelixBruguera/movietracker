@@ -39,7 +39,11 @@ const ProfileReviews = ({ data, sortKey }) => {
         <>
           <ul className="space-y-4">
             {data.reviews.map((review) => (
-              <ProfileReview data={review} color={ratingScale[review.rating]} />
+              <ProfileReview
+                key={review._id}
+                data={review}
+                color={ratingScale[review.rating]}
+              />
             ))}
           </ul>
           <div className="mt-4">

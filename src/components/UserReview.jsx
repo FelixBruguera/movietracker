@@ -14,7 +14,10 @@ const UserReview = ({ data, color, currentUser, query }) => {
   const deleteMutation = useMutation({
     mutationFn: () => axios.delete(`/api/reviews/${data._id}`),
     onSuccess: () => {
-      queryClient.invalidateQueries(["reviews", query, currentUser.id])
+      queryClient.invalidateQueries({
+        queryKey: ["reviews", query, currentUser.id],
+        exact: true,
+      })
       return toast("Succesfully Deleted")
     },
     onError: (error) => toast(error.response.statusText),
@@ -23,7 +26,10 @@ const UserReview = ({ data, color, currentUser, query }) => {
     mutationFn: (newReview) =>
       axios.patch(`/api/reviews/${data._id}`, newReview),
     onSuccess: () => {
-      queryClient.invalidateQueries(["reviews", query, currentUser.id])
+      queryClient.invalidateQueries({
+        queryKey: ["reviews", query, currentUser.id],
+        exact: true,
+      })
       return toast("Succesfully Updated")
     },
     onError: (error) => toast(error.response.statusText),

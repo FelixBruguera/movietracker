@@ -1,3 +1,4 @@
+import axios from "axios"
 import { useState, useEffect } from "react"
 
 export default function useDebounce(search) {
@@ -11,8 +12,9 @@ export default function useDebounce(search) {
       setDebounceValue([])
       timeout = setTimeout(
         () =>
-          fetch(`/api/movies?search=${search}`)
-            .then((response) => response.json())
+          axios
+            .get(`/api/movies?search=${search}`)
+            .then((response) => response.data)
             .then((data) => {
               setDebounceValue(data[0].movies)
               setIsLoading(false)

@@ -4,7 +4,7 @@ import ErrorMessage from "src/components/ErrorMessage"
 import ListHeading from "src/components/ListHeading"
 import ListHeadingTitle from "src/components/ListHeadingTitle"
 import Total from "src/components/Total"
-import { Calendar, Lock } from "lucide-react"
+import { Calendar, Lock, Users } from "lucide-react"
 import ListDetail from "src/components/ListDetail"
 import Link from "next/link"
 import { authClient } from "@/lib/auth-client.ts"
@@ -22,6 +22,7 @@ import Head from "next/head"
 import Avatar from "src/components/Avatar"
 import ListMovieWithContext from "src/components/ListMovieWithContext"
 import Poster from "../../src/components/Poster"
+import FollowList from "src/components/FollowList"
 
 export default function ProfileIndex() {
   const router = useRouter()
@@ -31,7 +32,9 @@ export default function ProfileIndex() {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["list", router.query],
     queryFn: () =>
-      axios.get(`/api/lists/${id}?${new URLSearchParams(otherParams)}`),
+      axios
+        .get(`/api/lists/${id}?${new URLSearchParams(otherParams)}`)
+        .then((response) => response.data),
   })
   const mutation = useMutation({
     mutationFn: (movieId) => axios.delete(`/api/lists/${id}/${movieId}`),
@@ -48,9 +51,10 @@ export default function ProfileIndex() {
   if (isError) {
     return <ErrorMessage />
   }
-  const list = data.data.list
-  const movies = data.data.list.moviesData
-  const user = data.data.userInfo[0]
+  const list = data.list
+  const movies = data.list.moviesData
+  const user = data.userInfo[0]
+  const isFollowed = data.isFollowed
   const sortOptions = { date: "Added date" }
 
   return (
@@ -78,6 +82,12 @@ export default function ProfileIndex() {
                 {new Date(list.createdAt).toLocaleDateString()}
               </p>
             </ListDetail>
+            <ListDetail>
+              <Users aria-label="Followers" />
+              <p className="text-stone-600 dark:text-stone-200 text-sm lg:text-base">
+                {list.followers}
+              </p>
+            </ListDetail>
             {list.isPrivate && (
               <ListDetail>
                 <Lock aria-label="Private List" title="Private List" />
@@ -89,7 +99,7 @@ export default function ProfileIndex() {
           </p>
         </div>
         {session?.user.id === user._id && (
-          <>
+          <div className="flex gap-2 lg:w-fit">
             <DialogWrapper
               title={`Adding to ${list.name}`}
               label="Add a movie to your list"
@@ -98,12 +108,15 @@ export default function ProfileIndex() {
             </DialogWrapper>
             <UpdateList list={list} />
             <DeleteList list={list} />
-          </>
+          </div>
+        )}
+        {session && session.user.id !== user._id && (
+          <FollowList listId={list._id} isFollowed={isFollowed} />
         )}
       </div>
       <ListHeading>
         <ListHeadingTitle title="Movies">
-          <Total total={data.data.info.totalMovies} label="Total Movies" />
+          <Total total={data.info.totalMovies} label="Total Movies" />
         </ListHeadingTitle>
         <SelectSortBy
           value="date"
@@ -128,14 +141,14 @@ export default function ProfileIndex() {
             ) : (
               <li key={movie._id} className="group">
                 <Link href={`/movies/${movie._id}`} className="text-center">
-                  <Poster src={movie.poster} alt={movie.title} />
+                  <Poster src={movie.poster} alt={movie.title} size="base" />
                 </Link>
               </li>
             ),
           )}
       </ul>
-      {data.data.info.totalPages > 1 && (
-        <PaginationWrap totalPages={data.data.info.totalPages} />
+      {data.info.totalPages > 1 && (
+        <PaginationWrap totalPages={data.info.totalPages} />
       )}
     </div>
   )

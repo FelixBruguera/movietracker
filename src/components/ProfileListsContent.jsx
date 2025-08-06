@@ -6,7 +6,7 @@ import Total from "./Total"
 import ListCard from "src/components/ListCard"
 import PaginationWrap from "src/components/PaginationWrap"
 
-const ProfileLists = ({ data }) => {
+const ProfileListsContent = ({ data }) => {
   const sortOptions = { date: "Creation date" }
   const sort = "date"
   const lists = data.lists
@@ -29,7 +29,7 @@ const ProfileLists = ({ data }) => {
         aria-label="lists"
       >
         {lists?.map((list) => (
-          <ListCard list={list} />
+          <ListCard key={list._id} list={list} />
         ))}
       </ul>
       <div className="mt-4">
@@ -41,4 +41,4 @@ const ProfileLists = ({ data }) => {
   )
 }
 
-export default ProfileLists
+export default ProfileListsContent

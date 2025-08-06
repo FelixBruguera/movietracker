@@ -23,7 +23,7 @@ export default async function handler(request, response) {
     }
     const isPrivate = request.body.isPrivate === true ? true : false
     try {
-      const query = await database.collection("lists").updateOne(
+      const query = await database.collection("lists").findOneAndUpdate(
         {
           _id: ObjectId.createFromHexString(id),
           user_id: ObjectId.createFromHexString(session.user.id),
@@ -35,9 +35,10 @@ export default async function handler(request, response) {
             isPrivate: isPrivate,
           },
         },
+        { returnDocument: "after" },
       )
-      if (query.modifiedCount === 1) {
-        return response.status(200).send()
+      if (query) {
+        return response.status(200).json(query)
       } else {
         return response.status(404).send()
       }
@@ -75,7 +76,7 @@ export default async function handler(request, response) {
         { session: mongoSession },
       )
       await mongoSession.commitTransaction()
-      return response.status(200).send()
+      return response.status(201).send()
     } catch (error) {
       if (error.code === 11000) {
         return response.status(422).json({ error: "Duplicated movie" })
@@ -107,7 +108,6 @@ export default async function handler(request, response) {
         .collection("lists")
         .aggregate(pipeline(request.query, session?.user.id))
         .next()
-      console.log(data)
       if (data.list) {
         return response.json(data)
       } else {

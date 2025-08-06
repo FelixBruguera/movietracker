@@ -13,6 +13,7 @@ import { Star } from "lucide-react"
 import Poster from "../src/components/Poster"
 import ErrorMessage from "../src/components/ErrorMessage"
 import Head from "next/head"
+import axios from "axios"
 
 export default function Index() {
   const router = useRouter()
@@ -20,9 +21,9 @@ export default function Index() {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["movies", router.query],
     queryFn: () =>
-      fetch(`/api/movies?${new URLSearchParams(router.query)}`).then((res) =>
-        res.json(),
-      ),
+      axios
+        .get(`/api/movies?${new URLSearchParams(router.query)}`)
+        .then((response) => response.data),
   })
 
   if (isLoading) {

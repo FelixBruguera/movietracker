@@ -5,7 +5,7 @@ const ProfileTab = ({ title, href, currentPath }) => {
   const isCurrentRoute = currentPath.includes(title.toLowerCase())
   const defaultRouteCheck = title === "Reviews" && currentPath === "/users/[id]"
   return (
-    <li key={title}>
+    <li>
       <Link href={href}>
         <Button
           asChild

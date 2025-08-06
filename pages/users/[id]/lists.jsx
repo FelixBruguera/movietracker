@@ -3,17 +3,18 @@ import ProfileHeader from "src/components/ProfileHeader"
 import { useQuery } from "@tanstack/react-query"
 import ErrorMessage from "src/components/ErrorMessage"
 import ProfileSkeleton from "src/components/ProfileSkeleton"
-import ProfileLists from "../../../src/components/ProfileLists"
+import ProfileListsContent from "src/components/ProfileListsContent"
+import axios from "axios"
 
-export default function ProfileDiary() {
+export default function ProfileLists() {
   const router = useRouter()
   const { id, ...otherParams } = router.query
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["diary", router.query],
+    queryKey: ["user_lists", router.query],
     queryFn: () =>
-      fetch(`/api/users/${id}/lists?${new URLSearchParams(otherParams)}`)
-        .then((res) => res.json())
-        .then((data) => data[0]),
+      axios
+        .get(`/api/users/${id}/lists?${new URLSearchParams(otherParams)}`)
+        .then((response) => response.data[0]),
   })
   if (isLoading) {
     return <ProfileSkeleton />
@@ -24,7 +25,7 @@ export default function ProfileDiary() {
   }
   return (
     <ProfileHeader username={data.user.username} image={data.user.image}>
-      <ProfileLists data={data} />
+      <ProfileListsContent data={data} />
     </ProfileHeader>
   )
 }

@@ -4,6 +4,7 @@ import ProfileReviews from "src/components/ProfileReviews"
 import { useQuery } from "@tanstack/react-query"
 import ErrorMessage from "src/components/ErrorMessage"
 import ProfileSkeleton from "src/components/ProfileSkeleton"
+import axios from "axios"
 
 export default function ProfileIndex() {
   const router = useRouter()
@@ -11,9 +12,9 @@ export default function ProfileIndex() {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["user", router.query],
     queryFn: () =>
-      fetch(`/api/users/${id}?${new URLSearchParams(otherParams)}`)
-        .then((res) => res.json())
-        .then((data) => data[0]),
+      axios
+        .get(`/api/users/${id}?${new URLSearchParams(otherParams)}`)
+        .then((response) => response.data[0]),
   })
   if (isLoading) {
     return <ProfileSkeleton />

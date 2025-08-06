@@ -12,7 +12,7 @@ const ProfileSkeleton = () => {
       </div>
       <div className="flex items-center justify-evenly w-full mx-auto pb-2 lg:px-60">
         {items.map((item) => (
-          <Skeleton className="w-1/6 h-10 dark:bg-stone-600" />
+          <Skeleton key={item} className="w-1/6 h-10 dark:bg-stone-600" />
         ))}
       </div>
       <ReviewsSkeleton />

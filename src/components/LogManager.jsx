@@ -22,7 +22,9 @@ const LogManager = ({ movie }) => {
   } = useQuery({
     queryKey: ["diary", movie._id],
     queryFn: () =>
-      fetch(`${url}?movie_id=${movie._id}`).then((response) => response.json()),
+      axios
+        .get(`${url}?movie_id=${movie._id}`)
+        .then((response) => response.data),
   })
   const updateMutation = useMutation({
     mutationFn: (data) => axios.patch(`${url}/${data.logId}`, data),

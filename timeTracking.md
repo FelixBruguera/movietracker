@@ -29,6 +29,7 @@
 | 29.07.2025  | 2     | Minor refactors, moved all the image sizing to the poster component and add a "read more" function to movies with long descriptions
 | 01.08.2025  | 10     | Implement the lists tab on profiles. Add dynamic titles. Refactor the profile pipelines to handle users with no reviews or logs. Refactor the login logic
 | 04.08.2025  | 8     | - Add images to users with gravatar. Add the count of reviews to each user document and the count of movies to each list. Add transactions for creating and deleting a review and adding and removing movies from a list. Add more tests for lists and reviews
+| 06.08.2025  | 6     | Implement list following, fixes and refactors 
 
 
 

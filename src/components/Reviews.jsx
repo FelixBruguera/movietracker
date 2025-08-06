@@ -26,19 +26,21 @@ export default function Reviews() {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["reviews", router.query, currentUser?.id],
     queryFn: () =>
-      fetch(`/api/reviews?${new URLSearchParams(router.query)}`)
-        .then((res) => res.json())
-        .then((data) => data[0]),
+      axios
+        .get(`/api/reviews?${new URLSearchParams(router.query)}`)
+        .then((response) => response.data[0]),
   })
   const mutation = useMutation({
     mutationFn: (newReview) => axios.post(`/api/reviews`, newReview),
     onSuccess: () => {
-      queryClient.invalidateQueries(["reviews", router.query, currentUser.id])
+      queryClient.invalidateQueries({
+        queryKey: ["reviews", router.query, currentUser.id],
+        exact: true,
+      })
       return toast("Succesfully Added")
     },
     onError: (error) => toast(error.response.statusText),
   })
-
   const sortOptions = reviewsInfo.sortOptions
   const ratingScale = reviewsInfo.ratingScale
 

@@ -4,7 +4,7 @@ import { ChevronDown, ChevronsDown, ChevronUp } from "lucide-react"
 
 const MovieDescription = ({ description }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const firstDot = description.indexOf(".", 1000)
+  const firstDot = description.indexOf(".", 800)
   const shortDescription = description.slice(0, firstDot + 1)
   const toggleIsOpen = () => setIsOpen((state) => !state)
   return isOpen ? (

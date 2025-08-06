@@ -5,15 +5,16 @@ import ErrorMessage from "src/components/ErrorMessage"
 import UsersMenu from "src/components/UsersMenu"
 import UserCard from "src/components/UserCard"
 import UsersSkeleton from "src/components/UsersSkeleton"
+import axios from "axios"
 
 export default function UsersPage() {
   const router = useRouter()
   const { data, isLoading, isError } = useQuery({
     queryKey: ["users", router.query],
     queryFn: () =>
-      fetch(`/api/users?${new URLSearchParams(router.query)}`).then((res) =>
-        res.json(),
-      ),
+      axios
+        .get(`/api/users?${new URLSearchParams(router.query)}`)
+        .then((response) => response.data),
   })
 
   if (isLoading) {

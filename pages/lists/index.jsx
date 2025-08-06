@@ -5,15 +5,16 @@ import ErrorMessage from "src/components/ErrorMessage"
 import UsersSkeleton from "src/components/UsersSkeleton"
 import ListsMenu from "src/components/ListsMenu"
 import ListCard from "src/components/ListCard"
+import axios from "axios"
 
 export default function UsersPage() {
   const router = useRouter()
   const { data, isLoading, isError } = useQuery({
     queryKey: ["lists", router.query],
     queryFn: () =>
-      fetch(`/api/lists?${new URLSearchParams(router.query)}`).then((res) =>
-        res.json(),
-      ),
+      axios
+        .get(`/api/lists?${new URLSearchParams(router.query)}`)
+        .then((response) => response.data),
   })
 
   if (isLoading) {

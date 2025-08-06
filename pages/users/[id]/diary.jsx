@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 import ErrorMessage from "src/components/ErrorMessage"
 import Diary from "src/components/Diary"
 import ProfileSkeleton from "src/components/ProfileSkeleton"
+import axios from "axios"
 
 export default function ProfileDiary() {
   const router = useRouter()
@@ -11,9 +12,9 @@ export default function ProfileDiary() {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["diary", router.query],
     queryFn: () =>
-      fetch(`/api/users/${id}/diary?${new URLSearchParams(otherParams)}`)
-        .then((res) => res.json())
-        .then((data) => data[0]),
+      axios
+        .get(`/api/users/${id}/diary?${new URLSearchParams(otherParams)}`)
+        .then((response) => response.data[0]),
   })
   if (isLoading) {
     return <ProfileSkeleton />

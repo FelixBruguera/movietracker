@@ -15,7 +15,7 @@ export default async function handler(request, response) {
       user_id: ObjectId.createFromHexString(session.user.id),
       movie_id: ObjectId.createFromHexString(movie_id),
       date: formattedDate,
-      month: formattedDate.getMonth(),
+      month: formattedDate.getMonth() + 1,
       year: formattedDate.getFullYear(),
     })
     if (query.insertedId) {

@@ -29,7 +29,9 @@ const SelectSortBy = ({ value, selectedValue, title, options }) => {
       </SelectTrigger>
       <SelectContent>
         {Object.entries(options).map(([key, value]) => (
-          <SelectItem value={key}>{value}</SelectItem>
+          <SelectItem key={key} value={key}>
+            {value}
+          </SelectItem>
         ))}
       </SelectContent>
     </Select>

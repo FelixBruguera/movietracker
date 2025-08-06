@@ -20,8 +20,18 @@ const UpdateList = ({ list }) => {
   const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn: (newEntry) => axios.patch(`/api/lists/${list._id}`, newEntry),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["list", router.query] })
+    onSuccess: (response) => {
+      queryClient.setQueryData(["list", router.query], (oldData) => {
+        return {
+          ...oldData,
+          list: {
+            ...oldData.list,
+            name: response.data.name,
+            description: response.data.description,
+            isPrivate: response.data.isPrivate,
+          },
+        }
+      })
       setOpen(false)
       toast("Succesfully Updated")
     },

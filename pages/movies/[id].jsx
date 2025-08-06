@@ -15,6 +15,7 @@ import NewLog from "src/components/NewLog"
 import DialogWrapper from "src/components/DialogWrapper"
 import MovieDescription from "../../src/components/MovieDescription"
 import Head from "next/head"
+import axios from "axios"
 
 export default function MoviePage() {
   const router = useRouter()
@@ -27,7 +28,8 @@ export default function MoviePage() {
     isError,
   } = useQuery({
     queryKey: ["movie", id],
-    queryFn: () => fetch(`/api/movies/${id}`).then((res) => res.json()),
+    queryFn: () =>
+      axios.get(`/api/movies/${id}`).then((response) => response.data),
   })
 
   if (isLoading) {
