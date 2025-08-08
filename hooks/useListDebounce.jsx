@@ -1,0 +1,14 @@
+import { useRouter } from "next/router"
+import { useEffect } from "react"
+
+export default function useListDebounce(search) {
+  const router = useRouter()
+  useEffect(() => {
+    let timeout = null
+    timeout = setTimeout(
+      () => router.push({ query: { ...router.query, search: search } }),
+      500,
+    )
+    return () => clearTimeout(timeout)
+  }, [search])
+}

@@ -9,6 +9,7 @@ import axios from "axios"
 
 export default function UsersPage() {
   const router = useRouter()
+  const search = router.query.search || ""
   const { data, isLoading, isError } = useQuery({
     queryKey: ["lists", router.query],
     queryFn: () =>
@@ -29,7 +30,7 @@ export default function UsersPage() {
 
   return (
     <div className="flex flex-col justify-between">
-      <ListsMenu />
+      <ListsMenu search={search} />
       <div className="p-5 flex flex-col items-center gap-2">
         <ul
           className="flex flex-wrap w-full items-center gap-5"

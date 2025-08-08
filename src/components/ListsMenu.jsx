@@ -4,9 +4,15 @@ import SortOrderToggle from "./SortOrderToggle"
 import ListDialog from "./ListDialog"
 import MoviesMenuItem from "./MoviesMenuItem"
 import { authClient } from "@/lib/auth-client.ts"
+import useListDebounce from "../../hooks/useListDebounce"
+import { useState } from "react"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 
-const ListsMenu = () => {
+const ListsMenu = ({ search }) => {
   const router = useRouter()
+  const [searchInput, setSearchInput] = useState(search)
+  useListDebounce(searchInput)
   const { data: session } = authClient.useSession()
   const sortOptions = {
     followers: "Followers",
@@ -25,9 +31,9 @@ const ListsMenu = () => {
     }
   }
   return (
-    <div className="flex items-center w-full px-9">
-      <div className="lg:w-8/10">
-        <ul className="hidden lg:flex w-fit items-center justify-center gap-5 lg:justify-between">
+    <div className="flex flex-col lg:flex-row items-center w-full px-9 gap-2 lg:gap-0">
+      <div className="w-full lg:w-2/10">
+        <ul className="flex w-full lg:w-fit items-center justify-evenly gap-5 lg:justify-between">
           {Object.keys(filters).map((filter) => (
             <li key={filter}>
               <MoviesMenuItem
@@ -39,14 +45,31 @@ const ListsMenu = () => {
           ))}
         </ul>
       </div>
-      <div className="w-1/10 flex items-center justify-end">
-        {session && <ListDialog />}
+      <div className="w-full lg:w-7/10 flex items-center justify-evenly">
+        <Input
+          name="search"
+          className="w-3/4 dark:border-stone-600"
+          placeholder="Search"
+          type="text"
+          disabled={router.query.filter === "following"}
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+        />
+        <Button
+          variant="outline"
+          className="dark:border-stone-600 hover:bg-stone-900 dark:hover:bg-stone-900 hover:cursor-pointer hover:text-white transition-colors"
+          disabled={searchInput.length < 1}
+          onClick={() => setSearchInput("")}
+        >
+          Clear
+        </Button>
       </div>
-      <div className="flex items-center justify-end w-full lg:w-fit">
+      <div className="flex items-center justify-end w-full gap-1 lg:w-fit">
+        {session && <ListDialog />}
         <SelectSortBy
           value={sort}
           selectedValue={sortOptions[sort]}
-          title="Sort Movies"
+          title="Sort Lists"
           options={sortOptions}
         />
         <SortOrderToggle />

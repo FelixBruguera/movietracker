@@ -12,7 +12,7 @@ const UsersMenu = () => {
         <SelectSortBy
           value={sort}
           selectedValue={sortOptions[sort]}
-          title="Sort Movies"
+          title="Sort Users"
           options={sortOptions}
         />
         <SortOrderToggle />

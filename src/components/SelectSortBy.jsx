@@ -21,6 +21,7 @@ const SelectSortBy = ({ value, selectedValue, title, options }) => {
         className="text-xs lg:text-sm w-40 border-1 border-stone-400 bg-gray-100 dark:border-stone-700 dark:bg-stone-900"
         name={title}
         title={title}
+        aria-label={title}
       >
         <SelectValue>
           <ArrowDownUp />

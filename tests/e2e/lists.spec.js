@@ -34,6 +34,20 @@ test.describe("as a logged in user", () => {
         .click({ button: "right" })
       await expect(page.getByText("Remove")).not.toBeVisible()
     })
+    test("Following a list", async ({ page }) => {
+      await page.getByText("Lists").click()
+      await page.getByRole("link", { name: "Public List" }).click()
+      await page.getByLabel("Follow list").click()
+      await expect(page.getByText("Succesfully followed")).toBeVisible()
+      await expect(page.getByLabel("Followers")).toHaveText("1")
+    })
+    test("Unfollowing a list", async ({ page }) => {
+      await page.getByText("Lists").click()
+      await page.getByRole("link", { name: "Public List" }).click()
+      await page.getByLabel("Unfollow list").click()
+      await expect(page.getByText("Succesfully unfollowed")).toBeVisible()
+      await expect(page.getByLabel("Followers")).toHaveText("0")
+    })
     test("Creating a list", async ({ page }) => {
       await page.getByText("Lists").click()
       await page.getByLabel("Create a new list").click()
@@ -107,6 +121,7 @@ test.describe("As a visitor", () => {
     await expect(page.getByLabel("Delete")).not.toBeVisible()
     await expect(page.getByLabel("Update your list")).not.toBeVisible()
     await expect(page.getByLabel("Add a movie")).not.toBeVisible()
+    await expect(page.getByLabel("Follow List")).not.toBeVisible()
     await page
       .getByAltText("The Four Horsemen of the Apocalypse")
       .click({ button: "right" })

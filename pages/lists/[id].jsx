@@ -77,17 +77,25 @@ export default function ProfileIndex() {
               </ListDetail>
             </Link>
             <ListDetail>
-              <Calendar aria-label="Created at" />
-              <p className="text-stone-600 dark:text-stone-200 text-sm lg:text-base">
+              <Calendar />
+              <p
+                className="text-stone-600 dark:text-stone-200 text-sm lg:text-base"
+                aria-label="Created at"
+              >
                 {new Date(list.createdAt).toLocaleDateString()}
               </p>
             </ListDetail>
-            <ListDetail>
-              <Users aria-label="Followers" />
-              <p className="text-stone-600 dark:text-stone-200 text-sm lg:text-base">
-                {list.followers}
-              </p>
-            </ListDetail>
+            {!list.isPrivate && (
+              <ListDetail>
+                <Users />
+                <p
+                  className="text-stone-600 dark:text-stone-200 text-sm lg:text-base"
+                  aria-label="Followers"
+                >
+                  {list.followers}
+                </p>
+              </ListDetail>
+            )}
             {list.isPrivate && (
               <ListDetail>
                 <Lock aria-label="Private List" title="Private List" />

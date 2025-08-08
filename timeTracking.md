@@ -30,6 +30,7 @@
 | 01.08.2025  | 10     | Implement the lists tab on profiles. Add dynamic titles. Refactor the profile pipelines to handle users with no reviews or logs. Refactor the login logic
 | 04.08.2025  | 8     | - Add images to users with gravatar. Add the count of reviews to each user document and the count of movies to each list. Add transactions for creating and deleting a review and adding and removing movies from a list. Add more tests for lists and reviews
 | 06.08.2025  | 6     | Implement list following, fixes and refactors 
+| 08.08.2025  | 5     | Implement list search and filtering by followed lists. Add api tests for the lists endpoint. Refactor the styles of the list and user cards. Add tests for following and unfollowing lists 
 
 
 

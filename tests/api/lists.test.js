@@ -65,5 +65,68 @@ describe("the lists endpoint", async () => {
       expect(listAfter.list.movies).toEqual(1)
       expect(listAfter.list.moviesData).toHaveLength(1)
     })
+    test("it doesn't allow following private lists", async () => {
+      const response = await fetch(
+        "http://localhost:3000/api/lists/6887585795c1bd3a57ef8b13/followers",
+        {
+          method: "POST",
+          headers: { Cookie: cookie, "Content-Type": "application/json" },
+        },
+      )
+      expect(response.status).toBe(404)
+    })
+    test("it doesn't allow to follow an inexistent list", async () => {
+      const response = await fetch(
+        "http://localhost:3000/api/lists/6882262f3aeb056a30f83b37/followers",
+        {
+          method: "POST",
+          headers: { Cookie: cookie, "Content-Type": "application/json" },
+        },
+      )
+      expect(response.status).toBe(404)
+    })
+    test("it doesn't allow the creator of a list to follow it", async () => {
+      const response = await fetch(
+        "http://localhost:3000/api/lists/6894b3421409ee41fc3f1eb1/followers",
+        {
+          method: "POST",
+          headers: { Cookie: cookie, "Content-Type": "application/json" },
+        },
+      )
+      expect(response.status).toBe(404)
+      const listAfter = await fetch(
+        "http://localhost:3000/api/lists/6894b3421409ee41fc3f1eb1",
+        { headers: { Cookie: cookie, "Content-Type": "application/json" } },
+      ).then((data) => data.json())
+      expect(listAfter.list.followers).toEqual(0)
+    })
+    test("it doesn't allow to follow a list twice", async () => {
+      const response = await fetch(
+        "http://localhost:3000/api/lists/6894b4bf1409ee41fc3f1eb7/followers",
+        {
+          method: "POST",
+          headers: { Cookie: cookie, "Content-Type": "application/json" },
+        },
+      )
+      expect(response.status).toBe(404)
+      const listAfter = await fetch(
+        "http://localhost:3000/api/lists/6894b4bf1409ee41fc3f1eb7",
+      ).then((data) => data.json())
+      expect(listAfter.list.followers).toEqual(1)
+    })
+    test("it doesn't allow to unfollow a list that the user doesn't follow", async () => {
+      const response = await fetch(
+        "http://localhost:3000/api/lists/6890c5e3ab93b6c177fbdd11/followers",
+        {
+          method: "DELETE",
+          headers: { Cookie: cookie, "Content-Type": "application/json" },
+        },
+      )
+      expect(response.status).toBe(404)
+      const listAfter = await fetch(
+        "http://localhost:3000/api/lists/6890c5e3ab93b6c177fbdd11",
+      ).then((data) => data.json())
+      expect(listAfter.list.followers).toEqual(0)
+    })
   })
 })

@@ -2,6 +2,7 @@ import { ObjectId } from "mongodb"
 import { connectToDatabase } from "lib/_mongodb"
 import listsPipeline from "lib/_listsPipeline"
 import { auth } from "@/lib/auth.ts"
+import followingPipeline from "lib/_followingPipeline"
 
 export default async function handler(request, response) {
   const { database } = await connectToDatabase()
@@ -37,10 +38,18 @@ export default async function handler(request, response) {
     }
   } else {
     try {
-      const data = await database
-        .collection("lists")
-        .aggregate(listsPipeline(request.query, session?.user.id))
-        .toArray()
+      let data
+      if (request.query.filter === "following") {
+        data = await database
+          .collection("lists_followers")
+          .aggregate(followingPipeline(request.query, session?.user.id))
+          .toArray()
+      } else {
+        data = await database
+          .collection("lists")
+          .aggregate(listsPipeline(request.query, session?.user.id))
+          .toArray()
+      }
       return response.json(data)
     } catch (e) {
       return response.status(404).send()

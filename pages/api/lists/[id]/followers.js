@@ -17,7 +17,7 @@ export default async function handler(request, response) {
       const check = await database
         .collection("lists")
         .findOneAndUpdate(
-          { _id: list_id },
+          { _id: list_id, isPrivate: false, user_id: { $ne: user_id } },
           { $inc: { followers: 1 } },
           { session: mongoSession },
         )
