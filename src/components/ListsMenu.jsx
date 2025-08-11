@@ -5,7 +5,7 @@ import ListDialog from "./ListDialog"
 import MoviesMenuItem from "./MoviesMenuItem"
 import { authClient } from "@/lib/auth-client.ts"
 import useListDebounce from "../../hooks/useListDebounce"
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
@@ -14,11 +14,13 @@ const ListsMenu = ({ search }) => {
   const [searchInput, setSearchInput] = useState(search)
   useListDebounce(searchInput)
   const { data: session } = authClient.useSession()
-  const sortOptions = {
-    followers: "Followers",
-    date: "Creation date",
-    movies: "Movies",
-  }
+  const sortOptions = useMemo(() => {
+    return {
+      followers: "Followers",
+      date: "Creation date",
+      movies: "Movies",
+    }
+  }, [])
   const sort = router.query.sortBy || "movies"
   const filters = { "Your lists": "user", Following: "following" }
   const handleFilter = (newValue) => {
@@ -34,15 +36,16 @@ const ListsMenu = ({ search }) => {
     <div className="flex flex-col lg:flex-row items-center w-full px-9 gap-2 lg:gap-0">
       <div className="w-full lg:w-2/10">
         <ul className="flex w-full lg:w-fit items-center justify-evenly gap-5 lg:justify-between">
-          {Object.keys(filters).map((filter) => (
-            <li key={filter}>
-              <MoviesMenuItem
-                title={filter}
-                onClick={handleFilter}
-                isActive={router.query.filter === filters[filter]}
-              />
-            </li>
-          ))}
+          {session &&
+            Object.keys(filters).map((filter) => (
+              <li key={filter}>
+                <MoviesMenuItem
+                  title={filter}
+                  onClick={handleFilter}
+                  isActive={router.query.filter === filters[filter]}
+                />
+              </li>
+            ))}
         </ul>
       </div>
       <div className="w-full lg:w-7/10 flex items-center justify-evenly">

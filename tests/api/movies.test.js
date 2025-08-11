@@ -10,14 +10,11 @@ describe("the movies endpoint", () => {
       const data = await response.json()
       expect(data[0].movies).toHaveLength(5)
     })
-    test("sorting by an unallowed field defaults to the imdb.rating", async () => {
-      const expectedResponse = await fetch("http://localhost:3000/api/movies")
-      expect(expectedResponse.status).toBe(200)
+    test("it doesn't sort by unallowed fields", async () => {
       const response = await fetch(
         "http://localhost:3000/api/movies?sortBy=imdb.id&sortOrder=-1",
       )
-      expect(response.status).toBe(200)
-      expect(response.json()).toStrictEqual(expectedResponse.json())
+      expect(response.status).toBe(404)
     })
   })
 })

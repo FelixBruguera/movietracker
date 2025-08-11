@@ -10,6 +10,45 @@ describe("the lists endpoint", async () => {
     }).then((response) => (cookie = response.headers.getSetCookie()))
   })
   describe("with invalid requests", () => {
+    test("doesn't allow more than 400 characters in the description of new lists", async () => {
+      const response = await fetch("http://localhost:3000/api/lists/", {
+        method: "POST",
+        headers: { Cookie: cookie, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: "New name",
+          description:
+            "Artificiose avaritia auxilium. Laborum cinis collum curatio. Tibi somniculosus vulgivagus ademptio demum defessus vaco constans. Artificiose avaritia auxilium. Laborum cinis collum curatio. Tibi somniculosus vulgivagus ademptio demum defessus vaco constans. Artificiose avaritia auxilium. Laborum cinis collum curatio. Tibi somniculosus vulgivagus ademptio demum defessus vaco constans. Artificiose avaritia auxilium. Laborum cinis collum curatio. Tibi somniculosus vulgivagus ademptio demum defessus vaco constans.",
+          isPrivate: false,
+        }),
+      })
+      expect(response.status).toBe(500)
+    })
+    test("doesn't allow more than 400 characters in the description when editing a list", async () => {
+      const response = await fetch(
+        "http://localhost:3000/api/lists/6894b3421409ee41fc3f1eb1",
+        {
+          method: "PATCH",
+          headers: { Cookie: cookie, "Content-Type": "application/json" },
+          body: JSON.stringify({
+            description:
+              "Artificiose avaritia auxilium. Laborum cinis collum curatio. Tibi somniculosus vulgivagus ademptio demum defessus vaco constans. Artificiose avaritia auxilium. Laborum cinis collum curatio. Tibi somniculosus vulgivagus ademptio demum defessus vaco constans. Artificiose avaritia auxilium. Laborum cinis collum curatio. Tibi somniculosus vulgivagus ademptio demum defessus vaco constans. Artificiose avaritia auxilium. Laborum cinis collum curatio. Tibi somniculosus vulgivagus ademptio demum defessus vaco constans.",
+          }),
+        },
+      )
+      expect(response.status).toBe(500)
+    })
+    test("only accepts booleans on the isPrivate field", async () => {
+      const response = await fetch("http://localhost:3000/api/lists/", {
+        method: "POST",
+        headers: { Cookie: cookie, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: "New name",
+          description: "Artificiose avaritia auxilium",
+          isPrivate: "maybe",
+        }),
+      })
+      expect(response.status).toBe(500)
+    })
     test("it only allows the creator of a list to delete it", async () => {
       const response = await fetch(
         "http://localhost:3000/api/lists/6890c5e3ab93b6c177fbdd11",
@@ -28,6 +67,7 @@ describe("the lists endpoint", async () => {
           body: JSON.stringify({
             name: "New name",
             description: "New description",
+            isPrivate: true,
           }),
           headers: { Cookie: cookie, "Content-Type": "application/json" },
         },

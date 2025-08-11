@@ -1,9 +1,6 @@
 import Link from "next/link"
 import Avatar from "./Avatar"
-import {
-  Calendar,
-  MessageCircleMore,
-} from "lucide-react"
+import { Calendar, MessageCircleMore } from "lucide-react"
 
 const UserCard = ({ user }) => {
   return (

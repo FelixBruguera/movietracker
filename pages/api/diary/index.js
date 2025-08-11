@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb"
 import { connectToDatabase } from "lib/_mongodb"
 import { auth } from "@/lib/auth.ts"
+import { z } from "zod"
 
 export default async function handler(request, response) {
   const { database } = await connectToDatabase()
@@ -9,7 +10,11 @@ export default async function handler(request, response) {
     return response.status(401).send()
   }
   if (request.method === "POST") {
-    const { date, movie_id } = request.body
+    const schema = z.object({
+      movie_id: z.custom((id) => ObjectId.isValid(id)),
+      date: z.iso.date(),
+    })
+    const { date, movie_id } = schema.parse(request.body)
     const formattedDate = new Date(`${date} 0:00:00:000Z`)
     const query = await database.collection("diary").insertOne({
       user_id: ObjectId.createFromHexString(session.user.id),
@@ -35,7 +40,7 @@ export default async function handler(request, response) {
         .toArray()
       return response.json(query)
     } catch {
-      return response.status(500).send()
+      return response.status(404).send()
     }
   }
 }

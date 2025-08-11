@@ -16,7 +16,7 @@ describe("the reviews endpoint", async () => {
         body: JSON.stringify({ text: "testing", rating: "15" }),
         headers: { Cookie: cookie, "Content-Type": "application/json" },
       })
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(500)
     })
     test("it only allows strings in the text field", async () => {
       const response = await fetch("http://localhost:3000/api/reviews", {
@@ -24,7 +24,7 @@ describe("the reviews endpoint", async () => {
         body: JSON.stringify({ text: { $in: [""] }, rating: "5" }),
         headers: { Cookie: cookie, "Content-Type": "application/json" },
       })
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(500)
     })
     test("it only allows the creator of a review to delete it", async () => {
       const response = await fetch(

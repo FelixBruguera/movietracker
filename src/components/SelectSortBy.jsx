@@ -7,8 +7,9 @@ import {
 } from "@/components/ui/select"
 import { ArrowDownUp } from "lucide-react"
 import { useRouter } from "next/router"
+import { memo } from "react"
 
-const SelectSortBy = ({ value, selectedValue, title, options }) => {
+const SelectSortBy = memo(({ value, selectedValue, title, options }) => {
   const router = useRouter()
   const onValueChange = (newValue) => {
     router.push({ query: { ...router.query, sortBy: newValue, page: 1 } }, "", {
@@ -37,6 +38,6 @@ const SelectSortBy = ({ value, selectedValue, title, options }) => {
       </SelectContent>
     </Select>
   )
-}
+})
 
 export default SelectSortBy

@@ -5,10 +5,12 @@ export default function useListDebounce(search) {
   const router = useRouter()
   useEffect(() => {
     let timeout = null
-    timeout = setTimeout(
-      () => router.push({ query: { ...router.query, search: search } }),
-      500,
-    )
+    if (router.query.search !== undefined || search != "") {
+      timeout = setTimeout(
+        () => router.push({ query: { ...router.query, search: search } }),
+        500,
+      )
+    }
     return () => clearTimeout(timeout)
   }, [search])
 }

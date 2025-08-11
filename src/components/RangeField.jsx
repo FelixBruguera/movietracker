@@ -37,6 +37,7 @@ const RangeField = ({
             max={maxValue}
             value={minValue}
             onChange={(e) => onMinChange(e.target.value)}
+            required
           ></Input>
         </div>
         <div className="flex w-2/4 justify-evenly">
@@ -54,6 +55,7 @@ const RangeField = ({
             max={max}
             value={maxValue}
             onChange={(e) => onMaxChange(e.target.value)}
+            required
           ></Input>
         </div>
       </div>

@@ -14,6 +14,6 @@ export default async function handler(request, response) {
     return response.json(data)
   } catch (e) {
     console.error(e)
-    return response.status(404).json({ error: "Movie not found" })
+    return response.status(404)
   }
 }

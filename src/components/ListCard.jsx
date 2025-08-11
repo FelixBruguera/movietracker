@@ -1,7 +1,8 @@
-import { Calendar, FilmIcon, Lock, TableProperties, Users } from "lucide-react"
+import { Calendar, FilmIcon, Lock, Users } from "lucide-react"
 import Link from "next/link"
+import { memo } from "react"
 
-const ListCard = ({ list }) => {
+const ListCard = memo(({ list }) => {
   return (
     <li
       key={list.id}
@@ -55,6 +56,6 @@ const ListCard = ({ list }) => {
       </Link>
     </li>
   )
-}
+})
 
 export default ListCard

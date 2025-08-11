@@ -2,6 +2,9 @@ import { ObjectId } from "mongodb"
 import { connectToDatabase } from "lib/_mongodb.js"
 import pipeline from "lib/_listPipeline.js"
 import { auth } from "@/lib/auth.ts"
+import { listSchema } from "pages/api/lists/index"
+import { baseSchema } from "pages/api/movies/index"
+import { z } from "zod"
 
 export default async function handler(request, response) {
   const { mongoClient, database } = await connectToDatabase()
@@ -12,16 +15,7 @@ export default async function handler(request, response) {
       return response.status(401).send()
     }
     const id = request.query.id
-    const { name, description } = request.body
-    if (
-      typeof name !== "string" ||
-      typeof description !== "string" ||
-      name.length > 80 ||
-      description.length > 400
-    ) {
-      return response.status(400).json({ error: "Invalid content" })
-    }
-    const isPrivate = request.body.isPrivate === true ? true : false
+    const { name, description, isPrivate } = listSchema.parse(request.body)
     try {
       const query = await database.collection("lists").findOneAndUpdate(
         {
@@ -103,10 +97,14 @@ export default async function handler(request, response) {
       }
     }
   } else {
+    const schema = baseSchema.extend({
+      id: z.custom((id) => ObjectId.isValid(id)),
+    })
+    const query = schema.parse(request.query)
     try {
       const data = await database
         .collection("lists")
-        .aggregate(pipeline(request.query, session?.user.id))
+        .aggregate(pipeline(query, session?.user.id))
         .next()
       if (data.list) {
         return response.json(data)

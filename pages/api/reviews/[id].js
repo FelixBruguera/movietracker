@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb"
 import { connectToDatabase } from "lib/_mongodb"
 import { auth } from "@/lib/auth.ts"
+import { reviewSchema } from "pages/api/reviews/index"
 
 export default async function handler(request, response) {
   const { mongoClient, database } = await connectToDatabase()
@@ -9,16 +10,10 @@ export default async function handler(request, response) {
     return response.status(401).send()
   }
   if (request.method === "PATCH") {
+    const schema = reviewSchema.omit({ movie_id: true })
     const id = ObjectId.createFromHexString(request.query.id)
     const userId = ObjectId.createFromHexString(session.user.id)
-    const text = request.body.text
-    const rating = parseInt(request.body.rating)
-    if (isNaN(rating) || rating < 1 || rating > 10) {
-      return response.status(400).json({ error: "Rating must be 1-10" })
-    }
-    if (typeof text !== "string" || text.length > 5000) {
-      return response.status(400).json({ error: "Invalid comment" })
-    }
+    const { text, rating } = schema.parse(request.body)
     const query = await database.collection("comments").updateOne(
       {
         _id: id,

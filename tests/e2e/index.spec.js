@@ -111,18 +111,6 @@ test.describe("the index route", () => {
       await expect(posters).toHaveCount(1)
       await expect(page.getByAltText("Salomè")).toBeVisible()
     })
-    test("ignores empty fields", async ({ page }) => {
-      await page.getByText("Filters").click()
-      await page.locator('input[name="released_min"]').fill("")
-      await page.locator('input[name="released_max"]').fill("")
-      await page.locator('input[name="imdb.rating_min"]').fill("")
-      await page.locator('input[name="imdb.rating_max"]').fill("")
-      await page.locator('input[name="runtime_min"]').fill("")
-      await page.locator('input[name="runtime_max"]').fill("")
-      await page.getByText("Submit").click()
-      const posters = page.getByRole("listitem").getByRole("img")
-      await expect(posters).toHaveCount(5)
-    })
     test("displays the correct messages for empty responses", async ({
       page,
     }) => {

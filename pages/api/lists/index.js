@@ -3,6 +3,14 @@ import { connectToDatabase } from "lib/_mongodb"
 import listsPipeline from "lib/_listsPipeline"
 import { auth } from "@/lib/auth.ts"
 import followingPipeline from "lib/_followingPipeline"
+import { z } from "zod"
+import { baseSchema } from "pages/api/movies/index"
+
+export const listSchema = z.object({
+  name: z.string().min(5).max(80),
+  description: z.string().min(5).max(400),
+  isPrivate: z.boolean(),
+})
 
 export default async function handler(request, response) {
   const { database } = await connectToDatabase()
@@ -11,16 +19,7 @@ export default async function handler(request, response) {
     if (!session) {
       return response.status(401).send()
     } else {
-      const { name, description } = request.body
-      if (
-        typeof name !== "string" ||
-        typeof description !== "string" ||
-        name.length > 80 ||
-        description.length > 400
-      ) {
-        return response.status(400).json({ error: "Invalid content" })
-      }
-      const isPrivate = request.body.isPrivate === true ? true : false
+      const { name, description, isPrivate } = listSchema.parse(request.body)
       try {
         await database.collection("lists").insertOne({
           user_id: ObjectId.createFromHexString(session.user.id),
@@ -37,17 +36,24 @@ export default async function handler(request, response) {
       }
     }
   } else {
+    const schema = baseSchema.extend({
+      sortBy: z.enum(["date", "followers", "movies"]).default("movies"),
+      filter: z.enum(["user", "following"]).optional(),
+      search: z.string().max(100).optional(),
+    })
     try {
       let data
+      const query = schema.parse(request.query)
+      const userId = session?.user.id
       if (request.query.filter === "following") {
         data = await database
           .collection("lists_followers")
-          .aggregate(followingPipeline(request.query, session?.user.id))
+          .aggregate(followingPipeline(query, userId))
           .toArray()
       } else {
         data = await database
           .collection("lists")
-          .aggregate(listsPipeline(request.query, session?.user.id))
+          .aggregate(listsPipeline(query, userId))
           .toArray()
       }
       return response.json(data)
