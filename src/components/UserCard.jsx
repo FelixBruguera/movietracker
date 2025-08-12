@@ -1,8 +1,10 @@
 import Link from "next/link"
 import Avatar from "./Avatar"
 import { Calendar, MessageCircleMore } from "lucide-react"
+import { format } from "date-fns"
 
 const UserCard = ({ user }) => {
+  const date = format(new Date(user.createdAt), "MMMM u")
   return (
     <li
       key={user.id}
@@ -24,7 +26,7 @@ const UserCard = ({ user }) => {
             </p>
           </div>
           <p className="flex items-center gap-1 text-sm md:text-base text-stone-600 dark:text-stone-400 group-hover:text-stone-400">
-            <Calendar /> {new Date(user.createdAt).toLocaleDateString()}
+            <Calendar /> {date}
           </p>
         </div>
       </Link>

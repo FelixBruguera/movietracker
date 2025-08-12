@@ -1,3 +1,5 @@
+import { useRouter } from "next/router"
+import ErrorMessage from "./ErrorMessage"
 import ListHeading from "./ListHeading"
 import ListHeadingTitle from "./ListHeadingTitle"
 import SelectSortBy from "./SelectSortBy"
@@ -5,8 +7,27 @@ import SortOrderToggle from "./SortOrderToggle"
 import Total from "./Total"
 import ListCard from "src/components/ListCard"
 import PaginationWrap from "src/components/PaginationWrap"
+import { useQuery } from "@tanstack/react-query"
+import axios from "axios"
+import ProfileListSkeleton from "./ProfileListsSkeleton"
 
-const ProfileListsContent = ({ data }) => {
+const ProfileListsContent = () => {
+  const router = useRouter()
+  const { id, ...otherParams } = router.query
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["user_lists", router.query],
+    queryFn: () =>
+      axios
+        .get(`/api/users/${id}/lists?${new URLSearchParams(otherParams)}`)
+        .then((response) => response.data[0]),
+  })
+  if (isLoading) {
+    return <ProfileListSkeleton />
+  }
+
+  if (isError) {
+    return <ErrorMessage />
+  }
   const sortOptions = { date: "Creation date" }
   const sort = "date"
   const lists = data.lists

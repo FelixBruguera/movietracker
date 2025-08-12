@@ -67,7 +67,7 @@ const ListsMenu = ({ search }) => {
           Clear
         </Button>
       </div>
-      <div className="flex items-center justify-end w-full gap-1 lg:w-fit">
+      <div className="flex items-center justify-end w-full gap-2 lg:w-fit">
         {session && <ListDialog />}
         <SelectSortBy
           value={sort}

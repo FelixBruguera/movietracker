@@ -36,7 +36,7 @@ describe("the reviews endpoint", async () => {
       )
       expect(response.status).toBe(404)
       const userAfter = await fetch(
-        "http://localhost:3000/api/users/59b99dc7cfa9a34dcd7885dd",
+        "http://localhost:3000/api/users/59b99dc7cfa9a34dcd7885dd/reviews",
       ).then((data) => data.json())
       expect(userAfter[0].info.totalReviews).toEqual(1)
       expect(userAfter[0].reviews).toHaveLength(1)

@@ -3,7 +3,8 @@ import PaginationWrap from "src/components/PaginationWrap"
 import { useRouter } from "next/router"
 import ListsMenu from "src/components/ListsMenu"
 import axios from "axios"
-import ListsCards from "src/components/ListsCards"
+import ItemsGrid from "src/components/ItemsGrid"
+import ListCard from "src/components/ListCard"
 
 export default function ListsPage() {
   const router = useRouter()
@@ -22,7 +23,13 @@ export default function ListsPage() {
   return (
     <div className="flex flex-col justify-between">
       <ListsMenu search={search} />
-      <ListsCards lists={lists} isLoading={isLoading} isError={isError} />
+      <ItemsGrid
+        items={lists}
+        isLoading={isLoading}
+        isError={isError}
+        ariaLabel={"lists"}
+        renderItem={(list) => <ListCard list={list} />}
+      />
       {totalPages > 1 && <PaginationWrap totalPages={totalPages} />}
     </div>
   )

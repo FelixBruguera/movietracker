@@ -7,11 +7,32 @@ import PaginationWrap from "./PaginationWrap"
 import Total from "./Total"
 import ListHeading from "./ListHeading"
 import ListHeadingTitle from "./ListHeadingTitle"
+import { useQuery } from "@tanstack/react-query"
+import { useRouter } from "next/router"
+import ErrorMessage from "./ErrorMessage"
+import axios from "axios"
+import ReviewsSkeleton from "./ReviewsSkeleton"
 
-const ProfileReviews = ({ data, sortKey }) => {
+const ProfileReviews = () => {
+  const router = useRouter()
+  const { id, ...otherParams } = router.query
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["userReviews", router.query],
+    queryFn: () =>
+      axios
+        .get(`/api/users/${id}/reviews?${new URLSearchParams(otherParams)}`)
+        .then((response) => response.data[0]),
+  })
+  if (isLoading) {
+    return <ReviewsSkeleton />
+  }
+
+  if (isError) {
+    return <ErrorMessage />
+  }
   const sortOptions = reviewsInfo.sortOptions
   const ratingScale = reviewsInfo.ratingScale
-  const sortBy = sortKey === "rating" ? "rating" : "date"
+  const sortBy = router.query.sortBy || "date"
   const averageRating =
     data.info.averageRating && Math.ceil(data.info.averageRating)
 

@@ -34,7 +34,7 @@ const MoviesMenu = () => {
     setFilterOpen(false)
   }
   return (
-    <div className="flex flex-col gap-3 lg:gap-0 lg:flex-row items-center w-9/10 mx-auto">
+    <div className="flex flex-col gap-3 lg:gap-0 lg:flex-row items-center w-full px-9 mx-auto">
       <ul className="hidden lg:flex w-full lg:w-7/10 flex-wrap items-center justify-center gap-1 lg:gap-0 lg:justify-between">
         {genres.map((genre) => (
           <li key={genre}>
@@ -46,19 +46,21 @@ const MoviesMenu = () => {
           </li>
         ))}
       </ul>
-      <div className="flex items-center justify-evenly w-full lg:w-3/10">
+      <div className="flex items-start justify-end gap-12 w-full lg:w-3/10">
         <MoviesFilters
           handleFilter={handleFilter}
           filterOpen={filterOpen}
           setFilterOpen={setFilterOpen}
         />
-        <SelectSortBy
-          value={sort}
-          selectedValue={ranges[sort]}
-          title="Sort Movies"
-          options={ranges}
-        />
-        <SortOrderToggle />
+        <div className="flex items-center justify-end gap-2">
+          <SelectSortBy
+            value={sort}
+            selectedValue={ranges[sort]}
+            title="Sort Movies"
+            options={ranges}
+          />
+          <SortOrderToggle />
+        </div>
       </div>
     </div>
   )

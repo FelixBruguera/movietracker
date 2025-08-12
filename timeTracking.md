@@ -32,6 +32,7 @@
 | 06.08.2025  | 6     | Implement list following, fixes and refactors 
 | 08.08.2025  | 5     | Implement list search and filtering by followed lists. Add api tests for the lists endpoint. Refactor the styles of the list and user cards. Add tests for following and unfollowing lists
 | 11.08.2025  | 8     | Refactor the api validation with zod and add more tests for lists and movies
+| 12.08.2025  | 5     | Refactor the profiles, lists, users and styles
 
 
 

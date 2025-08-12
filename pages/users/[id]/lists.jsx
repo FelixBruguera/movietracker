@@ -1,31 +1,11 @@
-import { useRouter } from "next/router"
 import ProfileHeader from "src/components/ProfileHeader"
-import { useQuery } from "@tanstack/react-query"
-import ErrorMessage from "src/components/ErrorMessage"
-import ProfileSkeleton from "src/components/ProfileSkeleton"
 import ProfileListsContent from "src/components/ProfileListsContent"
-import axios from "axios"
 
 export default function ProfileLists() {
-  const router = useRouter()
-  const { id, ...otherParams } = router.query
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["user_lists", router.query],
-    queryFn: () =>
-      axios
-        .get(`/api/users/${id}/lists?${new URLSearchParams(otherParams)}`)
-        .then((response) => response.data[0]),
-  })
-  if (isLoading) {
-    return <ProfileSkeleton />
-  }
-
-  if (isError) {
-    return <ErrorMessage />
-  }
   return (
-    <ProfileHeader username={data.user.username} image={data.user.image}>
-      <ProfileListsContent data={data} />
-    </ProfileHeader>
+    <div className="p-5">
+      <ProfileHeader />
+      <ProfileListsContent />
+    </div>
   )
 }

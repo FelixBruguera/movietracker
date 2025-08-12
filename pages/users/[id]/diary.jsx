@@ -16,16 +16,10 @@ export default function ProfileDiary() {
         .get(`/api/users/${id}/diary?${new URLSearchParams(otherParams)}`)
         .then((response) => response.data[0]),
   })
-  if (isLoading) {
-    return <ProfileSkeleton />
-  }
-
-  if (isError) {
-    return <ErrorMessage />
-  }
   return (
-    <ProfileHeader username={data.user.username} image={data.user.image}>
-      <Diary data={data} sortKey={otherParams.sortBy} />
-    </ProfileHeader>
+    <div className="p-5">
+      <ProfileHeader />
+      <Diary />
+    </div>
   )
 }

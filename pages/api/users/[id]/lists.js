@@ -13,7 +13,7 @@ export default async function GET(request, response) {
   const query = schema.parse(request.query)
   try {
     const data = await database
-      .collection("user")
+      .collection("lists")
       .aggregate(userListsPipeline(query))
       .toArray()
     return response.json(data)

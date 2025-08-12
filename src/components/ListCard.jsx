@@ -1,8 +1,18 @@
+import { format } from "date-fns"
 import { Calendar, FilmIcon, Lock, Users } from "lucide-react"
 import Link from "next/link"
 import { memo } from "react"
 
+const ListCardItem = (props) => {
+  return (
+    <div className="flex items-center text-sm md:text-base gap-1 text-stone-600 dark:text-stone-300 group-hover:text-stone-300 transition-colors">
+      {props.children}
+    </div>
+  )
+}
+
 const ListCard = memo(({ list }) => {
+  const date = format(new Date(list.createdAt), "MMMM u")
   return (
     <li
       key={list.id}
@@ -22,36 +32,24 @@ const ListCard = memo(({ list }) => {
           </div>
           {list.isPrivate && <Lock aria-label="Private list" />}
         </div>
+        <p className="dark:text-stone-300 text-nowrap max-w-full overflow-hidden text-ellipsis">
+          {list.description}
+        </p>
         <div className="flex gap-3">
-          <div className="flex items-center text-sm md:text-base gap-1">
+          <ListCardItem>
             <FilmIcon />
-            <p
-              className="text-stone-800 dark:text-stone-200 group-hover:text-stone-200"
-              aria-label="Movies"
-            >
-              {list.movies}
-            </p>
-          </div>
+            <p aria-label="Movies">{list.movies}</p>
+          </ListCardItem>
           {!list.isPrivate && (
-            <div className="flex items-center text-sm md:text-base gap-1">
+            <ListCardItem>
               <Users />
-              <p
-                className="text-stone-800 dark:text-stone-200 group-hover:text-stone-200"
-                aria-label="Followers"
-              >
-                {list.followers}
-              </p>
-            </div>
+              <p aria-label="Followers">{list.followers}</p>
+            </ListCardItem>
           )}
-          <div className="flex items-center text-sm md:text-base gap-1">
+          <ListCardItem>
             <Calendar />
-            <p
-              className="text-sm md:text-base text-stone-600 dark:text-stone-400 group-hover:text-stone-400"
-              aria-label="Created at"
-            >
-              {new Date(list.createdAt).toLocaleDateString()}
-            </p>
-          </div>
+            <p aria-label="Created at">{date}</p>
+          </ListCardItem>
         </div>
       </Link>
     </li>

@@ -1,5 +1,5 @@
-import { connectToDatabase } from "lib/_mongodb.js"
-import userDiaryPipeline from "lib/_userDiaryPipeline"
+import { connectToDatabase } from "lib/_mongodb"
+import userReviewsPipeline from "lib/_userReviewsPipeline"
 import { z } from "zod"
 import { baseSchema } from "pages/api/movies/index"
 import { ObjectId } from "mongodb"
@@ -7,20 +7,17 @@ import { ObjectId } from "mongodb"
 export default async function GET(request, response) {
   const { database } = await connectToDatabase()
   const schema = baseSchema.extend({
+    sortBy: z.enum(["rating", "date"]).default("date"),
     id: z.custom((id) => ObjectId.isValid(id)),
-    sortBy: z
-      .enum(["yearly", "monthly"])
-      .default("monthly")
-      .transform((sort) => (sort === "yearly" ? "$year" : ["$year", "$month"])),
   })
   const query = schema.parse(request.query)
   try {
     const data = await database
-      .collection("diary")
-      .aggregate(userDiaryPipeline(query))
+      .collection("comments")
+      .aggregate(userReviewsPipeline(query))
       .toArray()
     return response.json(data)
   } catch {
-    return response.status(404)
+    return response.status(404).send()
   }
 }

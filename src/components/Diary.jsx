@@ -1,3 +1,4 @@
+import { useRouter } from "next/router"
 import DiaryRow from "./DiaryRow"
 import ListHeading from "./ListHeading"
 import ListHeadingTitle from "./ListHeadingTitle"
@@ -5,10 +6,30 @@ import PaginationWrap from "./PaginationWrap"
 import SelectSortBy from "./SelectSortBy"
 import SortOrderToggle from "./SortOrderToggle"
 import Total from "./Total"
+import { useQuery } from "@tanstack/react-query"
+import axios from "axios"
+import ErrorMessage from "./ErrorMessage"
+import DiarySkeleton from "./DiarySkeleton"
 
-const Diary = ({ data, sortKey }) => {
+const Diary = () => {
+  const router = useRouter()
+  const { id, ...otherParams } = router.query
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["diary", router.query],
+    queryFn: () =>
+      axios
+        .get(`/api/users/${id}/diary?${new URLSearchParams(otherParams)}`)
+        .then((response) => response.data[0]),
+  })
+  if (isLoading) {
+    return <DiarySkeleton />
+  }
+
+  if (isError) {
+    return <ErrorMessage />
+  }
   const sortOptions = { monthly: "Monthly", yearly: "Yearly" }
-  const sortBy = sortKey === "yearly" ? "yearly" : "monthly"
+  const sortBy = router.query.sortBy || "monthly"
   return (
     <div>
       <ListHeading>
