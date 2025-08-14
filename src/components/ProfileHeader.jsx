@@ -9,7 +9,7 @@ import axios from "axios"
 
 const ProfileHeader = (props) => {
   const router = useRouter()
-  const tabs = { Reviews: "", Diary: "diary", Lists: "lists" }
+  const tabs = { Reviews: "", Diary: "diary", Lists: "lists", Stats: "stats" }
   const { id } = router.query
   const { data, isLoading, isError } = useQuery({
     queryKey: ["user", id],
