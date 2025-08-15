@@ -49,7 +49,7 @@ export default function MoviePage() {
         <title>{movie.title}</title>
         <meta property="og:title" content={movie.title} />
       </Head>
-      <div className="flex flex-col lg:flex-row gap-8">
+      <div className="flex flex-col lg:flex-row gap-8 max-w-400">
         <div className="w-3/4 mx-auto lg:w-1/3">
           <Poster src={movie.poster} alt={movie.title} size="large" />
         </div>

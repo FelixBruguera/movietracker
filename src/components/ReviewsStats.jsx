@@ -1,11 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
 import { useRouter } from "next/router"
-import ReviewsSkeleton from "./ReviewsSkeleton"
 import ErrorMessage from "./ErrorMessage"
 import axios from "axios"
 import RatingsByDecade from "./RatingsByDecade"
-import VerticalBarChart from "./VerticalBarChart"
-
+import RatingVerticalBarChart from "./RatingVerticalBarChart"
+import StatsSkeleton from "./StatsSkeleton"
 
 const ReviewsStats = () => {
   const router = useRouter()
@@ -18,7 +17,7 @@ const ReviewsStats = () => {
         .then((response) => response.data[0]),
   })
   if (isLoading) {
-    return <ReviewsSkeleton />
+    return <StatsSkeleton />
   }
 
   if (isError) {
@@ -26,9 +25,15 @@ const ReviewsStats = () => {
   }
   return (
     <div>
-        <RatingsByDecade data={data.byDecade} />
-        <VerticalBarChart data={data.byGenre} title="Top rated genres (Min. 2 movies)"/>
-        <VerticalBarChart data={data.byDirectors} title="Top rated directors (Min. 2 movies)"/>
+      <RatingsByDecade data={data.byDecade} />
+      <RatingVerticalBarChart
+        data={data.byGenre}
+        title="Best rated genres (Min. 2 movies)"
+      />
+      <RatingVerticalBarChart
+        data={data.byDirectors}
+        title="Best rated directors (Min. 2 movies)"
+      />
     </div>
   )
 }

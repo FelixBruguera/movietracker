@@ -8,33 +8,36 @@ const CustomTooltip = ({ active, payload, label }) => {
   const isVisible = active && payload && payload.length
   return (
     <TooltipWrapper isVisible={isVisible} label={label}>
-      <TooltipItem
-        title="Average Rating"
-        value={payload[0]?.payload.averageRating.toFixed(2)}
-      />
       <TooltipItem title="Movies" value={payload[0]?.payload.total} />
     </TooltipWrapper>
   )
 }
 
-const RatingsByDecade = ({ data }) => {
+const DiaryVerticalBarChart = ({ data, title }) => {
   return (
-    <ChartHeading title="Average rating by decade">
-      <ChartContainer config={{}} className="h-100 mx-auto w-2/4">
-        <BarChart accessibilityLayer data={data}>
+    <ChartHeading title={title}>
+      <ChartContainer config={{}} className="h-120 mx-auto w-3/5">
+        <BarChart accessibilityLayer data={data} layout="vertical">
           <CartesianGrid
-            vertical={false}
+            vertical={true}
+            horizontal={false}
             stroke="#a9aaab"
             strokeOpacity="50%"
           />
           <Bar
-            dataKey="averageRating"
-            radius={5}
+            dataKey="total"
+            radius={3}
             fill="var(--chart-main)"
             activeBar={{ fill: "var(--chart-accent" }}
           />
-          <XAxis dataKey="_id" tickLine={false} tickMargin={5} />
-          <YAxis tickLine={false} domain={[0, 10]} tickCount={10} />
+          <XAxis
+            tickLine={false}
+            tickMargin={5}
+            dataKey="total"
+            type="number"
+            domain={[0, "dataMax"]}
+          />
+          <YAxis width={100} dataKey="_id" type="category" tickLine={false} />
           <ChartTooltip cursor={false} content={<CustomTooltip />} />
         </BarChart>
       </ChartContainer>
@@ -42,4 +45,4 @@ const RatingsByDecade = ({ data }) => {
   )
 }
 
-export default RatingsByDecade
+export default DiaryVerticalBarChart

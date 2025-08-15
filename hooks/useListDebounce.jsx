@@ -7,7 +7,8 @@ export default function useListDebounce(search) {
     let timeout = null
     if (router.query.search !== undefined || search != "") {
       timeout = setTimeout(
-        () => router.push({ query: { ...router.query, search: search } }),
+        () =>
+          router.push({ query: { ...router.query, search: search, page: 1 } }),
         500,
       )
     }
