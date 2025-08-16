@@ -20,7 +20,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 const RatingsByDecade = ({ data }) => {
   return (
     <ChartHeading title="Average rating by decade">
-      <ChartContainer config={{}} className="h-100 mx-auto w-2/4">
+      <ChartContainer config={{}} className="h-100 mx-auto w-full lg:w-2/4">
         <BarChart accessibilityLayer data={data}>
           <CartesianGrid
             vertical={false}
@@ -33,8 +33,8 @@ const RatingsByDecade = ({ data }) => {
             fill="var(--chart-main)"
             activeBar={{ fill: "var(--chart-accent" }}
           />
-          <XAxis dataKey="_id" tickLine={false} tickMargin={5} />
-          <YAxis tickLine={false} domain={[0, 10]} tickCount={10} />
+          <XAxis dataKey="_id" tickLine={false} tickMargin={5} style={{ fontSize: "14px"}} />
+          <YAxis tickLine={false} domain={[0, 10]} tickCount={10} style={{ fontSize: "16px"}} />
           <ChartTooltip cursor={false} content={<CustomTooltip />} />
         </BarChart>
       </ChartContainer>

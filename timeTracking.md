@@ -35,6 +35,7 @@
 | 12.08.2025  | 5     | Refactor the profiles, lists, users and styles
 | 14.08.2025  | 4     | Add the stats tab to profiles. Add the /stats endpoint and a pipeline for review stats
 | 15.08.2025  | 3     | Add diary stats, refactors and style changes
+| 16.08.2025  | 5     | Add charts for most movies watched in a month, most watched movies, and rated higher than imdb and refactor the styles of charts and skeletons
 
 
 

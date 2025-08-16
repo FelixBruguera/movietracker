@@ -20,7 +20,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 const RatingVerticalBarChart = ({ data, title }) => {
   return (
     <ChartHeading title={title}>
-      <ChartContainer config={{}} className="h-120 mx-auto w-3/5">
+      <ChartContainer config={{}} className="h-120 mx-auto w-full lg:w-3/5">
         <BarChart accessibilityLayer data={data} layout="vertical">
           <CartesianGrid
             vertical={true}
@@ -41,8 +41,9 @@ const RatingVerticalBarChart = ({ data, title }) => {
             type="number"
             domain={[0, 10]}
             tickCount={10}
+            style={{ fontSize: "14px"}}
           />
-          <YAxis width={100} dataKey="_id" type="category" tickLine={false} />
+          <YAxis width={120} dataKey="_id" type="category" tickLine={false} style={{ fontSize: "16px"}}/>
           <ChartTooltip cursor={false} content={<CustomTooltip />} />
         </BarChart>
       </ChartContainer>

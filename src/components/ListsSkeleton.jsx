@@ -11,7 +11,7 @@ const ListsSkeleton = () => {
         {items.map((item) => (
           <Skeleton
             key={item}
-            className="w-9/10 lg:w-100 h-30 lg:h-25 rounded-sm bg-zinc-200 dark:bg-stone-600"
+            className="w-8/10 lg:w-100 h-30 lg:h-25 rounded-sm bg-zinc-200 dark:bg-stone-600"
           />
         ))}
       </ul>

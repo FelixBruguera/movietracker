@@ -13,12 +13,13 @@ const DiarySkeleton = () => {
         </div>
       </div>
       <Skeleton className="h-10 w-50 mx-auto bg-zinc-300 dark:bg-stone-600" />
-      <div className="flex gap-5">
-        <Skeleton className="h-50 w-35 bg-zinc-300 dark:bg-stone-600" />
-        <Skeleton className="h-50 w-35 bg-zinc-300 dark:bg-stone-600" />
-        <Skeleton className="h-50 w-35 bg-zinc-300 dark:bg-stone-600" />
-        <Skeleton className="h-50 w-35 bg-zinc-300 dark:bg-stone-600" />
-        <Skeleton className="h-50 w-35 bg-zinc-300 dark:bg-stone-600" />
+      <div className="flex gap-1 flex-wrap">
+        <Skeleton className="h-40 lg:h-50 w-28 lg:w-35 bg-zinc-300 dark:bg-stone-600" />
+        <Skeleton className="h-40 lg:h-50 w-28 lg:w-35 bg-zinc-300 dark:bg-stone-600" />
+        <Skeleton className="h-40 lg:h-50 w-28 lg:w-35 bg-zinc-300 dark:bg-stone-600" />
+        <Skeleton className="h-40 lg:h-50 w-28 lg:w-35 bg-zinc-300 dark:bg-stone-600" />
+        <Skeleton className="h-40 lg:h-50 w-28 lg:w-35 bg-zinc-300 dark:bg-stone-600" />
+
       </div>
       <Skeleton className="h-10 w-50 mx-auto bg-zinc-300 dark:bg-stone-600" />
       <div className="flex gap-5">
