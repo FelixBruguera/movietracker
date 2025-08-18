@@ -6,11 +6,11 @@ const MovieSearchItem = ({ movie, setSelected }) => {
       key={movie._id}
       onClick={() => setSelected(movie)}
       className="flex w-full px-2 rounded-lg items-center h-2/4 gap-2 border-transparent border-1
-            hover:dark:border-stone-700 group hover:border-stone-400 hover:cursor-pointer transition-all"
+            hover:dark:border-border group hover:border-stone-400 hover:cursor-pointer transition-all"
     >
       <Poster src={movie.poster} alt={movie.title} size="xs" />
       <div className="flex justify-between items-center w-full">
-        <h3 className="text-base font-bold max-w-8/10 group-hover:text-red-800 transition-all">
+        <h3 className="text-base font-bold max-w-8/10 group-hover:text-accent transition-all">
           {movie.title}
         </h3>
         <p className="text-xs lg:text-sm dark:text-gray-300">

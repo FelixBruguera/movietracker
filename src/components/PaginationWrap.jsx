@@ -52,7 +52,7 @@ const PaginationWrap = ({ totalPages, scrollTarget = "" }) => {
             <p>of {totalPages}</p>
           </span>
           <Button
-            className="h-8/10 w-fit px-3 bg-stone-800 hover:bg-red-800 hover:cursor-pointer dark:bg-gray-300 dark:hover:bg-red-800 dark:hover:text-white transition-all"
+            className="h-8/10 w-fit px-3 bg-stone-800 hover:bg-accent hover:cursor-pointer dark:bg-gray-300 dark:hover:bg-accent dark:hover:text-white transition-all"
             type="submit"
           >
             Go

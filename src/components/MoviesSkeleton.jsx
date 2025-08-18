@@ -7,7 +7,7 @@ const MoviesSkeleton = () => {
       {items.map((item) => (
         <Skeleton
           key={item}
-          className="h-40 lg:h-68 w-28 lg:w-45 rounded-sm bg-zinc-300 dark:bg-stone-600"
+          className="h-40 lg:h-68 w-28 lg:w-45 rounded-sm bg-zinc-300 dark:bg-muted"
         />
       ))}
     </div>

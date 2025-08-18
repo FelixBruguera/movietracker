@@ -10,8 +10,8 @@ const ProfileTab = ({ title, href, currentPath }) => {
         <Button
           asChild
           variant="ghost"
-          className={`p-4 hover:cursor-pointer hover:text-white hover:bg-red-800 dark:hover:bg-red-800 transition-all
-                ${(isCurrentRoute || defaultRouteCheck) && "bg-red-800 text-white"}`}
+          className={`p-4 hover:cursor-pointer hover:text-white hover:bg-accent dark:hover:bg-accent transition-all
+                ${(isCurrentRoute || defaultRouteCheck) && "bg-accent text-white"}`}
         >
           <h3 className="font-bold text-sm lg:text-base">{title}</h3>
         </Button>

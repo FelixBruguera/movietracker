@@ -15,6 +15,7 @@ import { useRouter } from "next/router"
 import FiltersField from "./FiltersField"
 import RangeField from "./RangeField"
 import SelectWrapper from "./SelectWrapper"
+import TextInput from "./TextInput"
 
 const MoviesFilters = ({ handleFilter, filterOpen, setFilterOpen }) => {
   const router = useRouter()
@@ -25,8 +26,8 @@ const MoviesFilters = ({ handleFilter, filterOpen, setFilterOpen }) => {
     <Sheet open={filterOpen} onOpenChange={setFilterOpen}>
       <SheetTrigger asChild>
         <Button
-          className={`text-xs lg:text-sm flex items-center justify-center gap-1 hover:cursor-pointer bg-gray-100 border-stone-300 hover:bg-stone-200 dark:bg-stone-900 border-1 dark:border-stone-700 transition-all
-            ${Object.keys(router.query).length > 0 ? "bg-red-800 text-white dark:bg-red-800" : null}`}
+          className={`text-xs lg:text-sm flex items-center justify-center gap-1 hover:cursor-pointer border-border hover:bg-accent bg-transparent border-1 dark:border-border transition-all
+            ${Object.keys(router.query).length > 0 ? "bg-accent text-white dark:bg-accent" : null}`}
           variant="ghost"
         >
           <Funnel />
@@ -44,30 +45,25 @@ const MoviesFilters = ({ handleFilter, filterOpen, setFilterOpen }) => {
             e.preventDefault()
             const formData = new FormData(e.target)
             const data = Object.fromEntries(formData.entries())
+            console.log(data)
             return handleFilter(data)
           }}
         >
-          <FiltersField labelText="Search" labelFor="search">
-            <Input
-              type="text"
-              name="search"
-              defaultValue={router.query.search || ""}
-            />
-          </FiltersField>
-          <FiltersField labelText="Search by actor" labelFor="cast">
-            <Input
-              type="text"
-              name="cast"
-              defaultValue={router.query.cast || ""}
-            />
-          </FiltersField>
-          <FiltersField labelText="Search by director" labelFor="directors">
-            <Input
-              type="text"
-              name="directors"
-              defaultValue={router.query.directors || ""}
-            />
-          </FiltersField>
+          <TextInput
+            labelText="Search"
+            name="search"
+            defaultValue={router.query.search || ""}
+          />
+          <TextInput
+            labelText="Search by actor"
+            name="cast"
+            defaultValue={router.query.cast || ""}
+          />
+          <TextInput
+            labelText="Search by director"
+            name="directors"
+            defaultValue={router.query.directors || ""}
+          />
           <FiltersField labelText="Genre" labelFor="genres">
             <SelectWrapper
               name="genres"

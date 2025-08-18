@@ -6,8 +6,8 @@ const UsersSkeleton = () => {
     <div className="flex flex-col gap-5">
       <div className="flex items-center w-full">
         <div className="flex items-center justify-end w-full lg:w-full px-10">
-          <Skeleton className="h-10 w-40 dark:bg-stone-600" />
-          <Skeleton className="h-10 w-10 dark:bg-stone-600" />
+          <Skeleton className="h-10 w-40 dark:bg-muted" />
+          <Skeleton className="h-10 w-10 dark:bg-muted" />
         </div>
       </div>
       <ul
@@ -17,7 +17,7 @@ const UsersSkeleton = () => {
         {items.map((item) => (
           <Skeleton
             key={item}
-            className="w-40 lg:w-75 h-30 rounded-sm dark:bg-stone-600"
+            className="w-40 lg:w-75 h-30 rounded-sm dark:bg-muted"
           />
         ))}
       </ul>

@@ -34,26 +34,29 @@ const UserDropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        className="w-fit lg:max-w-50 border-zinc-300 dark:border-stone-700 lg:border-transparent dark:lg:border-transparent overflow-clip whitespace-nowrap flex items-center gap-3 border-1 
-            hover:bg-gray-100 hover:dark:bg-stone-900 rounded-lg p-2 hover:cursor-pointer transition-all"
+        className="w-fit lg:max-w-50 border-zinc-300 dark:border-border lg:border-transparent dark:lg:border-transparent overflow-clip whitespace-nowrap flex items-center gap-3 border-1 
+            hover:bg-card rounded-lg p-2 hover:cursor-pointer transition-all"
       >
         <User />
         <p className="hidden lg:block">{session.user.username}</p>
         <ChevronDown />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem>
+        <DropdownMenuItem className="p-0">
           <Link
             href={`/users/${session.user.id}`}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 w-full px-2 py-1.5"
           >
             <CircleUserRound />
             <p>Profile</p>
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => logout()}>
+        <DropdownMenuItem
+          onClick={() => logout()}
+          className="hover:cursor-pointer"
+        >
           <LogOut />
-          <p className="hover:cursor-pointer">Logout</p>
+          <p>Logout</p>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

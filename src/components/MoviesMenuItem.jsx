@@ -5,8 +5,8 @@ const MoviesMenuItem = ({ title, onClick, isActive }) => {
     <Button
       onClick={() => onClick(title)}
       variant="ghost"
-      className={`text-xs lg:text-sm border-1 border-stone-300 dark:border-stone-700 hover:bg-red-800 hover:text-white dark:hover:bg-red-800 hover:cursor-pointer transition-all
-            ${isActive && "bg-red-800 text-white dark:hover:bg-stone-800"}`}
+      className={`w-full text-xs lg:text-sm border-1 border-border dark:border-border hover:bg-accent hover:text-white hover:cursor-pointer transition-all
+            ${isActive && "bg-accent text-white hover:bg-transparent dark:hover:bg-transparent"}`}
     >
       {title}
     </Button>

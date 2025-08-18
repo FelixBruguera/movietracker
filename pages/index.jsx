@@ -76,7 +76,7 @@ export default function Index() {
           ))
         )}
       </ul>
-      <PaginationWrap totalPages={totalPages} />
+      {totalPages > 1 && <PaginationWrap totalPages={totalPages} />}
     </div>
   )
 }

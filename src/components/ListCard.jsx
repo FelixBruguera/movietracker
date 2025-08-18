@@ -5,7 +5,7 @@ import { memo } from "react"
 
 const ListCardItem = (props) => {
   return (
-    <div className="flex items-center text-sm md:text-base gap-1 text-stone-600 dark:text-stone-300 group-hover:text-stone-300 transition-colors">
+    <div className="flex items-center text-sm md:text-base gap-1 text-stone-600 dark:text-stone-300 dark:group-hover:text-stone-300 transition-colors">
       {props.children}
     </div>
   )
@@ -16,8 +16,9 @@ const ListCard = memo(({ list }) => {
   return (
     <li
       key={list.id}
-      className="w-9/10 mx-auto md:w-100 h-2/14 flex flex-col gap-1 border-1 rounded-lg border-stone-300 dark:border-stone-700 
-            hover:bg-stone-900 hover:text-white transition-colors hover:border-stone-900 group"
+      className="w-9/10 mx-auto md:w-100 h-2/14 flex flex-col gap-1 border-1 rounded-lg border-border dark:border-stone-700 
+      bg-transparent
+            hover:bg-card dark:hover:text-white transition-colors group"
     >
       <Link
         href={`/lists/${list._id}`}

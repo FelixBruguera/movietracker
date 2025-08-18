@@ -1,4 +1,13 @@
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+} from "recharts"
 import { ChartContainer, ChartTooltip } from "@/components/ui/chart"
 import ChartHeading from "./ChartHeading"
 import TooltipItem from "./TooltipItem"
@@ -16,24 +25,29 @@ const CustomTooltip = ({ active, payload, label }) => {
 const LogsByYear = ({ data }) => {
   return (
     <ChartHeading title="Movies watched per year">
-      <ChartContainer config={{}} className="h-100 mx-auto w-full lg:w-3/4">
-        <BarChart accessibilityLayer data={data}>
+      <ResponsiveContainer height={450} width="95%">
+        <AreaChart accessibilityLayer data={data}>
           <CartesianGrid
             vertical={false}
             stroke="#a9aaab"
             strokeOpacity="50%"
           />
-          <Bar
+          <Area
             dataKey="total"
             radius={5}
             fill="var(--chart-main)"
             activeBar={{ fill: "var(--chart-accent" }}
           />
-          <XAxis dataKey="_id" tickLine={false} tickMargin={5} style={{ fontSize: "14px"}}/>
-          <YAxis tickLine={false} style={{ fontSize: "16px"}} />
+          <XAxis
+            className="text-xs lg:text-sm"
+            dataKey="_id"
+            tickLine={false}
+            tickMargin={5}
+          />
+          <YAxis tickLine={false} className="text-xs lg:text-sm" />
           <ChartTooltip cursor={false} content={<CustomTooltip />} />
-        </BarChart>
-      </ChartContainer>
+        </AreaChart>
+      </ResponsiveContainer>
     </ChartHeading>
   )
 }

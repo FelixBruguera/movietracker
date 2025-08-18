@@ -6,7 +6,7 @@ const Review = ({ data, userInfo = null, color }) => {
   return (
     <li
       key={data._id}
-      className="border p-4 rounded-lg bg-zinc-200 dark:bg-stone-900 hover:border-stone-400 dark:hover:border-stone-600 flex items-start justify-between transition-all"
+      className="border p-4 rounded-lg bg-muted dark:bg-card hover:border-stone-400 dark:hover:border-stone-600 flex items-start justify-between transition-all"
     >
       <Link href={`/users/${user._id}`}>
         <Avatar src={user.image} />
@@ -16,7 +16,7 @@ const Review = ({ data, userInfo = null, color }) => {
           <div className="flex gap-2 items-center">
             <Link
               href={`/users/${user._id}`}
-              className="font-bold hover:text-red-800 transition-all"
+              className="font-bold hover:text-accent transition-all"
             >
               {user.username}
             </Link>

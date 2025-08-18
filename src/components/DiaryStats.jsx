@@ -31,14 +31,18 @@ const DiaryStats = () => {
     <div>
       <LogsByYear data={data.yearly} />
       {monthlyMax && (
-        <StatsList title="Most movies watched in a month">
-          {data.monthly.map(item => <MonthlyTopItem data={item} max={monthlyMax} />)}
-        </StatsList >
+        <StatsList title="Most movies watched in a month" width="wide">
+          {data.monthly.map((item) => (
+            <MonthlyTopItem data={item} max={monthlyMax} />
+          ))}
+        </StatsList>
       )}
       {data.byMovie.length > 0 && (
-        <StatsList title="Most watched movies">
-          {data.byMovie.map(item => <MostWatchedMovie movie={item} />)}
-        </StatsList >
+        <StatsList title="Most watched movies" width="wide">
+          {data.byMovie.map((item) => (
+            <MostWatchedMovie movie={item} />
+          ))}
+        </StatsList>
       )}
       <DiaryVerticalBarChart data={data.byGenre} title="Most watched genres" />
       <DiaryVerticalBarChart

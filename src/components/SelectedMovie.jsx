@@ -19,7 +19,7 @@ const SelectedMovie = ({ movie, unselect }) => {
           </div>
         </div>
         <X
-          className="hover:text-red-800 hover:cursor-pointer"
+          className="hover:text-accent hover:cursor-pointer"
           onClick={() => unselect()}
         />
       </div>

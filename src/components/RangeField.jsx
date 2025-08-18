@@ -24,7 +24,7 @@ const RangeField = ({
       <div className="flex">
         <div className="flex w-2/4 justify-evenly">
           <Label
-            className="text-stone-400 text-xs lg:text-sm"
+            className="text-muted-foreground text-xs lg:text-sm"
             htmlFor={`${fieldName}_min`}
           >
             More than
@@ -32,7 +32,7 @@ const RangeField = ({
           <Input
             name={`${fieldName}_min`}
             type="number"
-            className="w-4/9 text-sm"
+            className="w-4/9 text-sm border-1 border-border"
             min={min}
             max={maxValue}
             value={minValue}
@@ -42,7 +42,7 @@ const RangeField = ({
         </div>
         <div className="flex w-2/4 justify-evenly">
           <Label
-            className="text-stone-400 text-xs lg:text-sm"
+            className="text-muted-foreground text-xs lg:text-sm"
             htmlFor={`${fieldName}_max`}
           >
             Less than
@@ -50,7 +50,7 @@ const RangeField = ({
           <Input
             name={`${fieldName}_max`}
             type="number"
-            className="w-4/9 text-sm"
+            className="w-4/9 text-sm border-1 border-border"
             min={minValue}
             max={max}
             value={maxValue}

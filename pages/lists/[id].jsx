@@ -69,7 +69,7 @@ export default function ProfileIndex() {
           <div className="w-fit flex items-center gap-3">
             <Link
               href={`/users/${user._id}`}
-              className="hover:text-red-800 transition-all w-fit"
+              className="hover:text-accent transition-all w-fit"
             >
               <ListDetail>
                 <Avatar src={user.image} size="xs" />

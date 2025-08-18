@@ -1,4 +1,11 @@
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  ResponsiveContainer,
+} from "recharts"
 import { ChartContainer, ChartTooltip } from "@/components/ui/chart"
 import ChartHeading from "./ChartHeading"
 import TooltipItem from "./TooltipItem"
@@ -20,7 +27,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 const RatingVerticalBarChart = ({ data, title }) => {
   return (
     <ChartHeading title={title}>
-      <ChartContainer config={{}} className="h-120 mx-auto w-full lg:w-3/5">
+      <ResponsiveContainer width="90%" height={500}>
         <BarChart accessibilityLayer data={data} layout="vertical">
           <CartesianGrid
             vertical={true}
@@ -30,7 +37,7 @@ const RatingVerticalBarChart = ({ data, title }) => {
           />
           <Bar
             dataKey="averageRating"
-            radius={0}
+            radius={5}
             fill="var(--chart-main)"
             activeBar={{ fill: "var(--chart-accent" }}
           />
@@ -41,12 +48,18 @@ const RatingVerticalBarChart = ({ data, title }) => {
             type="number"
             domain={[0, 10]}
             tickCount={10}
-            style={{ fontSize: "14px"}}
+            className="text-xs lg:text-sm"
           />
-          <YAxis width={120} dataKey="_id" type="category" tickLine={false} style={{ fontSize: "16px"}}/>
+          <YAxis
+            width={100}
+            dataKey="_id"
+            type="category"
+            tickLine={false}
+            className="text-xs lg:text-sm"
+          />
           <ChartTooltip cursor={false} content={<CustomTooltip />} />
         </BarChart>
-      </ChartContainer>
+      </ResponsiveContainer>
     </ChartHeading>
   )
 }

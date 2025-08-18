@@ -41,7 +41,7 @@ const FollowList = ({ listId, isFollowed }) => {
   return isFollowed ? (
     <Button
       variant="ghost"
-      className="hover:bg-stone-100 dark:hover:bg-red-800 border-1 border-transparent hover:border-stone-400 dark:hover:border-stone-700 cursor-pointer dark:hover:text-white transition-all"
+      className="hover:bg-stone-100 dark:hover:bg-accent border-1 border-transparent hover:border-stone-400 dark:hover:border-border cursor-pointer dark:hover:text-white transition-all"
       title="Unfollow list"
       aria-label="Unfollow list"
       onClick={() => deleteMutation.mutate()}
@@ -51,7 +51,7 @@ const FollowList = ({ listId, isFollowed }) => {
   ) : (
     <Button
       variant="ghost"
-      className="hover:bg-stone-100 dark:hover:bg-stone-900 hover:border-stone-400 dark:hover:border-stone-700 dark:hover:text-white hover:cursor-pointer border-1 border-transparent transition-all"
+      className="hover:bg-stone-100 dark:hover:bg-stone-900 hover:border-stone-400 dark:hover:border-border dark:hover:text-white hover:cursor-pointer border-1 border-transparent transition-all"
       title="Follow list"
       aria-label="Follow list"
       onClick={() => createMutation.mutate()}

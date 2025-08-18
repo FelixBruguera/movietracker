@@ -51,7 +51,7 @@ const ListsMenu = ({ search }) => {
       <div className="w-full lg:w-7/10 flex items-center justify-evenly">
         <Input
           name="search"
-          className="w-3/4 dark:border-stone-600"
+          className="w-3/4 border-border border-1"
           placeholder="Search"
           type="text"
           disabled={router.query.filter === "following"}

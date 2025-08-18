@@ -30,7 +30,7 @@ const ReviewForm = ({ previousReview, mutation }) => {
       }}
     >
       <Textarea
-        className="border-1 bg-white border-stone-400 w-6/10 lg:w-8/10 max-w-300 h-fit max-h-45 field-sizing-content dark:bg-neutral-700 transition-all"
+        className="border-1 bg-input dark:bg-input border-stone-400 w-6/10 lg:w-8/10 h-fit max-h-45 field-sizing-content transition-all"
         name="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
@@ -43,7 +43,7 @@ const ReviewForm = ({ previousReview, mutation }) => {
         onValueChange={(e) => setRating(parseInt(e))}
       >
         <SelectTrigger
-          className="lg:w-1/10 text-xs lg:text-sm border-1 border-stone-400 bg-gray-100 dark:border-stone-700 dark:bg-stone-900"
+          className="lg:w-1/10 text-xs lg:text-sm border-1 bg-card dark:bg-card border-border"
           title="Your Rating"
         >
           {rating}

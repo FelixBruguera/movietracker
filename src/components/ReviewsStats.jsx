@@ -8,7 +8,7 @@ import StatsSkeleton from "./StatsSkeleton"
 import StatsList from "./StatsList"
 import Poster from "./Poster"
 import { Separator } from "@/components/ui/separator"
-
+import RatingDifference from "./RatingDifference"
 
 const ReviewsStats = () => {
   const router = useRouter()
@@ -39,22 +39,14 @@ const ReviewsStats = () => {
         title="Best rated directors (Min. 2 movies)"
       />
       <StatsList title="Rated higher than IMDB">
-        <ul className="flex flex-wrap gap-2 items-center justify-evenly">
-          {data.higherThanIMDB.map(movie => {
-            return (
-              <li key={movie._id} className="group">
-              <Poster src={movie.poster} alt={movie.title} size="small" />
-                <Separator className="bg-zinc-400 dark:bg-stone-600 my-2 group-hover:bg-blue-700 dark:group-hover:bg-blue-700 transition-colors" />
-                <div className="flex items-center justify-center gap-1">
-                    <p className="font-bold">{movie.rating}</p>
-                    <p>vs</p>
-                    <p >{movie.imdbRating}</p>
-                    <p className=" font-bold text-green-600"> (+{movie.ratingVsImdb.toFixed(2)})</p>
-                </div>
-            </li>
-            )
-          })}
-        </ul>
+        {data.higherThanIMDB.map((movie) => (
+          <RatingDifference movie={movie} isRatedHigher={true} />
+        ))}
+      </StatsList>
+      <StatsList title="Rated lower than IMDB">
+        {data.lowerThanIMDB.map((movie) => (
+          <RatingDifference movie={movie} isRatedHigher={false} />
+        ))}
       </StatsList>
     </div>
   )

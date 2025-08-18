@@ -14,7 +14,7 @@ const AuthInput = (props) => {
       <Input
         {...inputProps}
         required
-        className="bg-zinc-200 border-gray-300 dark:bg-stone-900 border-1 dark:border-stone-700"
+        className="bg-zinc-200 border-gray-300 dark:bg-stone-900 border-1 dark:border-border"
       />
     </div>
   )

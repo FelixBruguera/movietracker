@@ -17,7 +17,7 @@ const DiaryRow = ({ data, group }) => {
       key={data.date}
       className="flex flex-col items-center justify-start group"
     >
-      <p className="my-3 p-1 w-full text-center font-bold text-lg lg:text-xl border-b-1 border-stone-300 dark:border-stone-700">
+      <p className="my-3 p-1 w-full text-center font-bold text-lg lg:text-xl border-b-1 border-border dark:border-border">
         {date}
       </p>
       <div className="flex flex-wrap w-full items-center justify-start gap-1 lg:gap-5">

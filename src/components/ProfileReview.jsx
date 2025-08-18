@@ -19,14 +19,14 @@ const ProfileReview = ({ data, color }) => {
         />
       </Link>
       <div
-        className="w-full md:w-9/10 border p-4 rounded-b-lg lg:rounded-lg bg-zinc-200 dark:bg-stone-900 
+        className="w-full md:w-9/10 border p-4 rounded-b-lg lg:rounded-lg bg-muted dark:bg-card 
             hover:border-zinc-400 dark:hover:border-stone-600 flex items-center justify-between transition-all"
       >
         <div className="flex flex-col gap-1 w-9/10">
           <div className="flex gap-2 items-center">
             <Link
               href={movieHref}
-              className="font-bold hover:text-red-800 transition-all"
+              className="font-bold hover:text-accent transition-all"
             >
               {data.movieInfo.title}
             </Link>

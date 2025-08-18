@@ -34,8 +34,8 @@ const MoviesMenu = () => {
     setFilterOpen(false)
   }
   return (
-    <div className="flex flex-col gap-3 lg:gap-0 lg:flex-row items-center w-full px-9 mx-auto">
-      <ul className="hidden lg:flex w-full lg:w-7/10 flex-wrap items-center justify-center gap-1 lg:gap-0 lg:justify-between">
+    <div className="flex flex-col gap-3 lg:gap-0 lg:flex-row items-center justify-between w-full px-9 mx-auto">
+      <ul className="hidden lg:flex w-full lg:w-full flex-wrap items-center justify-start lg:gap-5">
         {genres.map((genre) => (
           <li key={genre}>
             <MoviesMenuItem
@@ -46,7 +46,7 @@ const MoviesMenu = () => {
           </li>
         ))}
       </ul>
-      <div className="flex items-start justify-end gap-12 w-full lg:w-3/10">
+      <div className="flex items-start justify-end gap-2 w-full lg:w-3/10">
         <MoviesFilters
           handleFilter={handleFilter}
           filterOpen={filterOpen}

@@ -21,7 +21,7 @@ const LogManagerItem = ({ log, update, remove }) => {
         <input
           type="date"
           name="date"
-          className="p-2 w-2/4 text-sm border-1 dark:border-stone-700 rounded-lg"
+          className="p-2 w-2/4 text-sm border-1 dark:border-border rounded-lg"
           value={date}
           onChange={(e) => setDate(e.target.value)}
           max={format(new Date(), "yyyy-MM-dd")}
@@ -34,7 +34,7 @@ const LogManagerItem = ({ log, update, remove }) => {
             title="Deleting your log"
             mutation={() => remove.mutate({ logId: log._id })}
           >
-            <div className="text-sm font-medium p-4 py-2 rounded-md hover:cursor-pointer bg-red-800 hover:bg-red-900 dark:hover:bg-red-900">
+            <div className="text-sm font-medium p-4 py-2 rounded-md hover:cursor-pointer bg-accent hover:bg-red-900 dark:hover:bg-red-900">
               Delete
             </div>
           </Remove>
