@@ -38,16 +38,20 @@ const ReviewsStats = () => {
         data={data.byDirectors}
         title="Best rated directors (Min. 2 movies)"
       />
-      <StatsList title="Rated higher than IMDB">
-        {data.higherThanIMDB.map((movie) => (
-          <RatingDifference movie={movie} isRatedHigher={true} />
-        ))}
-      </StatsList>
-      <StatsList title="Rated lower than IMDB">
-        {data.lowerThanIMDB.map((movie) => (
-          <RatingDifference movie={movie} isRatedHigher={false} />
-        ))}
-      </StatsList>
+      {data.higherThanIMDB.length > 0 && (
+        <StatsList title="Rated higher than IMDB">
+          {data.higherThanIMDB.map((movie) => (
+            <RatingDifference movie={movie} isRatedHigher={true} />
+          ))}
+        </StatsList>
+      )}
+      {data.lowerThanIMDB.length > 0 && (
+        <StatsList title="Rated lower than IMDB">
+          {data.lowerThanIMDB.map((movie) => (
+            <RatingDifference movie={movie} isRatedHigher={false} />
+          ))}
+        </StatsList>
+      )}
     </div>
   )
 }

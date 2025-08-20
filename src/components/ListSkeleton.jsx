@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 const ListSkeleton = () => {
   const items = Array.from(Array(15).keys())
   return (
-    <div className="p-5 w-9/10 mx-auto flex flex-col items-start justify-start max-w-500">
+    <div className="p-5 w-full lg:w-9/10 mx-auto flex flex-col items-start justify-start max-w-500">
       <div className="w-9/10 pb-5 flex flex-col gap-2">
         <Skeleton className="w-3/4 lg:w-1/4 h-9 bg-muted" />
         <Skeleton className="w-2/4 lg:w-1/5 h-8 bg-muted" />

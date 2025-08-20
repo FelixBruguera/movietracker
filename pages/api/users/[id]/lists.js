@@ -8,7 +8,10 @@ export default async function GET(request, response) {
   const { database } = await connectToDatabase()
   const schema = baseSchema.extend({
     id: z.custom((id) => ObjectId.isValid(id)),
-    sortBy: z.literal("createdAt").default("createdAt"),
+    sortBy: z
+      .enum(["date", "followers", "movies"])
+      .default("movies")
+      .transform((option) => (option === "date" ? "createdAt" : option)),
   })
   const query = schema.parse(request.query)
   try {

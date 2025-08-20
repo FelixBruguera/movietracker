@@ -10,6 +10,7 @@ import PaginationWrap from "src/components/PaginationWrap"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import ProfileListSkeleton from "./ProfileListsSkeleton"
+import { useMemo } from "react"
 
 const ProfileListsContent = () => {
   const router = useRouter()
@@ -21,6 +22,13 @@ const ProfileListsContent = () => {
         .get(`/api/users/${id}/lists?${new URLSearchParams(otherParams)}`)
         .then((response) => response.data[0]),
   })
+  const sortOptions = useMemo(() => {
+    return {
+      followers: "Followers",
+      date: "Creation date",
+      movies: "Movies",
+    }
+  }, [])
   if (isLoading) {
     return <ProfileListSkeleton />
   }
@@ -28,8 +36,7 @@ const ProfileListsContent = () => {
   if (isError) {
     return <ErrorMessage />
   }
-  const sortOptions = { date: "Creation date" }
-  const sort = "date"
+  const sort = router.query.sortBy || "movies"
   const lists = data.lists
   return (
     <div>
@@ -45,14 +52,18 @@ const ProfileListsContent = () => {
         />
         <SortOrderToggle />
       </ListHeading>
-      <ul
-        className="flex flex-wrap w-full items-center justify-start gap-5"
-        aria-label="lists"
-      >
-        {lists?.map((list) => (
-          <ListCard key={list._id} list={list} />
-        ))}
-      </ul>
+      {lists.length > 0 ? (
+        <ul
+          className="flex flex-wrap w-full items-center justify-start gap-5"
+          aria-label="lists"
+        >
+          {lists?.map((list) => (
+            <ListCard key={list._id} list={list} />
+          ))}
+        </ul>
+      ) : (
+        <p>No public lists yet</p>
+      )}
       <div className="mt-4">
         {data.info.totalPages > 1 && (
           <PaginationWrap totalPages={data.info.totalPages} />

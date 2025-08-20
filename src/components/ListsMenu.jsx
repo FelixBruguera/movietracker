@@ -5,13 +5,13 @@ import ListDialog from "./ListDialog"
 import MoviesMenuItem from "./MoviesMenuItem"
 import { authClient } from "@/lib/auth-client.ts"
 import useListDebounce from "../../hooks/useListDebounce"
-import { useMemo, useState } from "react"
+import { memo, useEffect, useMemo, useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
-const ListsMenu = ({ search }) => {
+const ListsMenu = memo(() => {
   const router = useRouter()
-  const [searchInput, setSearchInput] = useState(search)
+  const [searchInput, setSearchInput] = useState("")
   useListDebounce(searchInput)
   const { data: session } = authClient.useSession()
   const sortOptions = useMemo(() => {
@@ -21,6 +21,11 @@ const ListsMenu = ({ search }) => {
       movies: "Movies",
     }
   }, [])
+  useEffect(() => {
+    if (router.isReady && router.query.search) {
+      setSearchInput(router.query.search)
+    }
+  }, [router.isReady])
   const sort = router.query.sortBy || "movies"
   const filters = { "Your lists": "user", Following: "following" }
   const handleFilter = (newValue) => {
@@ -79,6 +84,6 @@ const ListsMenu = ({ search }) => {
       </div>
     </div>
   )
-}
+})
 
 export default ListsMenu

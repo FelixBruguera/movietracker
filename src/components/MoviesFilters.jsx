@@ -22,12 +22,13 @@ const MoviesFilters = ({ handleFilter, filterOpen, setFilterOpen }) => {
   const genres = filtersData.genres
   const languages = filtersData.languages
   const types = ["All", "Movie", "Series"]
+  const { page, ...query } = router.query
   return (
     <Sheet open={filterOpen} onOpenChange={setFilterOpen}>
       <SheetTrigger asChild>
         <Button
           className={`text-xs lg:text-sm flex items-center justify-center gap-1 hover:cursor-pointer border-border hover:bg-accent bg-transparent border-1 dark:border-border transition-all
-            ${Object.keys(router.query).length > 0 ? "bg-accent text-white dark:bg-accent" : null}`}
+            ${Object.keys(query).length > 0 ? "bg-accent text-white dark:bg-accent" : null}`}
           variant="ghost"
         >
           <Funnel />

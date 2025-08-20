@@ -3,8 +3,9 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { memo } from "react"
 
-const Total = ({ total, label }) => {
+const Total = memo(({ total, label }) => {
   if (!total || total < 1) {
     return null
   }
@@ -23,6 +24,6 @@ const Total = ({ total, label }) => {
       <TooltipContent>{<p>{label}</p>}</TooltipContent>
     </Tooltip>
   )
-}
+})
 
 export default Total

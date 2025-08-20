@@ -1,8 +1,9 @@
 import { ArrowDownWideNarrow, ArrowUpWideNarrow } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/router"
+import { memo } from "react"
 
-const SortOrderToggle = () => {
+const SortOrderToggle = memo(() => {
   const router = useRouter()
   const isAscending = router.query.sortOrder === "1"
   const handleSortOrder = () => {
@@ -26,6 +27,6 @@ const SortOrderToggle = () => {
       )}
     </Button>
   )
-}
+})
 
 export default SortOrderToggle

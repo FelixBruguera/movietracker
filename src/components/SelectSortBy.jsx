@@ -7,15 +7,15 @@ import {
 } from "@/components/ui/select"
 import { ArrowDownUp } from "lucide-react"
 import { useRouter } from "next/router"
-import { memo } from "react"
+import { memo, useCallback } from "react"
 
 const SelectSortBy = memo(({ value, selectedValue, title, options }) => {
   const router = useRouter()
-  const onValueChange = (newValue) => {
+  const onValueChange = useCallback((newValue) => {
     router.push({ query: { ...router.query, sortBy: newValue, page: 1 } }, "", {
       scroll: false,
     })
-  }
+  })
   return (
     <Select value={value} onValueChange={(e) => onValueChange(e)}>
       <SelectTrigger

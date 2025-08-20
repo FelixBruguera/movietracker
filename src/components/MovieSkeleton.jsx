@@ -9,10 +9,10 @@ const MovieSkeleton = () => {
         <div className="w-full md:w-2/3 flex flex-col gap-3">
           <Skeleton className="h-10 w-90 lg:w-8/10 rounded-sm bg-zinc-200 dark:bg-muted p-2" />
           <MovieDetailsList>
-            <Skeleton className="h-10 w-1/10 rounded-sm bg-zinc-200 dark:bg-muted" />
-            <Skeleton className="h-10 w-1/10 rounded-sm bg-zinc-200 dark:bg-muted" />
-            <Skeleton className="h-10 w-1/10 rounded-sm bg-zinc-200 dark:bg-muted" />
-            <Skeleton className="h-10 w-1/10 rounded-sm bg-zinc-200 dark:bg-muted" />
+            <Skeleton className="h-10 w-1/8 rounded-sm bg-zinc-200 dark:bg-muted" />
+            <Skeleton className="h-10 w-1/8 rounded-sm bg-zinc-200 dark:bg-muted" />
+            <Skeleton className="h-10 w-1/8 rounded-sm bg-zinc-200 dark:bg-muted" />
+            <Skeleton className="h-10 w-1/8 rounded-sm bg-zinc-200 dark:bg-muted" />
           </MovieDetailsList>
           <Skeleton className="h-40 w-90 lg:w-9/10 rounded-sm bg-zinc-200 dark:bg-muted" />
         </div>

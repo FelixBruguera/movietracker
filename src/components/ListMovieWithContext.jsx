@@ -8,8 +8,9 @@ import Remove from "./Remove"
 import { Trash } from "lucide-react"
 import Poster from "./Poster"
 import Link from "next/link"
+import { memo } from "react"
 
-const ListMovieWithContext = ({ listName, movie, mutation }) => {
+const ListMovieWithContext = memo(({ listName, movie, mutation }) => {
   return (
     <ContextMenu>
       <ContextMenuTrigger>
@@ -35,6 +36,6 @@ const ListMovieWithContext = ({ listName, movie, mutation }) => {
       </ContextMenuContent>
     </ContextMenu>
   )
-}
+})
 
 export default ListMovieWithContext

@@ -1,7 +1,7 @@
 import { Skeleton } from "@/components/ui/skeleton"
 
 const ProfileSkeleton = () => {
-  const items = Array.from(Array(3).keys())
+  const items = Array.from(Array(4).keys())
   return (
     <div>
       <div className="w-full mx-auto pb-10 flex flex-col gap-2">

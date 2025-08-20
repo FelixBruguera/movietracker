@@ -16,9 +16,8 @@ const ListCard = memo(({ list }) => {
   return (
     <li
       key={list.id}
-      className="w-9/10 mx-auto md:w-100 h-2/14 flex flex-col gap-1 border-1 rounded-lg border-border dark:border-stone-700 
-      bg-transparent
-            hover:bg-card dark:hover:text-white transition-colors group"
+      className="w-9/10 mx-auto md:w-100 h-2/14 flex flex-col gap-1 border-1 rounded-lg border-border dark:hover:border-stone-700
+      bg-zinc-200 dark:bg-secondary hover:bg-transparent dark:hover:bg-transparent dark:hover:text-white transition-colors group"
     >
       <Link
         href={`/lists/${list._id}`}

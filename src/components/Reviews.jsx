@@ -53,7 +53,7 @@ export default function Reviews() {
   }
   const sortBy = router.query.sortBy || "date"
   const averageRating =
-    data.info.averageRating && Math.ceil(data.info.averageRating)
+    data.info.averageRating && Math.round(data.info.averageRating)
   const totalReviews = data.info.totalReviews
   const userReview = data.currentUserReview
 
@@ -85,12 +85,7 @@ export default function Reviews() {
         />
         <SortOrderToggle />
       </ListHeading>
-      {!userReview && session && (
-        <ReviewForm
-          previousReview={data.currentUserReview}
-          mutation={mutation}
-        />
-      )}
+      {!userReview && session && <ReviewForm mutation={mutation} />}
       {data.reviews?.length > 0 ? (
         <>
           <ul className="space-y-4">

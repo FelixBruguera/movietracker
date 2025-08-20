@@ -8,7 +8,6 @@ import ListCard from "src/components/ListCard"
 
 export default function ListsPage() {
   const router = useRouter()
-  const search = router.query.search || ""
   const { data, isLoading, isError } = useQuery({
     queryKey: ["lists", router.query],
     queryFn: () =>
@@ -16,13 +15,12 @@ export default function ListsPage() {
         .get(`/api/lists?${new URLSearchParams(router.query)}`)
         .then((response) => response.data[0]),
   })
-  console.log(data)
   const lists = data?.lists
   const totalPages = data?.info.totalPages
 
   return (
     <div className="flex flex-col justify-between">
-      <ListsMenu search={search} />
+      <ListsMenu />
       <ItemsGrid
         items={lists}
         isLoading={isLoading}

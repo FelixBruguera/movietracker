@@ -7,8 +7,9 @@ import {
 } from "@/components/ui/pagination"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/router"
+import { memo } from "react"
 
-const PaginationWrap = ({ totalPages, scrollTarget = "" }) => {
+const PaginationWrap = memo(({ totalPages, scrollTarget = "" }) => {
   const router = useRouter()
   const page = parseInt(router.query.page) || 1
   const handleChange = (newPage) => {
@@ -73,6 +74,6 @@ const PaginationWrap = ({ totalPages, scrollTarget = "" }) => {
       </PaginationContent>
     </Pagination>
   )
-}
+})
 
 export default PaginationWrap

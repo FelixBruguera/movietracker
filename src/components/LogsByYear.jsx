@@ -7,6 +7,9 @@ import {
   ResponsiveContainer,
   AreaChart,
   Area,
+  Line,
+  LineChart,
+  ComposedChart,
 } from "recharts"
 import { ChartContainer, ChartTooltip } from "@/components/ui/chart"
 import ChartHeading from "./ChartHeading"
@@ -26,18 +29,22 @@ const LogsByYear = ({ data }) => {
   return (
     <ChartHeading title="Movies watched per year">
       <ResponsiveContainer height={450} width="95%">
-        <AreaChart accessibilityLayer data={data}>
+        <ComposedChart accessibilityLayer data={data}>
           <CartesianGrid
             vertical={false}
             stroke="#a9aaab"
             strokeOpacity="50%"
           />
-          <Area
-            dataKey="total"
-            radius={5}
-            fill="var(--chart-main)"
-            activeBar={{ fill: "var(--chart-accent" }}
-          />
+          {data.length > 1 ? (
+            <Area dataKey="total" radius={5} fill="var(--chart-main)" />
+          ) : (
+            <Bar
+              dataKey="total"
+              radius={5}
+              fill="var(--chart-main)"
+              activeBar={{ fill: "var(--chart-accent" }}
+            />
+          )}
           <XAxis
             className="text-xs lg:text-sm"
             dataKey="_id"
@@ -46,7 +53,7 @@ const LogsByYear = ({ data }) => {
           />
           <YAxis tickLine={false} className="text-xs lg:text-sm" />
           <ChartTooltip cursor={false} content={<CustomTooltip />} />
-        </AreaChart>
+        </ComposedChart>
       </ResponsiveContainer>
     </ChartHeading>
   )

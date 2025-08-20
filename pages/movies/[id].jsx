@@ -43,6 +43,9 @@ export default function MoviePage() {
   if (isError) {
     return <ErrorMessage />
   }
+  const hours = movie.runtime && Math.floor(movie.runtime / 60)
+  const minutes = movie.runtime && Math.floor(movie.runtime % 60)
+  const runtime = hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`
   return (
     <div className="mx-auto p-4">
       <Head>
@@ -78,10 +81,12 @@ export default function MoviePage() {
               <Calendar />
               {movie.year}
             </MovieDetail>
-            <MovieDetail title="Runtime">
-              <Clock4 />
-              {movie.runtime} minutes
-            </MovieDetail>
+            {movie.runtime && (
+              <MovieDetail title="Runtime">
+                <Clock4 />
+                {runtime}
+              </MovieDetail>
+            )}
             <MovieDetail title="IMDB Rating">
               <img src="/imdb.png" alt="IMDB" className="h-9/10 w-full" />
               {movie.imdb.rating}

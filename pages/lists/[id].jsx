@@ -4,9 +4,6 @@ import ErrorMessage from "src/components/ErrorMessage"
 import ListHeading from "src/components/ListHeading"
 import ListHeadingTitle from "src/components/ListHeadingTitle"
 import Total from "src/components/Total"
-import { Calendar, Lock, Users } from "lucide-react"
-import ListDetail from "src/components/ListDetail"
-import Link from "next/link"
 import { authClient } from "@/lib/auth-client.ts"
 import DialogWrapper from "src/components/DialogWrapper"
 import AddToList from "src/components/AddToList"
@@ -19,12 +16,13 @@ import UpdateList from "src/components/UpdateList"
 import DeleteList from "src/components/DeleteList"
 import ListSkeleton from "src/components/ListSkeleton"
 import Head from "next/head"
-import Avatar from "src/components/Avatar"
 import ListMovieWithContext from "src/components/ListMovieWithContext"
-import Poster from "../../src/components/Poster"
 import FollowList from "src/components/FollowList"
+import ListMovie from "src/components/ListMovie"
+import ListDetails from "src/components/ListDetails"
+import { useMemo } from "react"
 
-export default function ProfileIndex() {
+export default function List() {
   const router = useRouter()
   const queryClient = useQueryClient()
   const { data: session } = authClient.useSession()
@@ -44,6 +42,9 @@ export default function ProfileIndex() {
     },
     onError: (error) => toast(error.response.statusText),
   })
+  const sortOptions = useMemo(() => {
+    return { date: "Added date" }
+  }, [])
   if (isLoading) {
     return <ListSkeleton />
   }
@@ -55,7 +56,6 @@ export default function ProfileIndex() {
   const movies = data.list.moviesData
   const user = data.userInfo[0]
   const isFollowed = data.isFollowed
-  const sortOptions = { date: "Added date" }
 
   return (
     <div className="p-5 w-full lg:w-9/10 lg:max-w-500 mx-auto">
@@ -66,42 +66,7 @@ export default function ProfileIndex() {
       <div className="w-full flex items-start justify-between">
         <div className="w-9/10 flex flex-col gap-2">
           <h1 className="text-2xl lg:text-3xl font-bold">{list.name}</h1>
-          <div className="w-fit flex items-center gap-3">
-            <Link
-              href={`/users/${user._id}`}
-              className="hover:text-accent transition-all w-fit"
-            >
-              <ListDetail>
-                <Avatar src={user.image} size="xs" />
-                <p className="flex">{user.username}</p>
-              </ListDetail>
-            </Link>
-            <ListDetail>
-              <Calendar />
-              <p
-                className="text-stone-600 dark:text-stone-200 text-sm lg:text-base"
-                aria-label="Created at"
-              >
-                {new Date(list.createdAt).toLocaleDateString()}
-              </p>
-            </ListDetail>
-            {!list.isPrivate && (
-              <ListDetail>
-                <Users />
-                <p
-                  className="text-stone-600 dark:text-stone-200 text-sm lg:text-base"
-                  aria-label="Followers"
-                >
-                  {list.followers}
-                </p>
-              </ListDetail>
-            )}
-            {list.isPrivate && (
-              <ListDetail>
-                <Lock aria-label="Private List" title="Private List" />
-              </ListDetail>
-            )}
-          </div>
+          <ListDetails user={user} list={list} />
           <p className="text-base lg:text-lg w-full text-stone-600 dark:text-stone-200 text-justify">
             {list.description}
           </p>
@@ -147,11 +112,7 @@ export default function ProfileIndex() {
                 mutation={mutation}
               />
             ) : (
-              <li key={movie._id} className="group">
-                <Link href={`/movies/${movie._id}`} className="text-center">
-                  <Poster src={movie.poster} alt={movie.title} size="base" />
-                </Link>
-              </li>
+              <ListMovie movie={movie} />
             ),
           )}
       </ul>

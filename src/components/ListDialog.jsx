@@ -11,9 +11,9 @@ import { toast } from "sonner"
 import axios from "axios"
 import TriggerButton from "./TriggerButton"
 import ListForm from "./ListForm"
-import { useState } from "react"
+import { memo, useState } from "react"
 
-const ListDialog = () => {
+const ListDialog = memo(() => {
   const queryClient = useQueryClient()
   const [open, setOpen] = useState(false)
   const mutation = useMutation({
@@ -40,6 +40,6 @@ const ListDialog = () => {
       </DialogContent>
     </Dialog>
   )
-}
+})
 
 export default ListDialog
