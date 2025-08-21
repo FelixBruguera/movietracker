@@ -38,6 +38,7 @@
 | 16.08.2025  | 5     | Add charts for most movies watched in a month, most watched movies, and rated higher than imdb and refactor the styles of charts and skeletons
 | 18.08.2025  | 8     | Change colors, update styles, refactor the filters form and charts. Add the rated lower than imdb stat
 | 20.08.2025  | 8     | Add the option to create a log when writing a review, remove the minimun length of the reviews comment, add more sorting options to the lists in profiles, modify styles, add more tests
+| 21.08.2025  | 5     | Refactor the index route, charts and movie search
 
 
 

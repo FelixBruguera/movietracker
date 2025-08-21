@@ -38,7 +38,7 @@ export default async function GET(request, response) {
       .collection("movies")
       .aggregate(moviesPipeline(query))
       .toArray()
-    return response.json(await data)
+    return response.json(data)
   } catch (error) {
     console.log(error)
     return response.status(404).send()

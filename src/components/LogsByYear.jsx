@@ -26,6 +26,9 @@ const CustomTooltip = ({ active, payload, label }) => {
 }
 
 const LogsByYear = ({ data }) => {
+  if (data.length < 1) {
+    return null
+  }
   return (
     <ChartHeading title="Movies watched per year">
       <ResponsiveContainer height={450} width="95%">

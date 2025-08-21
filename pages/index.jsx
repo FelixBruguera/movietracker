@@ -12,12 +12,10 @@ import {
 import { Star } from "lucide-react"
 import Poster from "../src/components/Poster"
 import ErrorMessage from "../src/components/ErrorMessage"
-import Head from "next/head"
 import axios from "axios"
 
 export default function Index() {
   const router = useRouter()
-  const page = router.query.page || 1
   const { data, isLoading, isError } = useQuery({
     queryKey: ["movies", router.query],
     queryFn: () =>
@@ -54,25 +52,11 @@ export default function Index() {
           </li>
         ) : (
           movies.map((movie) => (
-            <Tooltip>
-              <li key={movie._id}>
-                <TooltipTrigger>
-                  <Link href={`/movies/${movie._id}`} className="text-center">
-                    <Poster src={movie.poster} alt={movie.title} />
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent className="flex flex-col items-center justify-center">
-                  <p>{movie.title}</p>
-                  <p>
-                    {movie.released && new Date(movie.released).getFullYear()}
-                  </p>
-                  <div className="flex items-center">
-                    <p>{movie.imdb.rating}</p>
-                    <Star color="goldenrod" fill="goldenrod" size={12} />
-                  </div>
-                </TooltipContent>
-              </li>
-            </Tooltip>
+            <li key={movie._id}>
+              <Link href={`/movies/${movie._id}`} className="text-center">
+                <Poster src={movie.poster} alt={movie.title} />
+              </Link>
+            </li>
           ))
         )}
       </ul>

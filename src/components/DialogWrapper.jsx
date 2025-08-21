@@ -23,7 +23,7 @@ const DialogWrapper = (props) => {
           <Plus />
         </TriggerButton>
       </DialogTrigger>
-      <DialogContent className="overflow-auto w-150">
+      <DialogContent className="overflow-y-scroll lg:min-w-3/5">
         <DialogHeader>
           <DialogTitle>{props.title}</DialogTitle>
         </DialogHeader>

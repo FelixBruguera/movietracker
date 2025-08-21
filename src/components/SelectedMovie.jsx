@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label"
 
 const SelectedMovie = ({ movie, unselect }) => {
   return (
-    <div className="flex flex-col gap-3 items-center">
+    <div className="flex flex-col gap-3 items-center w-full lg:w-1/2 mx-auto">
       <Label className="text-stone-600 dark:text-stone-400">Movie</Label>
       <div className="w-full flex gap-5 items-center border-1 border-stone-400 dark:border-stone-800 rounded-lg p-3 hover:border-stone-900 transition-all">
         <div className="flex w-full items-center gap-3">

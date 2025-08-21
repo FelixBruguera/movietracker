@@ -25,6 +25,9 @@ const CustomTooltip = ({ active, payload, label }) => {
 }
 
 const RatingsByDecade = ({ data }) => {
+  if (data.length < 1) {
+    return null
+  }
   return (
     <ChartHeading title="Average rating by decade">
       <ResponsiveContainer width="90%" height={400}>

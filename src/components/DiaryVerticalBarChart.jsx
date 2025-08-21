@@ -21,6 +21,9 @@ const CustomTooltip = ({ active, payload, label }) => {
 }
 
 const DiaryVerticalBarChart = ({ data, title }) => {
+  if (data.length < 1) {
+    return null
+  }
   return (
     <ChartHeading title={title}>
       <ResponsiveContainer height={500} width="90%">

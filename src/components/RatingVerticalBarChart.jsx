@@ -25,6 +25,9 @@ const CustomTooltip = ({ active, payload, label }) => {
 }
 
 const RatingVerticalBarChart = ({ data, title }) => {
+  if (data.length < 1) {
+    return null
+  }
   return (
     <ChartHeading title={title}>
       <ResponsiveContainer width="90%" height={500}>

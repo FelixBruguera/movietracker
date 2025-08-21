@@ -10,16 +10,19 @@ const MovieSearch = ({ setSelected }) => {
   const { data, isLoading, isError } = useDebounce(search)
   return (
     <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-2">
-      <Label htmlFor="movie" className="text-stone-600 dark:text-stone-300">
-        Movie
-      </Label>
-      <Input
-        type="text"
-        id="movie"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      <ul className="h-100 w-full flex flex-col gap-3 mt-2">
+      <div className="mx-auto w-full lg:w-1/3 flex flex-col items-center gap-1">
+        <Label htmlFor="movie" className=" text-stone-600 dark:text-stone-300">
+          Movie
+        </Label>
+        <Input
+          type="text"
+          id="movie"
+          value={search}
+          className="border-border"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+      <ul className="h-100 w-full flex flex-wrap items-center justify-evenly gap-3 mt-2">
         {isLoading && <MovieSearchSkeleton />}
         {isError && <li>Something went wrong</li>}
         {data.length > 0
