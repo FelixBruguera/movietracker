@@ -22,7 +22,7 @@ const DiaryRow = ({ data, group }) => {
       </p>
       <div className="flex flex-wrap w-full items-center justify-start gap-1 lg:gap-5">
         {data.watched.map((movie) => (
-          <Tooltip>
+          <Tooltip key={movie._id}>
             <TooltipTrigger className="lg:bg-transparent rounded-t-2xl">
               <Link href={`/movies/${movie._id}`}>
                 <Poster src={movie.poster} alt={movie.title} size="small" />

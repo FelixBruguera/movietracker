@@ -16,6 +16,7 @@ import DialogWrapper from "src/components/DialogWrapper"
 import MovieDescription from "../../src/components/MovieDescription"
 import Head from "next/head"
 import axios from "axios"
+import MovieRating from "src/components/MovieRating"
 
 export default function MoviePage() {
   const router = useRouter()
@@ -87,30 +88,21 @@ export default function MoviePage() {
                 {runtime}
               </MovieDetail>
             )}
-            <MovieDetail title="IMDB Rating">
-              <img src="/imdb.png" alt="IMDB" className="h-9/10 w-full" />
-              {movie.imdb.rating}
-            </MovieDetail>
-            {movie.tomatoes?.critic?.rating && (
-              <MovieDetail title="Rotten Tomatoes Rating">
-                <img
-                  src="/tomatoes.png"
-                  alt="Rotten Tomatoes"
-                  className="h-9/10 w-full"
-                />
-                {movie.tomatoes.critic.rating}
-              </MovieDetail>
-            )}
-            {movie.metacritic && (
-              <MovieDetail title="Metacritic Rating">
-                <img
-                  src="/metacritic.png"
-                  alt="Metacritic"
-                  className="h-9/10 w-full"
-                />
-                {movie.metacritic}
-              </MovieDetail>
-            )}
+            <MovieRating
+              source="IMDB"
+              value={movie.imdb.rating}
+              logo="/imdb.png"
+            />
+            <MovieRating
+              source="Rotten Tomatoes"
+              value={movie.tomatoes?.critic?.rating}
+              logo="/tomatoes.png"
+            />
+            <MovieRating
+              source="Metacritic"
+              value={movie.metacritic}
+              logo="/metacritic.png"
+            />
             <MovieDetail title="Awards">
               <Trophy fill="goldenrod" color="goldenrod" />
               {movie.awards.wins} Awards

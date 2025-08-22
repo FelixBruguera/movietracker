@@ -6,19 +6,9 @@ import {
   YAxis,
   ResponsiveContainer,
 } from "recharts"
-import { ChartContainer, ChartTooltip } from "@/components/ui/chart"
+import { ChartTooltip } from "@/components/ui/chart"
 import ChartHeading from "./ChartHeading"
-import TooltipItem from "./TooltipItem"
-import TooltipWrapper from "./TooltipWrapper"
-
-const CustomTooltip = ({ active, payload, label }) => {
-  const isVisible = active && payload && payload.length
-  return (
-    <TooltipWrapper isVisible={isVisible} label={label}>
-      <TooltipItem title="Movies" value={payload[0]?.payload.total} />
-    </TooltipWrapper>
-  )
-}
+import { DiaryCustomTooltip } from "./LogsByYear"
 
 const DiaryVerticalBarChart = ({ data, title }) => {
   if (data.length < 1) {
@@ -55,7 +45,7 @@ const DiaryVerticalBarChart = ({ data, title }) => {
             tickLine={false}
             className="text-xs lg:text-sm"
           />
-          <ChartTooltip cursor={false} content={<CustomTooltip />} />
+          <ChartTooltip cursor={false} content={<DiaryCustomTooltip />} />
         </BarChart>
       </ResponsiveContainer>
     </ChartHeading>

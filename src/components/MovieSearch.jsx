@@ -11,12 +11,10 @@ const MovieSearch = ({ setSelected }) => {
   return (
     <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-2">
       <div className="mx-auto w-full lg:w-1/3 flex flex-col items-center gap-1">
-        <Label htmlFor="movie" className=" text-stone-600 dark:text-stone-300">
-          Movie
-        </Label>
         <Input
           type="text"
           id="movie"
+          placeholder="Movie"
           value={search}
           className="border-border"
           onChange={(e) => setSearch(e.target.value)}
@@ -27,7 +25,11 @@ const MovieSearch = ({ setSelected }) => {
         {isError && <li>Something went wrong</li>}
         {data.length > 0
           ? data.map((movie) => (
-              <MovieSearchItem movie={movie} setSelected={setSelected} />
+              <MovieSearchItem
+                key={movie._id}
+                movie={movie}
+                setSelected={setSelected}
+              />
             ))
           : !isLoading && search.length > 2 && <li>No Results</li>}
       </ul>

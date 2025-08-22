@@ -59,6 +59,7 @@ const LogManager = ({ movie }) => {
           {logs?.length > 0 ? (
             logs.map((log) => (
               <LogManagerItem
+                key={log._id}
                 log={log}
                 update={updateMutation}
                 remove={deleteMutation}

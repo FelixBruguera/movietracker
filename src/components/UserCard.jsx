@@ -9,7 +9,7 @@ const UserCard = ({ user }) => {
     <li
       key={user.id}
       className="w-9/10 mx-auto md:w-75 border-1 rounded-lg border-border dark:hover:border-stone-700 bg-zinc-200 dark:bg-secondary
-            hover:bg-transparent dark:hover:bg-transparent dark:hover:text-white transition-colors group"
+            hover:bg-transparent active:bg-transparent dark:hover:bg-transparent dark:active:bg-transparent dark:hover:text-white transition-colors group"
     >
       <Link href={`/users/${user._id}`} className="p-3 flex flex-col gap-2">
         <div className="flex items-center gap-2 w-full mb-1">

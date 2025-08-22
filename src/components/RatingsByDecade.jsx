@@ -6,12 +6,12 @@ import {
   YAxis,
   ResponsiveContainer,
 } from "recharts"
-import { ChartContainer, ChartTooltip } from "@/components/ui/chart"
+import { ChartTooltip } from "@/components/ui/chart"
 import ChartHeading from "./ChartHeading"
 import TooltipItem from "./TooltipItem"
 import TooltipWrapper from "./TooltipWrapper"
 
-const CustomTooltip = ({ active, payload, label }) => {
+export const RatingCustomTooltip = ({ active, payload, label }) => {
   const isVisible = active && payload && payload.length
   return (
     <TooltipWrapper isVisible={isVisible} label={label}>
@@ -55,7 +55,7 @@ const RatingsByDecade = ({ data }) => {
             tickCount={10}
             className="text-xs lg:text-sm"
           />
-          <ChartTooltip cursor={false} content={<CustomTooltip />} />
+          <ChartTooltip cursor={false} content={<RatingCustomTooltip />} />
         </BarChart>
       </ResponsiveContainer>
     </ChartHeading>

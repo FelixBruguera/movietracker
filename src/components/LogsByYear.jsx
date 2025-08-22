@@ -11,12 +11,12 @@ import {
   LineChart,
   ComposedChart,
 } from "recharts"
-import { ChartContainer, ChartTooltip } from "@/components/ui/chart"
+import { ChartTooltip } from "@/components/ui/chart"
 import ChartHeading from "./ChartHeading"
 import TooltipItem from "./TooltipItem"
 import TooltipWrapper from "./TooltipWrapper"
 
-const CustomTooltip = ({ active, payload, label }) => {
+export const DiaryCustomTooltip = ({ active, payload, label }) => {
   const isVisible = active && payload && payload.length
   return (
     <TooltipWrapper isVisible={isVisible} label={label}>
@@ -55,7 +55,7 @@ const LogsByYear = ({ data }) => {
             tickMargin={5}
           />
           <YAxis tickLine={false} className="text-xs lg:text-sm" />
-          <ChartTooltip cursor={false} content={<CustomTooltip />} />
+          <ChartTooltip cursor={false} content={<DiaryCustomTooltip />} />
         </ComposedChart>
       </ResponsiveContainer>
     </ChartHeading>

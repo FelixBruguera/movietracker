@@ -6,8 +6,6 @@ import RatingsByDecade from "./RatingsByDecade"
 import RatingVerticalBarChart from "./RatingVerticalBarChart"
 import StatsSkeleton from "./StatsSkeleton"
 import StatsList from "./StatsList"
-import Poster from "./Poster"
-import { Separator } from "@/components/ui/separator"
 import RatingDifference from "./RatingDifference"
 
 const ReviewsStats = () => {

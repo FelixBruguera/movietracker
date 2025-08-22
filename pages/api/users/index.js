@@ -17,7 +17,7 @@ export default async function GET(request, response) {
       .collection("user")
       .aggregate(usersPipeline(query))
       .toArray()
-    return response.json(await data)
+    return response.json(data)
   } catch {
     return response.status(404)
   }

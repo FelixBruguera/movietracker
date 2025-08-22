@@ -38,16 +38,24 @@ export default async function handler(request, response) {
       mongoSession.startTransaction()
       const id = request.query.id
       const user_id = ObjectId.createFromHexString(session.user.id)
-      const check = await database.collection("comments").deleteOne({
-        _id: ObjectId.createFromHexString(id),
-        user_id: user_id,
-      })
+      const check = await database.collection("comments").deleteOne(
+        {
+          _id: ObjectId.createFromHexString(id),
+          user_id: user_id,
+        },
+        { session: mongoSession },
+      )
       if (check.deletedCount !== 1) {
         return response.status(404).send()
       }
       await database
         .collection("user")
-        .findOneAndUpdate({ _id: user_id }, { $inc: { reviews: -1 } })
+        .findOneAndUpdate(
+          { _id: user_id },
+          { $inc: { reviews: -1 } },
+          { session: mongoSession },
+        )
+      await mongoSession.commitTransaction()
       return response.status(204).json()
     } catch {
       return response.status(404).send()

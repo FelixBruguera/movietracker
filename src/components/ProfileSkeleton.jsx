@@ -14,7 +14,7 @@ const ProfileSkeleton = () => {
         {items.map((item) => (
           <Skeleton
             key={item}
-            className="w-1/10 h-9 bg-zinc-200 dark:bg-muted"
+            className="w-2/10 lg:w-1/10 h-9 bg-zinc-200 dark:bg-muted"
           />
         ))}
       </div>

@@ -8,6 +8,7 @@ import useListDebounce from "../../hooks/useListDebounce"
 import { memo, useEffect, useMemo, useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { Search } from "lucide-react"
 
 const ListsMenu = memo(() => {
   const router = useRouter()
@@ -56,7 +57,7 @@ const ListsMenu = memo(() => {
       <div className="w-full lg:w-7/10 flex items-center justify-evenly">
         <Input
           name="search"
-          className="w-3/4 border-border border-1"
+          className="w-3/4 border-border border-1 "
           placeholder="Search"
           type="text"
           disabled={router.query.filter === "following"}

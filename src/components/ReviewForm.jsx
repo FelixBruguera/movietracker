@@ -45,7 +45,7 @@ const ReviewForm = ({ previousReview, mutation }) => {
         {!previousRating && (
           <div className="flex items-center gap-2">
             <Checkbox
-              className="border-border"
+              className="border-stone-600"
               id="log"
               name="log"
               checked={createLog}
