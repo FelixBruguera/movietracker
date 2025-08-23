@@ -7,7 +7,7 @@ import ErrorMessage from "./ErrorMessage"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 
-const ProfileHeader = (props) => {
+const ProfileHeader = () => {
   const router = useRouter()
   const tabs = { Reviews: "", Diary: "diary", Lists: "lists", Stats: "stats" }
   const { id } = router.query

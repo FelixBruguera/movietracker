@@ -1,8 +1,3 @@
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
 import { memo } from "react"
 
 const Total = memo(({ total, label }) => {
@@ -10,19 +5,15 @@ const Total = memo(({ total, label }) => {
     return null
   }
   return (
-    <Tooltip>
-      <TooltipTrigger>
-        <div className="flex flex-col items-center justify-center">
-          <p
-            className={`px-3 py-1 bg-card text-black dark:text-white font-bold rounded-lg`}
-            aria-label={label}
-          >
-            {total}
-          </p>
-        </div>
-      </TooltipTrigger>
-      <TooltipContent>{<p>{label}</p>}</TooltipContent>
-    </Tooltip>
+    <div className="flex flex-col items-center justify-center">
+      <p
+        className={`px-3 py-1 bg-card text-black dark:text-white font-bold rounded-lg`}
+        aria-label={label}
+        title={label}
+      >
+        {total}
+      </p>
+    </div>
   )
 })
 

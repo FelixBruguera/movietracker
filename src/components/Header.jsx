@@ -1,19 +1,12 @@
-import {
-  CircleQuestionMark,
-  Clapperboard,
-  Film,
-  MoveIcon,
-  TableOfContents,
-  Users,
-} from "lucide-react"
-import NavLink from "./NavLink"
+import { ModeToggle } from "@/components/ui/mode-toggle"
+import { authClient } from "@/lib/auth-client.ts"
+import { Clapperboard } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { ModeToggle } from "@/components/ui/mode-toggle"
-import UserDropdown from "./UserDropdown"
 import DialogWrapper from "./DialogWrapper"
-import { authClient } from "@/lib/auth-client.ts"
+import NavLink from "./NavLink"
 import NewLog from "./NewLog"
+import UserDropdown from "./UserDropdown"
 
 const Header = () => {
   const router = useRouter()
@@ -33,19 +26,16 @@ const Header = () => {
           <NavLink
             href={"/"}
             title="Movies"
-            icon={<Film />}
             isActive={router.pathname === "/"}
           />
           <NavLink
             href={"/lists"}
             title="Lists"
-            icon={<TableOfContents />}
             isActive={router.pathname === "/lists"}
           />
           <NavLink
             href={"/users"}
             title="Users"
-            icon={<Users />}
             isActive={router.pathname === "/users"}
           />
         </div>

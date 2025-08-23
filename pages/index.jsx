@@ -4,12 +4,6 @@ import PaginationWrap from "../src/components/PaginationWrap"
 import { useRouter } from "next/router"
 import MoviesMenu from "../src/components/MoviesMenu"
 import MoviesSkeleton from "../src/components/MoviesSkeleton"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { Star } from "lucide-react"
 import Poster from "../src/components/Poster"
 import ErrorMessage from "../src/components/ErrorMessage"
 import axios from "axios"

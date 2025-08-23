@@ -35,7 +35,7 @@ const ListDetails = ({ user, list }) => {
   return (
     <div className="w-fit flex items-center gap-3">
       <UserLink user={user} />
-      <ListDate date={new Date(list.createdAt).toLocaleDateString()} />
+      <ListDate date={list.createdAt.split("T")[0]} />
       <ListDetail>
         {list.isPrivate ? (
           <Lock aria-label="Private List" title="Private List" />

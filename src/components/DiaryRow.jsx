@@ -1,10 +1,5 @@
 import Poster from "./Poster"
 import Link from "next/link"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
 import { format } from "date-fns"
 
 const DiaryRow = ({ data, group }) => {
@@ -22,17 +17,15 @@ const DiaryRow = ({ data, group }) => {
       </p>
       <div className="flex flex-wrap w-full items-center justify-start gap-1 lg:gap-5">
         {data.watched.map((movie) => (
-          <Tooltip key={movie._id}>
-            <TooltipTrigger className="lg:bg-transparent rounded-t-2xl">
-              <Link href={`/movies/${movie._id}`}>
-                <Poster src={movie.poster} alt={movie.title} size="small" />
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent className="flex flex-col items-center justify-center">
-              <p>{movie.title}</p>
-              <p>{movie.date.split("T")[0]}</p>
-            </TooltipContent>
-          </Tooltip>
+          <Link
+            href={`/movies/${movie._id}`}
+            className="flex flex-col items-center gap-1"
+          >
+            <Poster src={movie.poster} alt={movie.title} size="small" />
+            <p className="text-sm text-muted-foreground text-center">
+              {movie.date.split("T")[0]}
+            </p>
+          </Link>
         ))}
       </div>
     </li>

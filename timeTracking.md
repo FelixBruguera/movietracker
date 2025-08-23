@@ -40,6 +40,8 @@
 | 20.08.2025  | 8     | Add the option to create a log when writing a review, remove the minimun length of the reviews comment, add more sorting options to the lists in profiles, modify styles, add more tests
 | 21.08.2025  | 5     | Refactor the index route, charts and movie search
 | 22.08.2025  | 3     | Refactors and styling updates
+| 23.08.2025  | 3     | Refactors and updating the README
+| **Total** | 176
 
 
 

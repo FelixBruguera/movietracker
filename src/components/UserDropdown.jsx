@@ -7,16 +7,7 @@ import {
 import Link from "next/link"
 import { authClient } from "@/lib/auth-client.ts"
 import { Button } from "@/components/ui/button"
-import {
-  ChevronDown,
-  User,
-  LogIn,
-  LogOut,
-  UserIcon,
-  SquareUser,
-  CircleUserRound,
-  CircleUser,
-} from "lucide-react"
+import { ChevronDown, User, LogIn, LogOut, CircleUserRound } from "lucide-react"
 
 const UserDropdown = () => {
   const { data: session } = authClient.useSession()
@@ -25,7 +16,7 @@ const UserDropdown = () => {
     return (
       <Button asChild aria-label="Login">
         <Link href="/users/login">
-          <LogIn />
+          <LogIn aria-label="Log in" />
           <p className="hidden lg:block">Login</p>
         </Link>
       </Button>

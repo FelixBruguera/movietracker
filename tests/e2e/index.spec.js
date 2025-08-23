@@ -8,12 +8,12 @@ test.describe("the index route", () => {
     test("sorting by release year", async ({ page }) => {
       await page.getByText("IMDB Rating").click()
       await page.getByText("Release Year").click()
-      const posters = page.getByRole("img")
+      const posters = page.getByRole("listitem").getByRole("img")
       await expect(posters.first()).toHaveAttribute("alt", "The Ace of Hearts")
     })
     test("changing the sort order", async ({ page }) => {
       await page.getByTitle("Descending Order").click()
-      const posters = page.getByRole("img")
+      const posters = page.getByRole("listitem").getByRole("img")
       await expect(posters.first()).toHaveAttribute(
         "alt",
         "In the Land of the Head Hunters",
@@ -23,7 +23,7 @@ test.describe("the index route", () => {
   test.describe("filtering", () => {
     test("by genre", async ({ page }) => {
       await page.getByText("Crime").click()
-      const posters = page.getByRole("img")
+      const posters = page.getByRole("listitem").getByRole("img")
       await expect(posters).toHaveCount(1)
       await expect(posters.first()).toHaveAttribute("alt", "The Ace of Hearts")
     })
